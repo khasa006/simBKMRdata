@@ -17,8 +17,8 @@
 #' `coeffs_ls`.
 #'
 #' @details CalculatePipThreshold function is designed to model the relationship between PIP(q95),
-#' coefficient of variation (CV), and sample size using a four-parameter
-#' logistic regression (Richard Curve). This package employs the `nls` function
+#' coefficient of variation (CV), and sample size using a form of four-parameter
+#' logistic regression (Richard Curve). This function employs the `nls` function
 #' from the R `stats` package, utilizing the Levenberg-Marquardt algorithm for
 #' optimization to ensure robust parameter estimation.
 #' \deqn{
@@ -30,11 +30,11 @@
 #'
 #' K: Right asymptote;
 #'
-#' C: Constant, typically set to 1;
+#' C: Constant;
 #'
 #' β1, β2: Midpoint shift parameters for CV and sample size;
 #'
-#' x1: Log-transformed CV (log2(CV));
+#' x1: Log2-transformed |CV| (log2(|CV|));
 #'
 #' x2: Log-transformed sample size (log10(Sample Size)).
 #'
