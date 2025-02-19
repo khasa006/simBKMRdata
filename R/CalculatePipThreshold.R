@@ -1,7 +1,7 @@
 #' Calculate PIP Threshold
-#' 
+#'
 #' @description Given a response vector (or statistics from this vector),
-#' calculate a PIP threshold that should preserve close to a nominal 5% test 
+#' calculate a PIP threshold that should preserve close to a nominal 5% test
 #' size for Bayesian Kernel Machine Regression (BKMR) feature selection.
 #'
 #' @param y a response vector for BKMR
@@ -15,11 +15,13 @@
 #' @returns A single numeric value; the output of the Richard's Four-Parameter
 #' Logistic Regression curve with the coefficient values supplied in
 #' `coeffs_ls`.
-#' 
+#'
 #' @details Tanvir: include a link to the Richard's curve, LaTeX code to show
 #' what this curve looks like, and a brief (1-2 sentence) explanation of how we
 #' calculated the values in `coeffs_ls`.
-#' 
+#' For more information on Richard's curve, see
+#' <https://en.wikipedia.org/wiki/Generalised_logistic_function>
+#'
 #' @export
 #' @importFrom stats sd
 #'
@@ -35,7 +37,7 @@ CalculatePipThreshold <- function(
     ),
     na.rm = TRUE
   ){
-  
+
   # Check inputs
   if (missing(y)) {
     argsMissing_lgl <- missing(absCV) | missing(sampSize)
@@ -49,12 +51,12 @@ CalculatePipThreshold <- function(
     absCV <- abs( sd(y, na.rm = na.rm) / mean(y, na.rm = na.rm) )
     sampSize <- length(y)
   }
-  
+
   # Calculate PIP threshold using Richard's Curve
   denomInner_num <- coeffs_ls$C + exp(-1 * coeffs_ls$betaAbsCV * log2(absCV))
   denom_num <- denomInner_num ^ (coeffs_ls$betaSampSize * log10(sampSize))
   PIP_num <- coeffs_ls$A + (coeffs_ls$K - coeffs_ls$A) / denom_num
-  
+
   PIP_num
-  
+
 }

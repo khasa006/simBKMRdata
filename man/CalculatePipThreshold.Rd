@@ -40,6 +40,8 @@ size for Bayesian Kernel Machine Regression (BKMR) feature selection.
 Tanvir: include a link to the Richard's curve, LaTeX code to show
 what this curve looks like, and a brief (1-2 sentence) explanation of how we
 calculated the values in \code{coeffs_ls}.
+For more information on Richard's curve, see
+\url{https://en.wikipedia.org/wiki/Generalised_logistic_function}
 }
 \examples{
 CalculatePipThreshold(absCV = 7.5, sampSize = 300)
