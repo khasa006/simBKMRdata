@@ -1,16 +1,31 @@
-#' Title
+#' Calculate PIP Threshold
+#' 
+#' @description Given a response vector (or statistics from this vector),
+#' calculate a PIP threshold that should preserve close to a nominal 5% test 
+#' size for Bayesian Kernel Machine Regression (BKMR) feature selection.
 #'
-#' @param y 
-#' @param absCV 
-#' @param sampSize 
-#' @param coeffs_ls 
-#' @param na.rm 
+#' @param y a response vector for BKMR
+#' @param absCV If `y` is not supplied, the absolute value of the coefficient
+#' of variation of the response
+#' @param sampSize If `y` is not supplied, the number of observations included
+#' in the response
+#' @param coeffs_ls A list of Richard's Curve parameters. See Details.
+#' @param na.rm Remove missing values from `y`? Defaults to `TRUE`
 #'
-#' @returns
+#' @returns A single numeric value; the output of the Richard's Four-Parameter
+#' Logistic Regression curve with the coefficient values supplied in
+#' `coeffs_ls`.
+#' 
+#' @details Tanvir: include a link to the Richard's curve, LaTeX code to show
+#' what this curve looks like, and a brief (1-2 sentence) explanation of how we
+#' calculated the values in `coeffs_ls`.
+#' 
 #' @export
+#' @importFrom stats sd
 #'
 #' @examples
-#' 
+#' CalculatePipThreshold(absCV = 7.5, sampSize = 300)
+#' # should equal 0.6829892
 
 CalculatePipThreshold <- function(
     y, absCV, sampSize,
@@ -43,7 +58,3 @@ CalculatePipThreshold <- function(
   PIP_num
   
 }
-
-# Test
-# CalculatePipThreshold(absCV = 7.5, sampSize = 300)
-# should equal 0.6829892

@@ -1,11 +1,15 @@
 Package: simBKMRdata
 Title: What the Package Does (One Line, Title Case)
-Version: 0.0.0.9000
+Version: 0.0.0.9001
 Authors@R: 
-    person("Kazi Tanvir", "Hasan", , "khasa006@fiu.edu", role = c("aut", "cre"),
-           comment = c(ORCID = "0000-0002-7723-4177"))
+    c(
+      person("Kazi Tanvir", "Hasan", , "khasa006@fiu.edu", role = c("aut", "cre"),
+           comment = c(ORCID = "0000-0002-7723-4177")),
+      person("Gabriel", "Odom", , "gabriel.j.odom@gmail.com", role = "aut",
+           comment = c(ORCID = "0000-0003-1341-4555"))
+    )
 Description: What the package does (one paragraph).
-License: use_gpl3_license()
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.2
+License: GPL (>= 3)
