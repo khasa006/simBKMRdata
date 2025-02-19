@@ -37,9 +37,31 @@ calculate a PIP threshold that should preserve close to a nominal 5\% test
 size for Bayesian Kernel Machine Regression (BKMR) feature selection.
 }
 \details{
-Tanvir: include a link to the Richard's curve, LaTeX code to show
-what this curve looks like, and a brief (1-2 sentence) explanation of how we
-calculated the values in \code{coeffs_ls}.
+CalculatePipThreshold function is designed to model the relationship between PIP(q95),
+coefficient of variation (CV), and sample size using a four-parameter
+logistic regression (Richard Curve). This package employs the \code{nls} function
+from the R \code{stats} package, utilizing the Levenberg-Marquardt algorithm for
+optimization to ensure robust parameter estimation.
+\deqn{
+  PIP(q_{95}) = A + \frac{K-A}{ (C + \exp(-\beta_1x_1) )^{\beta_2x_2} }
+}
+Where-
+
+A: Fixed left asymptote (0);
+
+K: Right asymptote;
+
+C: Constant, typically set to 1;
+
+β1, β2: Midpoint shift parameters for CV and sample size;
+
+x1: Log-transformed CV (log2(CV));
+
+x2: Log-transformed sample size (log10(Sample Size)).
+
+The detailed explanation of how we calculated the values in \code{coeffs_ls} can
+be found in <......>.
+
 For more information on Richard's curve, see
 \url{https://en.wikipedia.org/wiki/Generalised_logistic_function}
 }
