@@ -52,3 +52,4 @@ trans_root <- function(x, fracRoot = 0.5) {
 trans_log <- function(x, base = 10, shift = 1) {
   return(log(x + shift, base = base))
 }
+
