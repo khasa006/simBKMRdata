@@ -22,10 +22,6 @@
 #' result <- calculate_group_params(data, "GENDER")
 #'
 calculate_group_params <- function(data, group_col) {
-  library(dplyr)
-  library(purrr)
-  library(tidyr)
-
   # Define function to compute gamma parameters
   gamma_parameters <- function(x) {
     mean_x <- mean(x, na.rm = TRUE)
@@ -51,11 +47,20 @@ calculate_group_params <- function(data, group_col) {
           summarise(across(everything(), mean, na.rm = TRUE)) %>%
           unlist()
 
-        cor_matrix <- cor(numeric_cols, method = "spearman", use = "pairwise.complete.obs")
+        cor_matrix <- cor(
+          numeric_cols,
+          method = "spearman",
+          use = "pairwise.complete.obs"
+        )
 
         gamma_params <- map(numeric_cols, gamma_parameters)
 
-        list(n = n, mean = mean_vector, gamma = gamma_params, cor = cor_matrix)
+        list(
+          n = n,
+          mean = mean_vector,
+          gamma = gamma_params,
+          cor = cor_matrix
+        )
       })
     ) %>%
     pull(stats)
