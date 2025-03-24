@@ -1,13 +1,8 @@
 # Function to generate multivariate normal samples, transform to Z-scores, and apply qgamma transformation
-generate_mvGamma_data <- function(N, p, mean_vec, cov_mat, shape_num, rate_num) {
-
-  # Generate multivariate normal samples
+generate_mvGamma_data <- function(N, mean_vec, cov_mat, shape_num, rate_num) {
   norm_samples <- MASS::mvrnorm(n = N, mu = mean_vec, Sigma = cov_mat)
-
-  # Convert to CDF values (Z-score transformation)
   norm_cdf <- pnorm(norm_samples)
 
-  # Apply qgamma transformation
   mvGamma_fn <- function(normCdf_mat, shape_num, rate_num) {
     dataP <- ncol(normCdf_mat)
     dataN <- nrow(normCdf_mat)
@@ -18,7 +13,7 @@ generate_mvGamma_data <- function(N, p, mean_vec, cov_mat, shape_num, rate_num) 
         FUN = function(d) {
           qgamma(p = normCdf_mat[, d], shape = shape_num[d], rate = rate_num[d])
         },
-        FUN.VALUE = matrix(NA_real_, nrow = dataN)
+        FUN.VALUE = numeric(dataN)
       ),
       nrow = dataN, ncol = dataP, byrow = FALSE
     )
@@ -26,13 +21,7 @@ generate_mvGamma_data <- function(N, p, mean_vec, cov_mat, shape_num, rate_num) 
 
   gamma_samples <- mvGamma_fn(norm_cdf, shape_num, rate_num)
 
-  return(
-    list(
-      norm_samples = norm_samples,
-      norm_cdf = norm_cdf,
-      gamma_samples = gamma_samples
-    )
-  )
+  return(list(norm_samples = norm_samples, norm_cdf = norm_cdf, gamma_samples = gamma_samples))
 }
 
 # Parameters
@@ -41,13 +30,13 @@ N <- 1000
 shapeGamma_num <- c(0.5, 0.75, 1, 1.25)
 rateGamma_num <- 1:4
 mean_vec <- rep(0, p)
-cov_mat <- diag(nrow = p)
+cov_mat <- diag(p)  # Fixed: diag(nrow = p) -> diag(p)
 
 # Set seed for reproducibility
 set.seed(2025)
 
-# Generate data
-output <- generate_mvGamma_data(N, p, mean_vec, cov_mat, shapeGamma_num, rateGamma_num)
+# Generate data (removed extra `p` argument)
+output <- generate_mvGamma_data(N, mean_vec, cov_mat, shapeGamma_num, rateGamma_num)
 
 # Extract results
 norm_samples <- output$norm_samples
