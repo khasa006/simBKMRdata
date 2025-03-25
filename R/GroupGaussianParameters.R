@@ -26,19 +26,19 @@ calculate_group_stats <- function(data_df, group_col) {
   data_ls <- split.data.frame(x = data_df, f = data_df[, group_col])
   # remove the grouping column
   data_ls <- lapply(
-    X = data_ls, 
+    X = data_ls,
     FUN = function(x) {
       x[, group_col] <- NULL
       x
     }
   )
-  
+
   # Calculate statistics and moments (N, xBar, sd, corrMat, skew)
   lapply(
     X = data_ls,
     FUN = .group_stats
   )
-  
+
 }
 
 .group_stats <- function(x_df) {
@@ -50,9 +50,9 @@ calculate_group_stats <- function(data_df, group_col) {
   #   VALUE2 = c(4.5, 4.2, 4.35)
   # )
   # .group_stats(myDataFemale)
-  
+
   # browser()
-  
+
   out_ls <- list(
     sampSize = nrow(x_df),
     xBar = colMeans(x_df),
@@ -74,13 +74,14 @@ calculate_group_stats <- function(data_df, group_col) {
     },
     FUN.VALUE = numeric(1)
   )
-  
+
   out_ls
-  
+
 }
 
 .skewness <- function(x, xBar, sampSD, N) {
-  N * sum((x - xBar)^3) / ((N - 1) * (N - 2) * sampSD^3)
+  # https://en.wikipedia.org/wiki/Skewness
+  (sum((x - xBar)^3) / N) / (sum((x - xBar)^2) / (N - 1))^(3/2)
 }
 
 
@@ -89,7 +90,7 @@ calculate_group_stats <- function(data_df, group_col) {
 # data_grouped <- data %>%
 #   group_by_at(group_col) %>%
 #   nest()  # Nest the data by groups
-# 
+#
 # # Apply the calculation of statistics for each group
 # group_stats <- data_grouped %>%
 #   mutate(
@@ -100,15 +101,15 @@ calculate_group_stats <- function(data_df, group_col) {
 #         select(-all_of(group_col)) %>%
 #         summarise(across(everything(), mean, na.rm = TRUE)) %>%
 #         unlist()  # Get the mean vector
-#       
+#
 #       cor_matrix <- group_data %>%
 #         select(-all_of(group_col)) %>%
 #         cor(method = "spearman", use = "pairwise.complete.obs")  # Spearman correlation matrix
-#       
+#
 #       # Return the list of statistics for the group
 #       list(n = n, mean = mean_vector, cor = cor_matrix)
 #     })
 #   ) %>%
 #   pull(stats)  # Extract the list of statistics
-# 
+#
 # return(group_stats)
