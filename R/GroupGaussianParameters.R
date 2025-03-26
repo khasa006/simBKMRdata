@@ -13,7 +13,7 @@
 #'   - sample size (`sampSize`)
 #'   - sample mean vector (`xBar`)
 #'   - sample standard deviation vector (`sampSD`)
-#'   - sample Spearman correlation matrix (`sampCorr`)
+#'   - sample Spearman correlation matrix (`sampCorr_mat`)
 #'   - sample skewness (`sampSkew`)
 #' @export
 #'

@@ -17,8 +17,8 @@ the Generalized Gamma distribution without bias correction).}
 }
 \value{
 A list of estimated parameters for Multivariate Gamma distribution
-(sample size, sample correlation matrix \code{sampCorr}, sample shape vector
-\code{alpha}, sample rate vector \code{beta})
+(sample size, sample mean, sample correlation matrix \code{sampCorr_mat}, sample
+shape vector \code{alpha}, sample rate vector \code{beta})
 }
 \description{
 Helper function to estimate shape, rate, and correlation parameters for

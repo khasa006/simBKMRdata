@@ -19,7 +19,7 @@ parameter estimates for one group:
 \item sample size (\code{sampSize})
 \item sample mean vector (\code{xBar})
 \item sample standard deviation vector (\code{sampSD})
-\item sample Spearman correlation matrix (\code{sampCorr})
+\item sample Spearman correlation matrix (\code{sampCorr_mat})
 \item sample skewness (\code{sampSkew})
 }
 }

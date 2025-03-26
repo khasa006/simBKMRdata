@@ -42,7 +42,7 @@ estimate_mv_moments <- function(x_df) {
     sampSize = samp_size,
     xBar = mean_vector,
     sampSD = samp_sd,
-    sampCorr = samp_corr,
+    sampCorr_mat = samp_corr,
     sampSkew = samp_skew
   )
   

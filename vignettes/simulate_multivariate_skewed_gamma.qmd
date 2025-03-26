@@ -45,15 +45,15 @@ Next, we will use the generate_mvGamma_data() function to generate multivariate 
 
 ```{r}
 # Generate the data
-output <- generate_mvGamma_data(N, mean_vec, cov_mat, shapeGamma_num, rateGamma_num)
+gamma_samples <- generate_mvGamma_data(
+  sampSize = N,
+  mean_vec = mean_vec,
+  sampCorr_mat = cov_mat,
+  shape_num = shapeGamma_num,
+  rate_num = rateGamma_num
+)
 
-# Extract the results
-norm_samples <- output$norm_samples
-norm_cdf <- output$norm_cdf
-gamma_samples <- output$gamma_samples
-
-# View the first few rows of the normal and Gamma samples
-head(norm_samples)
+# View the first few rows of the Gamma samples
 head(gamma_samples)
 ```
 
@@ -62,21 +62,20 @@ head(gamma_samples)
 Let's visualize the first variable (column 1) of the normal samples and the Gamma-transformed samples.
 
 ```{r}
-# Plot the density of the first variable for both normal and Gamma-transformed data
+# Plot the density of the first and second variable for Gamma data
 par(mfrow = c(2, 1))
 
-# Density of normal samples (first variable)
+# Density of first variable
 plot(
-  density(norm_samples[, 1]), 
-  main = "Density of Normal Samples (Variable 1)", 
+  density(gamma_samples[, 1]), 
+  main = "Density of First Gamma Feature (Variable 1)", 
   col = "blue"
 )
 
-# Density of Gamma-transformed samples (first variable)
 plot(
-  density(gamma_samples[, 1]), 
-  main = "Density of Gamma Transformed Samples (Variable 1)", 
-  col = "red"
+  density(gamma_samples[, 2]), 
+  main = "Density of Second Gamma Feature (Variable 2)", 
+  col = "blue"
 )
 
 par(mfrow = c(1, 1))

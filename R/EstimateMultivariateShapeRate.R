@@ -7,8 +7,8 @@
 #' used in the author's paper), or `"gMLE"` (maximum likelihood estimates from
 #' the Generalized Gamma distribution without bias correction).
 #' @return A list of estimated parameters for Multivariate Gamma distribution
-#' (sample size, sample correlation matrix `sampCorr`, sample shape vector
-#' `alpha`, sample rate vector `beta`)
+#' (sample size, sample mean, sample correlation matrix `sampCorr_mat`, sample
+#' shape vector `alpha`, sample rate vector `beta`)
 #' @export
 #'
 #' @examples
@@ -18,6 +18,7 @@
 #' )
 #' estimate_mv_shape_rate(myData)
 estimate_mv_shape_rate <- function(x_df, using = c("MoM", "gMLE")) {
+  # browser()
   
   using <- match.arg(using)
   
@@ -25,7 +26,7 @@ estimate_mv_shape_rate <- function(x_df, using = c("MoM", "gMLE")) {
   samp_size <- moments_ls$sampSize
   mean_vector <- moments_ls$xBar
   samp_sd <- moments_ls$sampSD
-  samp_corr <- moments_ls$sampCorr
+  samp_corr <- moments_ls$sampCorr_mat
   
   if (using == "MoM") {
     
@@ -45,7 +46,8 @@ estimate_mv_shape_rate <- function(x_df, using = c("MoM", "gMLE")) {
   # Return all statistics as a list
   list(
     sampSize = samp_size,
-    sampCorr = samp_corr,
+    xBar = mean_vector,
+    sampCorr_mat = samp_corr,
     alpha = alpha_num,
     beta = beta_num
   )

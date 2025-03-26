@@ -1,3 +1,6 @@
 .Rproj.user
 *.Rproj
 README.html
+
+vignettes/*_files/
+vignettes/*.html
