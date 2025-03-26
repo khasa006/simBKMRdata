@@ -1,6 +1,6 @@
 ---
 title: "Simulate Multivariate Skewed Gamma Data"
-author: "Your Name"
+author: "Kazi Tanvir Hasan and Dr. Gabirel Odom"
 output: 
   rmarkdown::html_vignette:
     toc: true
@@ -66,10 +66,18 @@ Let's visualize the first variable (column 1) of the normal samples and the Gamm
 par(mfrow = c(2, 1))
 
 # Density of normal samples (first variable)
-plot(density(norm_samples[, 1]), main = "Density of Normal Samples (Variable 1)", col = "blue")
+plot(
+  density(norm_samples[, 1]), 
+  main = "Density of Normal Samples (Variable 1)", 
+  col = "blue"
+)
 
 # Density of Gamma-transformed samples (first variable)
-plot(density(gamma_samples[, 1]), main = "Density of Gamma Transformed Samples (Variable 1)", col = "red")
+plot(
+  density(gamma_samples[, 1]), 
+  main = "Density of Gamma Transformed Samples (Variable 1)", 
+  col = "red"
+)
 
 par(mfrow = c(1, 1))
 ```
