@@ -51,7 +51,7 @@
 #' CalculatePipThreshold(absCV = 7.5, sampSize = 300)
 #' # should equal 0.6829892
 
-CalculatePipThreshold <- function(
+calculate_pip_threshold <- function(
     y, absCV, sampSize,
     coeffs_ls = list(
       A = 0, K = 1.43462, C = 1.59948,

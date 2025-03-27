@@ -31,7 +31,7 @@ and then applies a \code{qgamma} transformation to each variable.
 }
 \examples{
 p <- 4
-N <- 50
+N <- 1000
 shapeGamma_num <- c(0.5, 0.75, 1, 1.25)
 rateGamma_num <- 1:4
 mean_vec <- rep(0, p)
