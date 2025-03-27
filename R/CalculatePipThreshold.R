@@ -48,9 +48,9 @@
 #' @importFrom stats sd
 #'
 #' @examples
-#' CalculatePipThreshold(absCV = 7.5, sampSize = 300)
+#' calculate_pip_threshold(absCV = 7.5, sampSize = 300)
 #' # should equal 0.6829892
-
+#' 
 calculate_pip_threshold <- function(
     y, absCV, sampSize,
     coeffs_ls = list(

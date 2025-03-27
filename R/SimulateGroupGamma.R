@@ -1,37 +1,40 @@
-#' Simulate Group Data
+#' Simulate Group Multivariate Data
 #'
-#' This function generates data for each group by invoking the specified data generation function
-#' once per group. It binds the generated data together into a single data frame.
+#' This function generates data for each group from a Multivariate Gamma
+#' Distribution by invoking this package's `generate_mvGamma_data()` function
+#' once per group. It binds the generated data together into a single data
+#' frame.
 #'
 #' @param param_list A list of named sublists, where each sublist contains the
-#' parameters for a group (mean, shape, rate, etc.). The list must be named with
-#' group names that match the groupings stated in `group_col_name`.
-#' @param data_gen_fn A function for data generation. Currently we can choose
-#' either `generate_mvGamma_data` or `MASS::mvrnorm`.
-#' @param group_col_name The name of the grouping/label column to be created in
-#' the final data frame.
+#' parameters for a group (sample size, shape, rate, and correlation matrix).
+#' @param group_col_name The column name of the grouping/label column to be
+#' created in the final data frame. The values are taken from the names of the
+#' sublists of `param_list`. Defaults to "group". See the example below.
 #'
-#' @return A data frame with the simulated data for all groups, including the grouping column.
+#' @return A data frame with the simulated data for all groups, including the
+#' grouping column.
 #'
 #' @examples
-#' # Example using MASS::mvrnorm for normal distribution
-#' param_list <- list(
-#'   Group1 = list(mean_vec = c(1, 2), sampCorr_mat = matrix(c(1, 0.5, 0.5, 1), 2, 2), sampSize = 100),
-#'   Group2 = list(mean_vec = c(2, 3), sampCorr_mat = matrix(c(1, 0.3, 0.3, 1), 2, 2), sampSize = 150)
-#' )
-#' simulate_group_data(param_list, MASS::mvrnorm, "Group")
 #'
-#' # Example using generate_mvGamma_data for Gamma distribution
+#' # Example using generate_mvGamma_data for MV Gamma distribution
 #' param_list <- list(
-#'   Group1 = list(mean_vec = c(1, 2), sampCorr_mat = matrix(c(1, 0.5, 0.5, 1), 2, 2),
-#'                 shape_num = c(2, 2), rate_num = c(1, 1), sampSize = 100),
-#'   Group2 = list(mean_vec = c(2, 3), sampCorr_mat = matrix(c(1, 0.3, 0.3, 1), 2, 2),
-#'                 shape_num = c(2, 2), rate_num = c(1, 1), sampSize = 150)
+#'   Male = list(
+#'     sampSize = 100,
+#'     sampCorr_mat = matrix(c(1, 0.5, 0.5, 1), 2, 2),
+#'     shape_num = c(2, 2),
+#'     rate_num = c(1, 1)
+#'   ),
+#'   Female = list(
+#'     sampSize = 150,
+#'     sampCorr_mat = matrix(c(1, 0.3, 0.3, 1), 2, 2),
+#'     shape_num = c(1, 4),
+#'     rate_num = c(0.5, 2)
+#'   )
 #' )
-#' simulate_group_data(param_list, generate_mvGamma_data, "Group")
+#' simulate_group_gamma(param_list, "Sex")
 #'
 #' @export
-simulate_group_data <- function(param_list, data_gen_fn, group_col_name) {
+simulate_group_gamma <- function(param_list, group_col_name) {
 
   # Check if the list of parameters is named
   if (is.null(names(param_list))) {
