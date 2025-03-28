@@ -33,7 +33,7 @@ N <- 1000  # Number of samples
 shapeGamma_num <- c(0.5, 0.75, 1, 1.25)  # Shape parameters for the Gamma distribution
 rateGamma_num <- 1:4  # Rate parameters for the Gamma distribution
 mean_vec <- rep(0, p)  # Mean vector for the normal distribution
-cov_mat <- diag(p)  # Covariance matrix (identity matrix here for simplicity)
+cor_mat <- diag(p)  # Covariance matrix (identity matrix here for simplicity)
 
 # Set seed for reproducibility
 set.seed(2025)
@@ -48,7 +48,7 @@ Next, we will use the generate_mvGamma_data() function to generate multivariate 
 gamma_samples <- generate_mvGamma_data(
   sampSize = N,
   mean_vec = mean_vec,
-  sampCorr_mat = cov_mat,
+  sampCorr_mat = cor_mat,
   shape_num = shapeGamma_num,
   rate_num = rateGamma_num
 )

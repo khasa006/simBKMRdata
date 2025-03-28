@@ -8,7 +8,9 @@ simulate_group_gamma(param_list, group_col_name)
 }
 \arguments{
 \item{param_list}{A list of named sublists, where each sublist contains the
-parameters for a group (sample size, shape, rate, and correlation matrix).}
+parameters for a group (sample size, mean, standard correlation matrix, shape,
+and rate parameter). The dimension of the parameters for each group must be
+the same.}
 
 \item{group_col_name}{The column name of the grouping/label column to be
 created in the final data frame. The values are taken from the names of the
@@ -20,26 +22,27 @@ grouping column.
 }
 \description{
 This function generates data for each group from a Multivariate Gamma
-Distribution by invoking this package's \code{generate_mvGamma_data()} function
-once per group. It binds the generated data together into a single data
-frame.
+Distribution by invoking this distribution's random generator once
+per group. It binds the generated data together into a single data frame.
 }
 \examples{
 
 # Example using generate_mvGamma_data for MV Gamma distribution
 param_list <- list(
-  Male = list(
-    sampSize = 100,
-    sampCorr_mat = matrix(c(1, 0.5, 0.5, 1), 2, 2),
-    shape_num = c(2, 2),
-    rate_num = c(1, 1)
-  ),
-  Female = list(
-    sampSize = 150,
-    sampCorr_mat = matrix(c(1, 0.3, 0.3, 1), 2, 2),
-    shape_num = c(1, 4),
-    rate_num = c(0.5, 2)
-  )
+ Male = list(
+  sampSize = 100,
+  mean_vec = c(0, 0),  # Mean vector for each variable
+  sampCorr_mat = matrix(c(1, 0.5, 0.5, 1), 2, 2),  # Covariance matrix
+  shape_num = c(2, 2),  # Shape parameters for Gamma distribution
+  rate_num = c(1, 1)    # Rate parameters for Gamma distribution
+ ),
+ Female = list(
+  sampSize = 150,
+  mean_vec = c(1, 1),
+  sampCorr_mat = matrix(c(1, 0.3, 0.3, 1), 2, 2),
+  shape_num = c(1, 4),
+  rate_num = c(0.5, 2)
+ )
 )
 simulate_group_gamma(param_list, "Sex")
 

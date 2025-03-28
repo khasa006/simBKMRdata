@@ -1,0 +1,144 @@
+---
+title: "Simulating Multivariate Group Data for Different Distributions"
+author: "Kazi Tanvir Hasan and Dr. Gabriel Odom"
+output: 
+  rmarkdown::html_vignette:
+    toc: true
+    toc_depth: 2
+vignette: >
+  %\VignetteIndexEntry{Simulate Multivariate Normal and Skewed Gamma Data with Pre-Estimated Statistics}
+  %\VignetteEngine{quarto::html}
+  %\VignetteLanguage{en}
+---
+
+
+
+# Introduction
+
+In this guide, we provide the steps for simulating multivariate data for two types of distributions: **Multivariate Normal (Gaussian)** and **Multivariate Skewed Gamma**. These simulations are useful for statistical modeling, hypothesis testing, and data analysis in various domains.
+
+
+## 1. Simulate Multivariate Normal Data
+
+The **Multivariate Normal (Gaussian) Distribution** is a fundamental distribution used in statistics. In this section, we simulate data for different groups (e.g., Male, Female) using predefined parameters such as the mean vector, standard deviations, and correlation matrix. The function `simulate_group_gaussian()` takes care of generating the simulated data for each group.
+
+```{r}
+# Example: Simulating Multivariate Normal Data
+library(simBKMRdata)
+
+param_list <- list(
+  Male = list(
+    sampSize = 50,
+    mean_vec = c(1, 2),
+    sampSD = c(2, 1),
+    sampCorr_mat = matrix(c(1, 0.5, 0.5, 1), 2, 2)
+  ),
+  Female = list(
+    sampSize = 100,
+    mean_vec = c(2, 3),
+    sampSD = c(1, 2),
+    sampCorr_mat = matrix(c(1, 0.3, 0.3, 1), 2, 2)
+  )
+)
+
+# Simulate the data using the simulate_group_gaussian function
+simulated_data <- simulate_group_gaussian(param_list, "Sex")
+
+# View the first few rows of the simulated data
+head(simulated_data)
+```
+
+In the above example:
+
+We define two groups: Male and Female.
+
+Each group has specific parameters: sample size (sampSize), mean vector (mean_vec), sample standard deviations (sampSD), and a correlation matrix (sampCorr_mat).
+
+The simulate_group_gaussian() function generates multivariate normal data for both groups, and each row of the output is labeled with the group name (Sex).
+
+
+## 2. Simulate Multivariate Skewed Gamma Data
+The Multivariate Skewed Gamma Distribution generalizes the Gamma distribution to account for skewness. This section demonstrates how to simulate multivariate skewed Gamma data using parameters such as shape and rate parameters, in addition to the mean vector and correlation matrix. The function simulate_group_gamma() is used for generating the data.
+
+```{r}
+# Example: Simulating Multivariate Skewed Gamma Data
+
+param_list <- list(
+  Male = list(
+    sampSize = 100,
+    mean_vec = c(0, 0),
+    sampCorr_mat = matrix(c(1, 0.5, 0.5, 1), 2, 2),
+    shape_num = c(2, 2),
+    rate_num = c(1, 1)
+  ),
+  Female = list(
+    sampSize = 150,
+    mean_vec = c(1, 1),
+    sampCorr_mat = matrix(c(1, 0.3, 0.3, 1), 2, 2),
+    shape_num = c(1, 4),
+    rate_num = c(0.5, 2)
+  )
+)
+
+# Simulate the data using the simulate_group_gamma function
+simulated_gamma_data <- simulate_group_gamma(param_list, "Sex")
+
+# View the first few rows of the simulated data
+head(simulated_gamma_data)
+```
+
+In the above example:
+
+We define two groups: Male and Female.
+
+Each group has parameters: sample size (sampSize), mean vector (mean_vec), correlation matrix (sampCorr_mat), and the additional shape (shape_num) and rate (rate_num) parameters for the skewed Gamma distribution.
+
+The simulate_group_gamma() function generates the skewed Gamma data for both groups, and each row is labeled with the group name (Sex).
+
+
+## 3. Explanation of Functions
+
+# 3.1 `simulate_group_gaussian()`
+
+This function generates multivariate normal data for each group by calling the MASS::mvrnorm() function once per group. The generated data for each group is stored in a data frame, and the group label is added as a new column.
+
+**Parameters:**
+
+- param_list: A list where each sublist contains the parameters for a group (sample size, mean vector, standard deviations, and correlation matrix).
+
+- group_col_name: The name for the grouping/label column in the final data frame. By default, it is set to "group".
+
+**Returns:**
+
+- A data frame combining the generated data from all groups, including the group label.
+
+## `3.2 simulate_group_gamma()`
+
+This function generates multivariate skewed Gamma data for each group. It invokes the simBKMRdata::generate_mvGamma_data() function for each group, passing in the parameters like sample size, mean vector, correlation matrix, shape, and rate parameters.
+
+**Parameters:**
+
+- param_list: A list where each sublist contains the parameters for a group (sample size, mean vector, correlation matrix, shape parameters, and rate parameters).
+
+- group_col_name: The name for the grouping/label column in the final data frame. By default, it is set to "group".
+
+**Returns:**
+
+- A data frame combining the generated skewed Gamma data from all groups, including the group label.
+
+
+## 4. Customization and Further Use
+
+You can customize the parameters for each group, such as the sample size, mean, standard deviation, and correlation matrix for normal data, or the shape and rate parameters for skewed Gamma data. The grouping column (group_col_name) can be adjusted to reflect the name of the variable or feature you are studying.
+
+**Additional Use Cases**
+
+- Multivariate Simulation for Statistical Analysis: These simulations can be used to create synthetic datasets for hypothesis testing or model validation.
+
+- Simulating Group Data for Experimentation: This is particularly useful when real-world data is unavailable or if you need to simulate data with specific properties (e.g., different distributions, correlations).
+
+
+
+# Conclusion
+
+This vignette demonstrates how to simulate multivariate data for two key distributions: Multivariate Normal and Multivariate Skewed Gamma. By using functions like `simulate_group_gaussian()` and `simulate_group_gamma()`, you can easily generate data for multiple groups with specific statistical properties, which can be valuable for testing statistical models, conducting experiments, or exploring data distribution characteristics.
