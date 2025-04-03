@@ -8,9 +8,9 @@ simulate_group_gamma(param_list, group_col_name)
 }
 \arguments{
 \item{param_list}{A list of named sublists, where each sublist contains the
-parameters for a group (sample size, mean, standard correlation matrix, shape,
-and rate parameter). The dimension of the parameters for each group must be
-the same.}
+parameters for a group (sample size, mean, standard correlation matrix,
+shape, and rate parameter). The dimension of the parameters for each group
+must be the same.}
 
 \item{group_col_name}{The column name of the grouping/label column to be
 created in the final data frame. The values are taken from the names of the
@@ -21,8 +21,8 @@ A data frame with the simulated data for all groups, including the
 grouping column.
 }
 \description{
-This function generates data for each group from a Multivariate Gamma
-Distribution by invoking this distribution's random generator once
+This function generates data for each group from a Multivariate
+Gamma Distribution by invoking this distribution's random generator once
 per group. It binds the generated data together into a single data frame.
 }
 \examples{

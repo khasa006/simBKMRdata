@@ -1,13 +1,13 @@
 #' Simulate Group Multivariate Data
 #'
-#' This function generates data for each group from a Multivariate Gamma
-#' Distribution by invoking this distribution's random generator once
+#' @description This function generates data for each group from a Multivariate
+#' Gamma Distribution by invoking this distribution's random generator once
 #' per group. It binds the generated data together into a single data frame.
 #'
 #' @param param_list A list of named sublists, where each sublist contains the
-#' parameters for a group (sample size, mean, standard correlation matrix, shape,
-#' and rate parameter). The dimension of the parameters for each group must be
-#' the same.
+#' parameters for a group (sample size, mean, standard correlation matrix,
+#' shape, and rate parameter). The dimension of the parameters for each group
+#' must be the same.
 #' @param group_col_name The column name of the grouping/label column to be
 #' created in the final data frame. The values are taken from the names of the
 #' sublists of `param_list`. Defaults to "group". See the example below.
@@ -67,17 +67,17 @@ simulate_group_gamma <- function(param_list, group_col_name) {
       if (!all(param_check_lgl)) {
         stop(
 
-          "All parameter sublists must contain sample size (sampSize), sample mean
-        (mean_vec), sample correlation matrix (sampCorr_mat), sample shape
-        parameter (shape_num) and sample rate parameter (rate_num); these list
-        names must be EXACT."
+          "All parameter sublists must contain sample size (sampSize), sample
+          mean (mean_vec), sample correlation matrix (sampCorr_mat), sample
+          shape parameter (shape_num) and sample rate parameter (rate_num);
+          these list names must be EXACT."
         )
       }
 
       generated_data <- simBKMRdata::generate_mvGamma_data(
         sampSize = group_params$sampSize,  # Number of samples
         mean_vec = group_params$mean_vec,  # Pre-estimated mean vector
-        sampCorr_mat = group_params$sampCorr_mat,  # Pre-estimated covariance matrix
+        sampCorr_mat = group_params$sampCorr_mat,  # Pre-estimated cov matrix
         shape_num = group_params$shape_num,  # Pre-estimated shape parameters
         rate_num = group_params$rate_num  # Pre-estimated rate parameters
       )
@@ -115,15 +115,23 @@ simulate_group_gamma <- function(param_list, group_col_name) {
 #     group_params <- param_list[[group_name]]
 #
 #     # Check if the required parameters are present in the group
-#     if (is.null(group_params$mean_vec) || is.null(group_params$sampCorr_mat)) {
-#       stop("Each group must have 'mean_vec' and 'sampCorr_mat' in its parameters.")
+#     if (
+#       is.null(group_params$mean_vec) || is.null(group_params$sampCorr_mat)
+#     ) {
+#       stop(
+#         "Each group must have 'mean_vec' and 'sampCorr_mat' in its
+#         parameters."
+#       )
 #     }
 #
 #     # Check for distribution-specific parameters and generate data
 #     if (identical(data_gen_fn, generate_mvGamma_data)) {
 #       # Ensure Gamma-specific parameters are present
 #       if (is.null(group_params$shape_num) || is.null(group_params$rate_num)) {
-#         stop("Each group must have 'shape_num' and 'rate_num' for the Gamma distribution.")
+#         stop(
+#           "Each group must have 'shape_num' and 'rate_num' for the Gamma
+#           distribution."
+#         )
 #       }
 #
 #       # Generate data using Gamma distribution

@@ -1,8 +1,9 @@
 #' Simulate Group Multivariate Gaussian Data
 #'
-#' This function generates data for each group from a Multivariate Gaussian
-#' (Normal) Distribution by invoking this distribution's random generator once
-#' per group. It binds the generated data together into a single data frame.
+#' @description This function generates data for each group from a Multivariate
+#' Gaussian (Normal) Distribution by invoking this distribution's random
+#' generator once per group. It binds the generated data together into a single
+#' data frame.
 #'
 #' @param param_list A list of named sublists, where each sublist contains the
 #' parameters for a group (sample size, mean, standard deviation, and

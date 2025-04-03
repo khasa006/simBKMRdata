@@ -21,9 +21,10 @@ A data frame with the simulated data for all groups, including the
 grouping column.
 }
 \description{
-This function generates data for each group from a Multivariate Gaussian
-(Normal) Distribution by invoking this distribution's random generator once
-per group. It binds the generated data together into a single data frame.
+This function generates data for each group from a Multivariate
+Gaussian (Normal) Distribution by invoking this distribution's random
+generator once per group. It binds the generated data together into a single
+data frame.
 }
 \examples{
 # Example using MASS::mvrnorm for normal distribution

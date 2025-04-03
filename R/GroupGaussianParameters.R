@@ -1,8 +1,8 @@
 #' Calculate summary statistics for each group
 #'
-#' This function computes the sample size, mean vector, standard deviation
-#' vector, Spearman correlation matrix, and skewness vector for each group,
-#' based on the grouping column.
+#' @description This function computes the sample size, mean vector, standard
+#' deviation vector, Spearman correlation matrix, and skewness vector for each
+#' group, based on the grouping column.
 #'
 #' @param data_df A data frame containing the data to be processed.
 #' @param group_col A character string specifying the name of the column to

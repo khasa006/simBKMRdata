@@ -18,16 +18,12 @@ generate_mvGamma_data(sampSize, mean_vec, sampCorr_mat, shape_num, rate_num)
 \item{rate_num}{A numeric vector of rate parameters for the Gamma transformation.}
 }
 \value{
-A list containing:
-\itemize{
-\item \code{norm_samples}: The generated multivariate normal samples.
-\item \code{norm_cdf}: The CDF of the normal samples.
-\item \code{gamma_samples}: The transformed Gamma samples.
-}
+A data frame containing the transformed Gamma samples.
 }
 \description{
-This function generates multivariate normal samples, transforms them into Z-scores,
-and then applies a \code{qgamma} transformation to each variable.
+This function generates multivariate normal samples, transforms
+them into Z-scores, and then calls the \code{qgamma()} function to transform the
+values for each correlated variable to those from a Gamma distribution.
 }
 \examples{
 p <- 4

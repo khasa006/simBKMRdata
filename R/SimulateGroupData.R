@@ -1,7 +1,8 @@
 #' Simulate Group Data
 #'
-#' This function generates data for each group by invoking the specified data generation function
-#' once per group. It binds the generated data together into a single data frame.
+#' @description This function generates data for each group by invoking the
+#' specified data generation function once per group. It binds the generated
+#' data together into a single data frame.
 #'
 #' @param param_list A list of named sublists, where each sublist contains the
 #' parameters for a group (mean, shape, rate, etc.). The list must be named with

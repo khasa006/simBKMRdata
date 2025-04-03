@@ -1,7 +1,8 @@
 #' Generate Multivariate Skewed Gamma Transformed Data
 #'
-#' This function generates multivariate normal samples, transforms them into Z-scores,
-#' and then applies a `qgamma` transformation to each variable.
+#' @description This function generates multivariate normal samples, transforms
+#' them into Z-scores, and then calls the `qgamma()` function to transform the
+#' values for each correlated variable to those from a Gamma distribution.
 #'
 #' @param sampSize Number of samples to generate.
 #' @param mean_vec A numeric vector of means for the normal distribution.
@@ -9,10 +10,7 @@
 #' @param shape_num A numeric vector of shape parameters for the Gamma transformation.
 #' @param rate_num A numeric vector of rate parameters for the Gamma transformation.
 #'
-#' @return A list containing:
-#'   - \code{norm_samples}: The generated multivariate normal samples.
-#'   - \code{norm_cdf}: The CDF of the normal samples.
-#'   - \code{gamma_samples}: The transformed Gamma samples.
+#' @return A data frame containing the transformed Gamma samples.
 #'
 #' @importFrom MASS mvrnorm
 #' @importFrom stats pnorm qgamma

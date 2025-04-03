@@ -27,9 +27,9 @@ A list of lists, where each inner list contains:
 }
 }
 \description{
-This function computes the sample size, gamma distribution parameters
-(shape and rate), and Spearman correlation matrix for each group, based on
-the grouping column.
+This function computes the sample size, gamma distribution
+parameters (shape and rate), and Spearman correlation matrix for each group,
+based on the grouping column.
 }
 \examples{
 myData <- data.frame(

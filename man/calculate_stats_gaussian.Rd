@@ -24,9 +24,9 @@ parameter estimates for one group:
 }
 }
 \description{
-This function computes the sample size, mean vector, standard deviation
-vector, Spearman correlation matrix, and skewness vector for each group,
-based on the grouping column.
+This function computes the sample size, mean vector, standard
+deviation vector, Spearman correlation matrix, and skewness vector for each
+group, based on the grouping column.
 }
 \examples{
 myData <- data.frame(
