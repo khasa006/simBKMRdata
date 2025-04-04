@@ -16,8 +16,13 @@ License: GPL (>= 3)
 Imports:
     MASS, stats
 Suggests:
-    quarto 
+    bkmr,
+    fields,
+    quarto,
+    testthat (>= 3.0.0),
+    tidyverse
 VignetteBuilder: quarto
 Depends: 
     R (>= 3.5)
 LazyData: true
+Config/testthat/edition: 3

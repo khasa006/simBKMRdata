@@ -1,12 +1,12 @@
 ---
-title: "Simulating Multivariate Group Data for Different Distributions"
+title: "Simulating Multivariate Data by Group for Different Distributions"
 author: "Kazi Tanvir Hasan and Dr. Gabriel Odom"
 output: 
   rmarkdown::html_vignette:
     toc: true
     toc_depth: 2
 vignette: >
-  %\VignetteIndexEntry{Simulate Multivariate Normal and Skewed Gamma Data with Pre-Estimated Statistics}
+  %\VignetteIndexEntry{Simulate Multivariate Normal and Skewed Gamma Data by Group with Pre-Estimated Statistics}
   %\VignetteEngine{quarto::html}
   %\VignetteLanguage{en}
 ---

@@ -74,7 +74,7 @@ simulate_group_gamma <- function(param_list, group_col_name) {
         )
       }
 
-      generated_data <- simBKMRdata::generate_mvGamma_data(
+      generated_data <- generate_mvGamma_data(
         sampSize = group_params$sampSize,  # Number of samples
         mean_vec = group_params$mean_vec,  # Pre-estimated mean vector
         sampCorr_mat = group_params$sampCorr_mat,  # Pre-estimated cov matrix

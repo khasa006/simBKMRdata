@@ -1,10 +1,10 @@
-# Save Lucchini's "Taranto Children's" Dataset in the Package
+# Save Lucchini's Children's Metal Exposure Dataset in the Package
 # Kazi Tanvir Hasan and Gabriel Odom
 # 2025-04-03
 
 # Tanvir was emailed the raw tables to create this dataset on <DATE>. He
 # wrangled the original data set using the script <inst/scripts/FILE_NAME.R>.
-# He then saved the cleaned version as "inst/extdata/tarantoChildren.csv" on 
+# He then saved the cleaned version as "inst/extdata/metalExposChildren.csv" on 
 # 2025-04-02.
 
 # Prof. Roberto Lucchini emailed permission for us to share this data set on 
@@ -14,8 +14,8 @@
 # Prof. Roberto Lucchini (rlucchin AT fiu DOT edu).
 
 library(tidyverse)
-tarantoChildren_df <-
-  read_csv("inst/extdata/tarantoChildren.csv") %>% 
+metalExposChildren_df <-
+  read_csv("inst/extdata/metalExposChildren.csv") %>% 
   select(-Zone, -Traffic) %>% 
   # ADD COMMENT FROM EMAIL/DATA DICTIONARY HERE
   rename(Distance_metres = Distance, Sex = Gender) %>% 
@@ -29,4 +29,4 @@ tarantoChildren_df <-
     Sex = as.factor(Sex)
   )
 
-usethis::use_data(tarantoChildren_df)
+usethis::use_data(metalExposChildren_df)
