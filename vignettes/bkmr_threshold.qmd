@@ -35,9 +35,9 @@ First, we load the data, clean it, and perform any necessary transformations. In
 set.seed(2025)
 
 # Load the dataset and preprocess
-bkmrAnalysisData_df <- read_csv(
-  "/Users/tanvirhasan/Github/simBKMRdata/data/tarantoChlidren_df.csv"
-) %>%
+load("~/Github/simBKMRdata/data/tarantoChildren_df.rda")
+
+bkmrAnalysisData_df <- tarantoChildren_df %>%
   select(QI, Cadmium:Manganese) %>%  # Selecting relevant columns
   na.omit() %>%  # Remove rows with missing values
   mutate_at(
