@@ -30,7 +30,7 @@ generate_mvGamma_data <- function(sampSize,
                                   sampCorr_mat,
                                   shape_num,
                                   rate_num) {
-  
+
   # Check that the length of shape_num and rate_num match the number of
   # variables (p)
   p <- length(mean_vec)
@@ -58,7 +58,7 @@ generate_mvGamma_data <- function(sampSize,
 .mvGamma_fn <- function(normCdf_mat, shape_num, rate_num) {
   dataP <- ncol(normCdf_mat)
   dataN <- nrow(normCdf_mat)
-  
+
   # Apply the qgamma transformation to each column
   out_mat <- matrix(
     data = vapply(
@@ -67,14 +67,14 @@ generate_mvGamma_data <- function(sampSize,
         stats::qgamma(
           p = normCdf_mat[, d],
           shape = shape_num[d],
-          rate = rate_num[d]
+          rate = 1 / rate_num[d]
         )
       },
       FUN.VALUE = numeric(dataN)
     ),
     nrow = dataN, ncol = dataP, byrow = FALSE
   )
-  
+
   as.data.frame(out_mat)
-  
+
 }
