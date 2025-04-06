@@ -1,12 +1,12 @@
 ---
-title: "Simulate Multivariate Normal and Skewed Gamma Data"
+title: "Simulation and Estimation for each group"
 author: "Kazi Tanvir Hasan and Dr. Gabriel Odom"
 output: 
   rmarkdown::html_vignette:
     toc: true
     toc_depth: 2
 vignette: >
-  %\VignetteIndexEntry{Simulate Multivariate Normal and Skewed Gamma Data with Pre-Estimated Statistics}
+  %\VignetteIndexEntry{Simulation and Estimation for each group}
   %\VignetteEngine{quarto::html}
   %\VignetteLanguage{en}
 ---
@@ -19,13 +19,13 @@ This vignette demonstrates how to simulate **multivariate normal data** and **mu
 
 In this guide, we cover the following steps:
 
-1. **Simulate Multivariate Normal Data**: Use pre-estimated statistics (mean vector and covariance matrix) to generate multivariate normal data using the `MASS::mvrnorm()` function.
+1. **Simulate Multivariate Normal Data**: Use pre-estimated statistics (mean vector and covariance matrix) to generate multivariate normal data using the `simulate_group_data()` function with `MASS::mvrnorm()` data generation function.
 
-2. **Estimate Multivariate Moments**: Using a dataset to estimate key statistics such as mean, variance, correlation, and skewness.
+2. **Estimate Multivariate Moments**: Using a dataset to estimate key statistics such as mean, variance, correlation, and skewness using `calculate_stats_gaussian()` function.
 
-3. **Simulate Multivariate Skewed Gamma Data**: Use pre-estimated statistics to generate multivariate skewed Gamma data using the `generate_mvGamma_data` function.
+3. **Simulate Multivariate Skewed Gamma Data**: Use pre-estimated statistics to generate multivariate skewed Gamma data using the `simulate_group_data()` function with `generate_mvGamma_data` data generation function.
 
-4. **Estimate Multivariate Skewed Gamma Parameters**: Estimate skewed Gamma distribution parameters using **Method of Moments (MoM)** and **Generalized Maximum Likelihood Estimation (gMLE)** methods based on an existing dataset.
+4. **Estimate Multivariate Skewed Gamma Parameters**: Estimate skewed Gamma distribution parameters (shape and rate) using the `calculate_stats_gamma()` function.  Choose either **Method of Moments (MoM)** or **Generalized Maximum Likelihood Estimation (gMLE)** methods based on an existing dataset.
 
 
 ## Setup
@@ -36,15 +36,6 @@ We will load the necessary libraries and assume that we already have pre-estimat
 # Load necessary libraries
 library(MASS)         # For generating multivariate normal data
 library(simBKMRdata)  # For generating skewed Gamma data and estimating moments
-
-# Set parameters for the simulation (pre-estimated)
-mean_vec <- c(0, 0, 0, 0)  # Pre-estimated mean vector
-cov_mat <- diag(4)         # Pre-estimated covariance matrix (identity matrix for simplicity)
-shapeGamma_num <- c(0.5, 0.75, 1, 1.25)  # Pre-estimated shape parameters for Gamma
-rateGamma_num <- 1:4  # Pre-estimated rate parameters for Gamma
-
-# Set seed for reproducibility
-set.seed(2025)
 ```
 
 
@@ -53,11 +44,21 @@ set.seed(2025)
 Given the pre-estimated mean vector and covariance matrix, we can generate multivariate normal data using the `MASS::mvrnorm()` function.
 
 ```{r}
-# Generate multivariate normal data based on pre-estimated mean and covariance matrix
-mvnorm_samples <- mvrnorm(n = 1000, mu = mean_vec, Sigma = cov_mat)
+# Example using MASS::mvrnorm for normal distribution
+param_list <- list(
+  Group1 = list(
+    mean_vec = c(1, 2), 
+    sampCorr_mat = matrix(c(1, 0.5, 0.5, 1), 2, 2), 
+    sampSize = 100
+  ),
+  Group2 = list(
+    mean_vec = c(2, 3), 
+    sampCorr_mat = matrix(c(1, 0.3, 0.3, 1), 2, 2), 
+    sampSize = 150
+  )
+)
 
-# View the first few rows of the simulated data
-head(mvnorm_samples)
+mvnorm_samples <- simulate_group_data(param_list, MASS::mvrnorm, "Group")
 ```
 
 
@@ -68,13 +69,10 @@ Let's visualize the first two variables of the generated multivariate normal dat
 ```{r}
 # Plot the first two variables of the multivariate normal data
 plot(
-  mvnorm_samples[, 1], 
-  mvnorm_samples[, 2], 
-  main = "Scatterplot of First Two Variables of Multivariate Normal Data",
-  xlab = "Variable 1", 
-  ylab = "Variable 2", 
-  pch = 19,
-  col = "blue"
+  mvnorm_samples[, 1], mvnorm_samples[, 2],
+  main = "Scatterplot: MV Normal Data",
+  xlab = "Variable 1", ylab = "Variable 2",
+  pch = 19, col = "blue"
 )
 ```
 
@@ -86,17 +84,12 @@ Suppose we already have a dataset and need to estimate key multivariate moments 
 ### Example: Estimating Moments from an Existing Dataset
 
 ```{r}
-# Example dataset (real dataset can be used)
 myData <- data.frame(
-  VALUE1 = c(2.3, 2.7, 2.5, 2.8, 3.1),
-  VALUE2 = c(4.5, 4.2, 4.35, 4.6, 4.7)
+  GENDER = c('Male', 'Female', 'Male', 'Female', 'Male', 'Female'),
+  VALUE1 = c(1.2, 2.3, 1.5, 2.7, 1.35, 2.5),
+  VALUE2 = c(3.4, 4.5, 3.8, 4.2, 3.6, 4.35)
 )
-
-# Estimate multivariate moments
-moment_estimates <- estimate_mv_moments(myData)
-
-# Display the estimated moments
-moment_estimates
+calculate_stats_gaussian(data_df = myData, group_col = "GENDER")
 ```
 
 
@@ -120,17 +113,26 @@ The moment_estimates object contains:
 We can now generate multivariate skewed Gamma data based on pre-estimated shape and rate parameters for the Gamma distribution. This can be done using the `generate_mvGamma_data` function.
 
 ```{r}
-# Generate multivariate skewed Gamma data
-gamma_samples <- generate_mvGamma_data(
-  sampSize = 1000,  # Number of samples
-  mean_vec = mean_vec,  # Pre-estimated mean vector
-  sampCorr_mat = cov_mat,  # Pre-estimated covariance matrix
-  shape_num = shapeGamma_num,  # Pre-estimated shape parameters
-  rate_num = rateGamma_num  # Pre-estimated rate parameters
+# Example using generate_mvGamma_data for Gamma distribution
+param_list <- list(
+   Group1 = list(
+     mean_vec = c(1, 2), 
+     sampCorr_mat = matrix(c(1, 0.5, 0.5, 1), 2, 2),
+     shape_num = c(2, 2), 
+     rate_num = c(1, 1), 
+     sampSize = 100
+   ),
+   Group2 = list(
+     mean_vec = c(2, 3), 
+     sampCorr_mat = matrix(c(1, 0.3, 0.3, 1), 2, 2),
+     shape_num = c(2, 2), 
+     rate_num = c(1, 1), 
+     sampSize = 150
+   )
+ 
 )
 
-# View the first few rows of the Gamma samples
-head(gamma_samples)
+gamma_samples <- simulate_group_data(param_list, generate_mvGamma_data, "Group")
 ```
 
 ### Visualizing the Skewed Gamma Data
@@ -140,21 +142,8 @@ Let's plot the density of the first two variables of the generated skewed Gamma 
 ```{r}
 # Plot the density of the first and second variable for Gamma data
 par(mfrow = c(2, 1))
-
-# Density of the first variable
-plot(
-  density(gamma_samples[, 1]), 
-  main = "Density of First Gamma Feature (Variable 1)", 
-  col = "blue"
-)
-
-# Density of the second variable
-plot(
-  density(gamma_samples[, 2]), 
-  main = "Density of Second Gamma Feature (Variable 2)", 
-  col = "blue"
-)
-
+plot(density(gamma_samples[, 1]), main = "Gamma Variable 1", col = "blue")
+plot(density(gamma_samples[, 2]), main = "Gamma Variable 2", col = "blue")
 par(mfrow = c(1, 1))
 ```
 
@@ -166,11 +155,12 @@ If we have an existing dataset, we can estimate the parameters of the multivaria
 ### Example: Estimating Skewed Gamma Parameters Using MoM
 
 ```{r}
-# Estimate multivariate skewed gamma parameters using the Method of Moments
-skewed_gamma_params_mom <- estimate_mv_shape_rate(myData, using = "MoM")
-
-# Display the estimated skewed gamma parameters
-skewed_gamma_params_mom
+myData <- data.frame(
+   GENDER = c('Male', 'Female', 'Male', 'Female', 'Male', 'Female'),
+   VALUE1 = c(1.2, 2.3, 1.5, 2.7, 1.35, 2.5),
+   VALUE2 = c(3.4, 4.5, 3.8, 4.2, 3.6, 4.35)
+)
+calculate_stats_gamma(data_df = myData, group_col= "GENDER", using = "MoM")
 ```
 
 
