@@ -1,6 +1,8 @@
 ---
-title: "An R Package for Simulating Multivariate Environmental Exposure Data and Estimating Feature Selection Thresholds for Bayesian Kernel Machine Regression"
-author: "Kazi Tanvir Hasan and Dr. Gabriel Odom"
+title: "Helper Functions for Bayesian Kernel Machine Regression"
+subtitle: "Simulating Multivariate Environmental Exposure Data and Estimating Feature Selection Thresholds"
+date: "2025-04-07"
+author: "Kazi Tanvir Hasan and Gabriel J. Odom"
 output:
   rmarkdown::html_document:
     toc: true
@@ -14,19 +16,17 @@ bibliography: references.bib
 
 # Abstract
 
-In environmental health studies, the relationship between multiple environmental exposures and health outcomes, such as cognitive development, is often investigated using complex datasets that exhibit non-normality. This paper introduces an R package designed to simulate multivariate environmental exposure data and estimate feature selection thresholds for Bayesian Kernel Machine Regression (BKMR). The package enables researchers to generate data from multivariate normal and skewed Gamma distributions, common in environmental exposure research, and calculate statistical features such as mean, variance, skewness, and correlation. The package also facilitates the calculation of the Posterior Inclusion Probability (PIP) threshold for feature selection in BKMR, offering an approach that accounts for non-normal data. The effectiveness of the package is demonstrated through a real-world application using data from the Taranto Children Study, where metal exposures are related to IQ scores.
+In environmental health studies, the relationship between multiple environmental exposures and health outcomes, such as cognitive development, is often investigated using complex datasets that exhibit non-normality. This paper introduces an R package designed to simulate multivariate environmental exposure data and estimate feature selection thresholds to aid in research to apply and extend the Bayesian Kernel Machine Regression (BKMR) methodology. The package enables researchers to generate data from multivariate normal and multivariate skewed Gamma distributions, common in environmental exposure research, and calculate multivariate statistical features such as mean, variance, skewness, shape, and scale vectors, and correlation matrices. This package also facilitates the calculation of a Posterior Inclusion Probability (PIP) threshold for feature selection in BKMR, offering an approach that accounts for non-normal data (based on the work in [CITE]). The effectiveness of the package is demonstrated through a real-world application using data from an adolescent environmental exposure study, where metal exposures are related to IQ scores.
 
 ## Keywords
 
-R package, Bayesian Kernel Machine Regression, multivariate simulation, feature selection, environmental exposure, statistical moments, Gamma distribution, skewed Gamma distribution, non-normal data
+R package, Bayesian Kernel Machine Regression, multivariate simulation, feature selection, environmental exposure, statistical moments, multivariate Gamma distribution, skewed data
 
 # Introduction
 
-Environmental exposure to metals such as Cadmium, Mercury, Arsenic, and Lead is linked to various adverse health outcomes, especially among children[@Horton2013]. In particular, these exposures may influence cognitive functions, with effects that often vary based on the concentration of metals in the environment[@Sanders2015; @trasande2011; @tyler2014; @tolins2014]. Research into these relationships frequently involves complex, multivariate datasets where environmental factors are correlated, and data distributions often exhibit skewness rather than normality[@bobb2014; @bobb2018; @hasan2024].
+Environmental exposure to metals such as Cadmium, Mercury, Arsenic, and Lead is linked to various adverse health outcomes, especially among children [@Horton2013]. In particular, these exposures may influence cognitive functions, with effects that often vary based on the concentration of metals in the environment [@Sanders2015; @trasande2011; @tyler2014; @tolins2014]. Research into these relationships frequently involves complex, multivariate datasets where environmental factors are correlated, and data distributions often exhibit skewness rather than normality [@bobb2014; @bobb2018; @hasan2024].
 
-The Bayesian Kernel Machine Regression (BKMR) model is a powerful method for identifying relevant environmental factors and interactions[@bobb2014; @bobb2018; @wilson2022; @devick2022; @gerwinn2010; @ibrahimou2024]. However, its effectiveness is typically constrained by its assumption of normality in the data, which is frequently violated in environmental health studies[@bobb2014; @bobb2018; @hasan2024; @Van2021]. To address this limitation, we have developed an R package that facilitates data simulation for multivariate environments and estimates the Posterior Inclusion Probability (PIP) threshold for feature selection within the BKMR framework, particularly when data deviate from normality[@hasan2024].
-
-This article presents the R package and demonstrates its utility by simulating environmental exposure data from multivariate normal and skewed Gamma distributions, estimating key statistical moments, and applying BKMR to assess the effects of metal exposures on children's IQ scores using real-world data.
+The Bayesian Kernel Machine Regression (BKMR) model is a powerful method for identifying relevant environmental factors and interactions [@bobb2014; @bobb2018; @wilson2022; @devick2022; @gerwinn2010; @ibrahimou2024]. However, its effectiveness is typically constrained by its assumption of normality in the data, which is frequently violated in environmental health studies [@bobb2014; @bobb2018; @hasan2024; @Van2021]. To allow BKMR to flexibly handle multivariate skewed data, ongoing methodological innovation is needed, and synthetic data sets are a critical component of this research. To fill this need for realistic synthetic data sets, we have developed an R package that facilitates parametric bootstrap data simulation for multivariate environmental exposures. Further, this package includes computational results to estimate a Posterior Inclusion Probability (PIP) threshold which enables feature selection for BKMR via a hypothesis testing framework with controlled test size, which is particularly useful when data deviate from multivariate normality [@hasan2024]. In this chapter, we show how to estimate key statistical moments from a real data set which includes effects of metals exposures on children's IQ scores. Then, to facilitate future methodological innovation, we show how to use these moments as parameter estimates to simulate multiple synthetic environmental exposure data sets from multivariate normal and multivariate (skewed) Gamma distributions. Also, for the real data analysis, we show how to apply our threshold equation to use BKMR results for feature selection.
 
 # Materials and Methods
 
@@ -170,6 +170,8 @@ bkmrAnalysisData_df <- metalExposChildren_df %>%
   mutate(
     across(Cadmium:Manganese, ~ trans_log(.))
   )
+
+head(bkmrAnalysisData_df)
 ```
 
 ## Estimation of Moments for Multivariate Skewed Gamma Distribution
@@ -183,11 +185,14 @@ Bayesian Kernel Machine Regression (BKMR) was employed to investigate the effect
 We used the kmbayes function from the bkmr package to fit the BKMR model. A cover design was used to generate knot points for the model, and posterior inclusion probabilities (PIPs) were extracted to identify significant predictors.
 
 ```{r}
+#| label: run-bkmr
 library(bkmr)
 
 # Extract the response variable (IQ) and the exposure matrix (metals)
 iq <- bkmrAnalysisData_df %>% pull(QI)
-expos <- data.matrix(bkmrAnalysisData_df %>% select(Cadmium:Manganese))
+expos <- bkmrAnalysisData_df %>%
+  select(Cadmium:Manganese) %>% 
+  data.matrix()
 
 # Generate knot points using a cover design for Bayesian modeling
 knots50 <- fields::cover.design(expos, nd = 50)$design
@@ -197,7 +202,7 @@ modelFit <- kmbayes(
   y = iq,         # Response variable
   Z = expos,      # Exposure matrix (metal concentrations)
   X = NULL,       # No additional covariates
-  iter = 10000,   # Number of MCMC iterations
+  iter = 2000,    # Number of MCMC iterations
   family = "gaussian",  # Gaussian response
   verbose = TRUE,       # Output progress for each iteration
   varsel = TRUE,       # Perform variable selection
