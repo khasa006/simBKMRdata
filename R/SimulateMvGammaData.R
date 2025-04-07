@@ -5,11 +5,10 @@
 #' values for each correlated variable to those from a Gamma distribution.
 #'
 #' @param sampSize Number of samples to generate.
-#' @param mean_vec A numeric vector of means for the normal distribution.
 #' @param sampCorr_mat A correlation matrix for the normal distribution.
 #' @param shape_num A numeric vector of shape parameters for the Gamma transformation.
 #' @param rate_num A numeric vector of rate parameters for the Gamma transformation.
-#'
+#' Second column: <https://en.wikipedia.org/wiki/Gamma_distribution>
 #' @return A data frame containing the transformed Gamma samples.
 #'
 #' @importFrom MASS mvrnorm
@@ -21,19 +20,17 @@
 #' N <- 1000
 #' shapeGamma_num <- c(0.5, 0.75, 1, 1.25)
 #' rateGamma_num <- 1:4
-#' mean_vec <- rep(0, p)
 #' cov_mat <- diag(p)
-#' generate_mvGamma_data(N, mean_vec, cov_mat, shapeGamma_num, rateGamma_num)
+#' generate_mvGamma_data(N, cov_mat, shapeGamma_num, rateGamma_num)
 
 generate_mvGamma_data <- function(sampSize,
-                                  mean_vec,
                                   sampCorr_mat,
                                   shape_num,
                                   rate_num) {
 
   # Check that the length of shape_num and rate_num match the number of
   # variables (p)
-  p <- length(mean_vec)
+  p <- ncol(sampCorr_mat)
   if (length(shape_num) != p) {
     stop("The length of shape_num must match the number of variables (p).")
   }
@@ -43,7 +40,9 @@ generate_mvGamma_data <- function(sampSize,
 
   # Generate multivariate normal samples
   norm_samples <- MASS::mvrnorm(
-    n = sampSize, mu = mean_vec, Sigma = sampCorr_mat
+    n = sampSize,
+    mu = rep.int(x = 0, times = p),
+    Sigma = sampCorr_mat
   )
 
   # Calculate the CDF of the normal samples
@@ -67,7 +66,7 @@ generate_mvGamma_data <- function(sampSize,
         stats::qgamma(
           p = normCdf_mat[, d],
           shape = shape_num[d],
-          rate = 1 / rate_num[d]
+          rate = rate_num[d]
         )
       },
       FUN.VALUE = numeric(dataN)

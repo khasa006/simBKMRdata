@@ -35,9 +35,9 @@ simulate_group_data(param_list, MASS::mvrnorm, "Group")
 
 # Example using generate_mvGamma_data for Gamma distribution
 param_list <- list(
-  Group1 = list(mean_vec = c(1, 2), sampCorr_mat = matrix(c(1, 0.5, 0.5, 1), 2, 2),
+  Group1 = list(sampCorr_mat = matrix(c(1, 0.5, 0.5, 1), 2, 2),
                 shape_num = c(2, 2), rate_num = c(1, 1), sampSize = 100),
-  Group2 = list(mean_vec = c(2, 3), sampCorr_mat = matrix(c(1, 0.3, 0.3, 1), 2, 2),
+  Group2 = list(sampCorr_mat = matrix(c(1, 0.3, 0.3, 1), 2, 2),
                 shape_num = c(2, 2), rate_num = c(1, 1), sampSize = 150)
 )
 simulate_group_data(param_list, generate_mvGamma_data, "Group")

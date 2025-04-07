@@ -31,14 +31,12 @@ per group. It binds the generated data together into a single data frame.
 param_list <- list(
  Male = list(
   sampSize = 100,
-  mean_vec = c(0, 0),  # Mean vector for each variable
   sampCorr_mat = matrix(c(1, 0.5, 0.5, 1), 2, 2),  # Covariance matrix
   shape_num = c(2, 2),  # Shape parameters for Gamma distribution
   rate_num = c(1, 1)    # Rate parameters for Gamma distribution
  ),
  Female = list(
   sampSize = 150,
-  mean_vec = c(1, 1),
   sampCorr_mat = matrix(c(1, 0.3, 0.3, 1), 2, 2),
   shape_num = c(1, 4),
   rate_num = c(0.5, 2)

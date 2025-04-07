@@ -23,14 +23,12 @@
 #' param_list <- list(
 #'  Male = list(
 #'   sampSize = 100,
-#'   mean_vec = c(0, 0),  # Mean vector for each variable
 #'   sampCorr_mat = matrix(c(1, 0.5, 0.5, 1), 2, 2),  # Covariance matrix
 #'   shape_num = c(2, 2),  # Shape parameters for Gamma distribution
 #'   rate_num = c(1, 1)    # Rate parameters for Gamma distribution
 #'  ),
 #'  Female = list(
 #'   sampSize = 150,
-#'   mean_vec = c(1, 1),
 #'   sampCorr_mat = matrix(c(1, 0.3, 0.3, 1), 2, 2),
 #'   shape_num = c(1, 4),
 #'   rate_num = c(0.5, 2)
@@ -53,7 +51,7 @@ simulate_group_gamma <- function(param_list, group_col_name) {
 
   # Expected parameter names
   gamma_params_expected <- c(
-    "sampSize", "mean_vec", "sampCorr_mat", "shape_num", "rate_num"
+    "sampSize", "sampCorr_mat", "shape_num", "rate_num"
   )
 
   simOut_ls <- lapply(
@@ -68,15 +66,13 @@ simulate_group_gamma <- function(param_list, group_col_name) {
         stop(
 
           "All parameter sublists must contain sample size (sampSize), sample
-          mean (mean_vec), sample correlation matrix (sampCorr_mat), sample
-          shape parameter (shape_num) and sample rate parameter (rate_num);
-          these list names must be EXACT."
+          correlation matrix (sampCorr_mat), sample shape parameter (shape_num)
+          and sample rate parameter (rate_num); these list names must be EXACT."
         )
       }
 
       generated_data <- generate_mvGamma_data(
         sampSize = group_params$sampSize,  # Number of samples
-        mean_vec = group_params$mean_vec,  # Pre-estimated mean vector
         sampCorr_mat = group_params$sampCorr_mat,  # Pre-estimated cov matrix
         shape_num = group_params$shape_num,  # Pre-estimated shape parameters
         rate_num = group_params$rate_num  # Pre-estimated rate parameters

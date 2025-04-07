@@ -99,7 +99,7 @@ The moment_estimates object contains:
 
 - sampSize: The number of observations.
 
-- xBar: Mean vector for each variable.
+- mean_vec: Mean vector for each variable.
 
 - sampSD: Standard deviation of each variable.
 
@@ -116,14 +116,12 @@ We can now generate multivariate skewed Gamma data based on pre-estimated shape 
 # Example using generate_mvGamma_data for Gamma distribution
 param_list <- list(
    Group1 = list(
-     mean_vec = c(1, 2), 
      sampCorr_mat = matrix(c(1, 0.5, 0.5, 1), 2, 2),
      shape_num = c(2, 2), 
      rate_num = c(1, 1), 
      sampSize = 100
    ),
    Group2 = list(
-     mean_vec = c(2, 3), 
      sampCorr_mat = matrix(c(1, 0.3, 0.3, 1), 2, 2),
      shape_num = c(2, 2), 
      rate_num = c(1, 1), 
@@ -132,7 +130,9 @@ param_list <- list(
  
 )
 
-gamma_samples <- simulate_group_data(param_list, generate_mvGamma_data, "Group")
+gamma_samples <- simulate_group_data(
+  param_list, generate_mvGamma_data, "Group"
+)
 ```
 
 ### Visualizing the Skewed Gamma Data
@@ -169,8 +169,6 @@ calculate_stats_gamma(data_df = myData, group_col= "GENDER", using = "MoM")
 The skewed_gamma_params_mom list will contain:
 
 - sampSize: The sample size.
-
-- xBar: The mean vector of the data.
 
 - sampCorr_mat: The sample correlation matrix.
 

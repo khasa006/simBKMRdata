@@ -4,12 +4,12 @@
 \alias{.skewness}
 \title{Helper function to calculate skewness for a vector}
 \usage{
-.skewness(x, xBar, sampSD, N)
+.skewness(x, mean_vec, sampSD, N)
 }
 \arguments{
 \item{x}{A numeric vector of data}
 
-\item{xBar}{The mean of the data}
+\item{mean_vec}{The mean of the data}
 
 \item{sampSD}{The standard deviation of the data}
 

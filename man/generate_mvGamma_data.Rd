@@ -4,18 +4,17 @@
 \alias{generate_mvGamma_data}
 \title{Generate Multivariate Skewed Gamma Transformed Data}
 \usage{
-generate_mvGamma_data(sampSize, mean_vec, sampCorr_mat, shape_num, rate_num)
+generate_mvGamma_data(sampSize, sampCorr_mat, shape_num, rate_num)
 }
 \arguments{
 \item{sampSize}{Number of samples to generate.}
-
-\item{mean_vec}{A numeric vector of means for the normal distribution.}
 
 \item{sampCorr_mat}{A correlation matrix for the normal distribution.}
 
 \item{shape_num}{A numeric vector of shape parameters for the Gamma transformation.}
 
-\item{rate_num}{A numeric vector of rate parameters for the Gamma transformation.}
+\item{rate_num}{A numeric vector of rate parameters for the Gamma transformation.
+Second column: \url{https://en.wikipedia.org/wiki/Gamma_distribution}}
 }
 \value{
 A data frame containing the transformed Gamma samples.
@@ -30,7 +29,6 @@ p <- 4
 N <- 1000
 shapeGamma_num <- c(0.5, 0.75, 1, 1.25)
 rateGamma_num <- 1:4
-mean_vec <- rep(0, p)
 cov_mat <- diag(p)
-generate_mvGamma_data(N, mean_vec, cov_mat, shapeGamma_num, rateGamma_num)
+generate_mvGamma_data(N, cov_mat, shapeGamma_num, rateGamma_num)
 }

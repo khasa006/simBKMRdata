@@ -24,9 +24,9 @@
 #'
 #' # Example using generate_mvGamma_data for Gamma distribution
 #' param_list <- list(
-#'   Group1 = list(mean_vec = c(1, 2), sampCorr_mat = matrix(c(1, 0.5, 0.5, 1), 2, 2),
+#'   Group1 = list(sampCorr_mat = matrix(c(1, 0.5, 0.5, 1), 2, 2),
 #'                 shape_num = c(2, 2), rate_num = c(1, 1), sampSize = 100),
-#'   Group2 = list(mean_vec = c(2, 3), sampCorr_mat = matrix(c(1, 0.3, 0.3, 1), 2, 2),
+#'   Group2 = list(sampCorr_mat = matrix(c(1, 0.3, 0.3, 1), 2, 2),
 #'                 shape_num = c(2, 2), rate_num = c(1, 1), sampSize = 150)
 #' )
 #' simulate_group_data(param_list, generate_mvGamma_data, "Group")
@@ -49,8 +49,8 @@ simulate_group_data <- function(param_list, data_gen_fn, group_col_name) {
     group_params <- param_list[[group_name]]
 
     # Check if the required parameters are present in the group
-    if (is.null(group_params$mean_vec) || is.null(group_params$sampCorr_mat)) {
-      stop("Each group must have 'mean_vec' and 'sampCorr_mat' in its parameters.")
+    if (is.null(group_params$sampCorr_mat)) {
+      stop("Each group must have 'sampCorr_mat' in its parameters.")
     }
 
     # Check for distribution-specific parameters and generate data
@@ -63,7 +63,6 @@ simulate_group_data <- function(param_list, data_gen_fn, group_col_name) {
       # Generate data using Gamma distribution
       generated_data <- data_gen_fn(
         sampSize = group_params$sampSize,
-        mean_vec = group_params$mean_vec,
         sampCorr_mat = group_params$sampCorr_mat,
         shape_num = group_params$shape_num,
         rate_num = group_params$rate_num
@@ -71,6 +70,10 @@ simulate_group_data <- function(param_list, data_gen_fn, group_col_name) {
 
     } else if (identical(data_gen_fn, MASS::mvrnorm)) {
       # Generate data using Normal distribution
+      if (is.null(group_params$mean_vec)) {
+        stop("Each group must have 'mean_vec' in its parameters.")
+      }
+
       generated_data <- data_gen_fn(
         n = group_params$sampSize,
         mu = group_params$mean_vec,
@@ -91,6 +94,9 @@ simulate_group_data <- function(param_list, data_gen_fn, group_col_name) {
 
   # Combine all the group data frames into one
   combined_data <- do.call(rbind, all_data)
+  # currently it's adding non-unique row name = group label
+  # (female.1, female.2,...)
+  rownames(combined_data) <- NULL
 
   return(combined_data)
 }

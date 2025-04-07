@@ -33,7 +33,7 @@ estimate_mv_shape_rate <- function(x_df, using = c("MoM", "gMLE")) {
 
   moments_ls <- estimate_mv_moments(x_df)
   samp_size <- moments_ls$sampSize
-  mean_vector <- moments_ls$xBar
+  mean_vector <- moments_ls$mean_vec
   samp_sd <- moments_ls$sampSD
   samp_corr <- moments_ls$sampCorr_mat
 
@@ -41,7 +41,7 @@ estimate_mv_shape_rate <- function(x_df, using = c("MoM", "gMLE")) {
 
     # Calculate Gamma distribution parameters with method of moments
     alpha_num <- (mean_vector^2) / samp_sd^2  # Shape parameter
-    beta_num <- samp_sd^2 / mean_vector       # Rate parameter
+    beta_num <- samp_sd^2 / mean_vector       # Scale parameter
 
   } else if (using == "gMLE") {
     # https://en.wikipedia.org/wiki/Gamma_distribution#Closed-form_estimators
@@ -55,10 +55,10 @@ estimate_mv_shape_rate <- function(x_df, using = c("MoM", "gMLE")) {
   # Return all statistics as a list
   list(
     sampSize = samp_size,
-    xBar = mean_vector,
+    mean_vec = mean_vector,
     sampCorr_mat = samp_corr,
-    alpha = alpha_num,
-    beta = beta_num
+    shape_num = alpha_num,
+    rate_num = 1 / beta_num
   )
 
 }

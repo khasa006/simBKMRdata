@@ -39,7 +39,12 @@ estimate_mv_moments <- function(x_df) {
     X = seq_len(ncol(x_df)),
     FUN = function(d) {
       if (length(unique(x_df[, d])) > 1) {
-        .skewness(x = x_df[, d], xBar = mean_vector[d], sampSD = samp_sd[d], N = samp_size)
+        .skewness(
+          x = x_df[, d],
+          mean_vec = mean_vector[d],
+          sampSD = samp_sd[d],
+          N = samp_size
+        )
       } else {
         return(NA)  # Return NA if the column has only one unique value
       }
@@ -50,7 +55,7 @@ estimate_mv_moments <- function(x_df) {
   # Return all statistics as a list
   out_ls <- list(
     sampSize = samp_size,
-    xBar = mean_vector,
+    mean_vec = mean_vector,
     sampSD = samp_sd,
     sampCorr_mat = samp_corr,
     sampSkew = samp_skew
@@ -62,15 +67,15 @@ estimate_mv_moments <- function(x_df) {
 #' Helper function to calculate skewness for a vector
 #'
 #' @param x A numeric vector of data
-#' @param xBar The mean of the data
+#' @param mean_vec The mean of the data
 #' @param sampSD The standard deviation of the data
 #' @param N The sample size
 #' @return The skewness value
-.skewness <- function(x, xBar, sampSD, N) {
+.skewness <- function(x, mean_vec, sampSD, N) {
   # Skewness calculation based on sample moments
   # https://en.wikipedia.org/wiki/Skewness
-  numerator <- sum((x - xBar)^3) / N
-  denominator <- (sum((x - xBar)^2) / (N - 1))^(3/2)
+  numerator <- sum((x - mean_vec)^3) / N
+  denominator <- (sum((x - mean_vec)^2) / (N - 1))^(3/2)
   numerator / denominator
 }
 
