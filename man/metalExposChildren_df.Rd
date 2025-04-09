@@ -33,6 +33,10 @@ for more details. Licensed under CC BY 4.0.
 metalExposChildren_df
 }
 \description{
-A short description...
+This dataset originates from a real-world cohort study led by Dr. Lucchini
+and collaborators, focusing on environmental exposures in children. It
+includes measurements of five metal concentrations—Cadmium, Mercury, Arsenic,
+Lead, and Manganese—alongside standardized intelligence quotient (IQ) scores,
+and some other socio-economic and demographic variables.
 }
 \keyword{datasets}

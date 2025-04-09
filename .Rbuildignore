@@ -4,3 +4,5 @@ README.html
 ^LICENSE\.md$
 ^\.DS_Store$
 ^inst/.DS_Store$
+^\\.Rhistory$
+

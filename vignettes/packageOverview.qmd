@@ -176,9 +176,11 @@ library(bkmr)
 set.seed(2025)
 
 bkmrAnalysisData_df <- analysisData_df %>%
-  mutate(
-    across(Cadmium:Manganese, ~ trans_log(.))
+  na.omit() %>%
+  mutate_at(
+    vars(Cadmium:Manganese), ~ log10(. + 1) %>% as.vector
   )
+
 
 # Extract the response variable (IQ) and the exposure matrix (metals)
 iq <- bkmrAnalysisData_df %>% 
@@ -223,31 +225,30 @@ pipThresh_num <- calculate_pip_threshold(y = bkmrAnalysisData_df$QI)
 
 ## Exploratory Data Analysis
 
-We began by examining the real-world environmental exposure dataset metalExposChildren_df, which includes measurements of various metal concentrations—Cadmium, Mercury, Arsenic, Lead, and Manganese—in children, along with their corresponding IQ scores. After preprocessing to remove missing values, we visualized the distribution of each metal concentration. The histograms and density plots (Figure 1) revealed moderate to high skewness in several metals, particularly Cadmium and Arsenic, which deviated substantially from normality.
+We began by examining the real-world environmental exposure dataset derived from the cohort study led by Dr. Lucchini and colleagues. The dataset comprises measurements of five key metal concentrations — Cadmium, Mercury, Arsenic, Lead, and Manganese—in children, along with corresponding intelligence quotient (IQ) scores. Visualization of the marginal distributions of these metal concentrations using histograms and kernel density plots (Figure 1) revealed marked right-skewness across all analytes, suggesting the need for distribution-sensitive modeling approaches.
 
 ```{r}
+#| echo=FALSE
 variablePlot
 ```
 
 ## Parameter Estimation from Real Data
 
-To simulate synthetic data reflecting real-world distributions, we estimated key statistical parameters for each sex group (Male and Female) using the calculate_stats_gamma() function, employing the method of moments. This function returned group-specific parameter lists, including sample size, mean vectors, Gamma distribution shape and rate parameters, and Spearman correlation matrices. These group-level parameters provided the basis for generating realistic skewed multivariate distributions of environmental exposures.
+To capture the empirical distributional features of the observed data, we implemented the `calculate_stats_gamma()` function to estimate parameters for Gamma distributions within male and female subgroups. This method-of-moments approach yielded group-specific descriptors, including sample sizes, means, Gamma shape and rate parameters, and Spearman correlation matrices among the metals. These parameters served as foundational elements for generating realistic synthetic data that preserve sex-specific distribution and correlation structures of the environmental exposures.
 
 
 
 ## Simulation of Multivariate Gamma Data
 
-With the estimated parameters, we used the simulate_group_data() function to generate synthetic multivariate Gamma-distributed exposure data. This function internally called generate_mvGamma_data() and produced group-labeled datasets that preserved the distributional properties of the original data. The simulated data maintained inter-variable correlations and group-specific skewness patterns, effectively replicating real-world exposure profiles.
+With the estimated parameters, we used the `simulate_group_data()` function to generate synthetic multivariate Gamma-distributed exposure data. This function internally called `generate_mvGamma_data()` and produced group-labeled datasets that preserved the distributional properties of the original data. The simulated data maintained inter-variable correlations and group-specific skewness patterns, effectively replicating real-world exposure profiles.
 
 
 
 ## Bayesian Kernel Machine Regression (BKMR) Analysis
 
-We applied BKMR to evaluate the associations between environmental exposures and children’s IQ scores. Prior to analysis, each metal variable was log-transformed using the trans_log() function to reduce skewness. The exposure matrix consisted of the five log-transformed metals, and the outcome variable was the continuous IQ score.
+To assess the relationship between metal exposures and cognitive outcomes, we employed Bayesian Kernel Machine Regression (BKMR) using the kmbayes() function from the bkmr package. Prior to analysis, we omit the missing values and the metal concentration variables were log-transformed using the `trans_log()` function to mitigate skewness. The exposure matrix thus comprised log-transformed values of the five metals, with IQ as the continuous outcome variable.
 
-Using the kmbayes() function from the bkmr package, we fit the model with 2000 MCMC iterations, enabling variable selection through posterior inclusion probabilities (PIPs). Posterior inference indicated that several metals had elevated PIP values, suggesting strong associations with IQ. The PIPs were extracted using ExtractPIPs() and sorted in descending order.
-
-Notably, Arsenic and Lead emerged as likely key contributors to cognitive development outcomes. However, determining which PIP values were statistically meaningful required the use of a calibrated, data-driven threshold.
+The BKMR model was fit with 2,000 MCMC iterations, allowing for variable selection via computation of Posterior Inclusion Probabilities (PIPs). Extraction and ranking of PIPs, conducted using the `ExtractPIPs()` function, revealed that Cadmium and Lead were among the most influential predictors of IQ variability, as indicated by elevated PIP values (Table 1).
 
 Table 1. Posterior Inclusion Probabilities (PIPs) for Metal Exposures
 
@@ -262,11 +263,13 @@ pipFit %>%
   )
 ```
 
-To address the challenge of determining meaningful PIP thresholds under skewed data conditions, we applied the calculate_pip_threshold() function. This function dynamically estimates a threshold based on the dataset’s coefficient of variation (CV) and sample size using a Four-Parameter Logistic Regression model.
+Notably, Cadmium and Lead emerged as likely key contributors to cognitive development outcomes. However, determining which PIP values were statistically meaningful required the use of a calibrated, data-driven threshold.
 
-For the current dataset, the computed threshold value was r pipThresh_num. This threshold adapts to sample characteristics and adjusts the selection criterion accordingly, making it especially suitable for non-normal data distributions.
+To address the challenge of determining meaningful PIP thresholds under skewed data conditions, we applied the `calculate_pip_threshold()` function. This function dynamically estimates a threshold based on the dataset’s coefficient of variation (CV) and sample size using a Four-Parameter Logistic Regression model.
 
-By comparing each metal’s PIP against the calculated threshold, we identified a refined subset of significant exposures. This approach allows for a statistically principled method of feature selection within the BKMR framework, ensuring robust and interpretable results even when the data deviate from normality.
+For the current dataset, the computed threshold value was `r pipThresh_num`. This threshold adapts to sample characteristics and adjusts the selection criterion accordingly, making it especially suitable for non-normal data distributions.
+
+By comparing each metal’s PIP against the calculated threshold, we identified a refined subset of significant exposures, which included not only cadmium and lead but also manganese and mercury. This approach allows for a statistically principled method of feature selection within the BKMR framework, ensuring robust and interpretable results even when the data deviate from normality.
 
 
 

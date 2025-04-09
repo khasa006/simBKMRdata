@@ -2,6 +2,7 @@
 *.Rproj
 README.html
 .DS_Store
+.Rhistory
 inst/.DS_Store
 vignettes/*_files/
 vignettes/*.html

@@ -1,7 +1,11 @@
 #' Children's Environmental Heavy Metal Exposure Data
 #'
 #' @description
-#' A short description...
+#' This dataset originates from a real-world cohort study led by Dr. Lucchini
+#' and collaborators, focusing on environmental exposures in children. It
+#' includes measurements of five metal concentrations—Cadmium, Mercury, Arsenic,
+#' Lead, and Manganese—alongside standardized intelligence quotient (IQ) scores,
+#' and some other socio-economic and demographic variables.
 #'
 #' @format ## `who`
 #' A data frame with 437 rows and 13 columns:
