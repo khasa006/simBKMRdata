@@ -1,12 +1,14 @@
 Package: simBKMRdata
 Title: Helper Functions for Bayesian Kernel Machine Regression
-Version: 0.0.0.9001
+Version: 0.1.0
 Authors@R: 
     c(
       person("Kazi Tanvir", "Hasan", , "khasa006@fiu.edu", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0002-7723-4177")),
       person("Gabriel", "Odom", , "gabriel.j.odom@gmail.com", role = "aut",
-           comment = c(ORCID = "0000-0003-1341-4555"))
+           comment = c(ORCID = "0000-0003-1341-4555")),
+      person("Roberto", "Lucchini", , "rlucchin@fiu.edu", role = "ctb",
+           comment = c(ORCID = "0000-0002-9723-0237"))
     )
 Description: This R package provides a suite of helper functions designed to 
             support Bayesian Kernel Machine Regression (BKMR) analyses in 
@@ -27,6 +29,7 @@ Imports:
 Suggests:
     bkmr,
     fields,
+    gt,
     quarto,
     testthat (>= 3.0.0),
     tidyverse
