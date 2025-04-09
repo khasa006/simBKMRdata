@@ -17,7 +17,7 @@ Simulate multivariate normal or multivariate skewed exposure data for downstream
 4. Simulate List of Exposure Data Sets for Groups $i = 1, \ldots, G$
     + MV Normal: use [`MASS::mvrnorm()`](https://rdrr.io/cran/MASS/man/mvrnorm.html)
     + MV Skew Gamma: copy the internals of [`lcmix::rmvgamma()`](https://rdrr.io/rforge/lcmix/man/mvgamma.html) from RForge, cite it, and include it here
-5. Use BMKR to analyze the simulated data (we will show some quick examples in vignettes, but not include any functions)
+5. Use BKMR to analyze the simulated data (we will show some quick examples in vignettes, but not include any functions)
 6. Calculate a PIP threshold that preserves a 5% test size for real or simulated data (as close as we can for now). This function should only depend on the response vector, or summary statistics of it (specifically $|\text{cv}(y)|$ and $n$). 
 
 

@@ -51,7 +51,7 @@ The package aims to provide a robust framework for simulating non-normal environ
 
 -   `simulate_group_data()`: Generates data using multivariate normal or Gamma distributions.
 
-2.  Statistical Parametes Estimation: The function `calculate_stats_gaussian()` calculates key statistical moments, including mean, variance, skewness, and correlation matrix, which are essential for understanding the underlying structure of the normally distrubuted data. The function `calculate_stats_gamma()` computes the sample size, gamma distribution parameters (shape and rate), and Spearman correlation matrix for each group, based on the grouping column.
+2.  Statistical Parameters Estimation: The function `calculate_stats_gaussian()` calculates key statistical moments, including mean, variance, skewness, and correlation matrix, which are essential for understanding the underlying structure of the normally distributed data. The function `calculate_stats_gamma()` computes the sample size, gamma distribution parameters (shape and rate), and Spearman correlation matrix for each group, based on the grouping column.
 
 3.  Feature Selection Threshold Calculation: The PIP threshold for feature selection is computed using the `calculate_pip_threshold()` function. This function estimates the threshold based on a Four-Parameter Logistic Regression model (Richard's curve), which adjusts for variations in data and sample size[@richards1959]. The formula used to calculate the PIP threshold is:
 
@@ -156,7 +156,7 @@ param_list <- calculate_stats_gamma(
 param_list
 ```
 
-#### Data Simuation 
+#### Data Simulation 
 
 ```{r}
 gamma_samples <- simulate_group_data(

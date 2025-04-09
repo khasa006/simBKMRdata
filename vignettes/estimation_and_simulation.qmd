@@ -79,7 +79,7 @@ plot(
 
 ## 2. Estimate Multivariate Moments (Using an Existing Dataset)
 
-Suppose we already have a dataset and need to estimate key multivariate moments such as mean, variance, skewness, and correlation. We can use the estimate_mv_moments() function to calculate these statistics.
+Suppose we already have a dataset and need to estimate key multivariate moments such as mean, variance, skewness, and correlation. We can use the `estimate_mv_moments()` function to calculate these statistics.
 
 ### Example: Estimating Moments from an Existing Dataset
 
@@ -166,7 +166,7 @@ calculate_stats_gamma(data_df = myData, group_col= "GENDER", using = "MoM")
 
 ### Output Explanation
 
-The skewed_gamma_params_mom list will contain:
+The list will contain:
 
 - sampSize: The sample size.
 

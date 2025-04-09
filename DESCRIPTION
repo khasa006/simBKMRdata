@@ -13,7 +13,7 @@ Authors@R:
 Description: This R package provides a suite of helper functions designed to 
             support Bayesian Kernel Machine Regression (BKMR) analyses in 
             environmental health research. It enables users to simulate 
-            realistic multivariate exposure data based on Multivariate SKewed 
+            realistic multivariate exposure data based on Multivariate Skewed 
             Gamma distributions, estimate distributional parameters by subgroup,
             and apply adaptive, data-driven thresholds for feature selection 
             using Posterior Inclusion Probabilities (PIPs). The package is 

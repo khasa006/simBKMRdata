@@ -32,7 +32,7 @@
 #'
 #' C: Constant;
 #'
-#' β1, β2: Midpoint shift parameters for CV and sample size;
+#' \eqn{\beta_1, \beta_2}: Midpoint shift parameters for CV and sample size;
 #'
 #' x1: Log2-transformed |CV| (log2(|CV|));
 #'
