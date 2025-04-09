@@ -6,3 +6,5 @@ README.html
 ^inst/.DS_Store$
 ^\\.Rhistory$
 
+^CRAN-SUBMISSION$
+^cran-comments\.md$
