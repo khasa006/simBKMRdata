@@ -1,6 +1,6 @@
 Package: simBKMRdata
 Title: Helper Functions for Bayesian Kernel Machine Regression
-Version: 0.1.0
+Version: 0.1.1
 Authors@R: 
     c(
       person("Kazi Tanvir", "Hasan", , "khasa006@fiu.edu", role = c("aut", "cre"),
@@ -11,15 +11,14 @@ Authors@R:
            comment = c(ORCID = "0000-0002-9723-0237"))
     )
 Description: Provides a suite of helper functions to support Bayesian Kernel 
-            Machine Regression (BKMR) analyses in environmental health research.
-            It enables the simulation of realistic multivariate exposure data 
-            using Multivariate Skewed Gamma distributions, estimation of 
-            distributional parameters by subgroup, and application of adaptive, 
-            data-driven thresholds for feature selection via Posterior Inclusion
-            Probabilities (PIPs). It is especially suited for handling skewed 
-            exposure data and enhancing the interpretability of BKMR results 
-            through principled variable selection. For more discription see the 
-            forthcoming work of Hasan, et.al. <https:...>  
+    Machine Regression (BKMR) analyses in environmental health research. It 
+    enables the simulation of realistic multivariate exposure data using 
+    Multivariate Skewed Gamma distributions, estimation of distributional 
+    parameters by subgroup, and application of adaptive, data-driven thresholds 
+    for feature selection via Posterior Inclusion Probabilities (PIPs). It is 
+    especially suited for handling skewed exposure data and enhancing the 
+    interpretability of BKMR results through principled variable selection. The
+    methodology is shown in Hasan et. al. (2025) <ADD LINK HERE>.
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.2

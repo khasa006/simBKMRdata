@@ -141,10 +141,11 @@ Let's plot the density of the first two variables of the generated skewed Gamma 
 
 ```{r}
 # Plot the density of the first and second variable for Gamma data
+old_par_mfrow <- par()[["mfrow"]]
 par(mfrow = c(2, 1))
 plot(density(gamma_samples[, 1]), main = "Gamma Variable 1", col = "blue")
 plot(density(gamma_samples[, 2]), main = "Gamma Variable 2", col = "blue")
-par(mfrow = c(1, 1))
+par(mfrow = old_par_mfrow)
 ```
 
 
