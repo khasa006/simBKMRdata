@@ -95,7 +95,7 @@ The package includes data transformation functions to prepare data for analysis:
 
 ## Software Implementation
 
-The simBKMRdata software is implemented as an R package. It depends on the following packages: bkmr[@bkmr], fields[@fields], base[@base] and MASS[@MASS]. The R software and these required packages can be obtained from the CRAN website. Furthermore, daily builds of package bkmr are provided on the CRAN website \[.....\]. It has been published under GPL version 3. The source code is available on GitHub at \[https://github.com/khasa006/simBKMRdata\].
+The simBKMRdata software is implemented as an R package. It depends on the following packages: bkmr[@bkmr], fields[@fields], base[@base] and MASS[@MASS]. The R software and these required packages can be obtained from the CRAN website. Furthermore, daily builds of package simBKMRdata are provided on the CRAN website \[.....\]. It has been published under GPL version 3. The source code is available on GitHub at \[https://github.com/khasa006/simBKMRdata\].
 
 ### Installation
 
@@ -123,7 +123,6 @@ library(tidyverse)
 data("metalExposChildren_df")
 
 
-# Preprocess the data by selecting relevant columns and removing missing values
 analysisData_df <- metalExposChildren_df %>%
   select(QI, Cadmium:Manganese, Sex)
 
