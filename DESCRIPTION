@@ -18,7 +18,7 @@ Description: Provides a suite of helper functions to support Bayesian Kernel
     for feature selection via Posterior Inclusion Probabilities (PIPs). It is 
     especially suited for handling skewed exposure data and enhancing the 
     interpretability of BKMR results through principled variable selection. The
-    methodology is shown in Hasan et. al. (2025) <ADD LINK HERE>.
+    methodology is shown in Hasan et. al. (2025) <doi:10.1101/2025.04.14.25325822>.
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.2
