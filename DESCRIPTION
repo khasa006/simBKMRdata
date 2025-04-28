@@ -1,14 +1,19 @@
 Package: simBKMRdata
 Title: Helper Functions for Bayesian Kernel Machine Regression
-Version: 0.1.1
+Version: 0.2.0
 Authors@R: 
     c(
       person("Kazi Tanvir", "Hasan", , "khasa006@fiu.edu", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0002-7723-4177")),
+      person("Ibrahimou", "Boubakari", , "bibrahim@fiu.edu", role = "aut",
+           comment = c(ORCID = "0000-0003-3173-4317")),
+      person("Guerini", "Cristian", , "cristian.guerini@unibs.it", role = "aut"),
+      person("Bursac", "Zoran", , "zbursac@fiu.edu", role = "aut",
+           comment = c(ORCID = "0000-0001-9306-0907")),
+      person("Roberto", "Lucchini", , "rlucchin@fiu.edu", role = "aut",
+           comment = c(ORCID = "0000-0002-9723-0237")),
       person("Gabriel", "Odom", , "gabriel.j.odom@gmail.com", role = "aut",
-           comment = c(ORCID = "0000-0003-1341-4555")),
-      person("Roberto", "Lucchini", , "rlucchin@fiu.edu", role = "ctb",
-           comment = c(ORCID = "0000-0002-9723-0237"))
+           comment = c(ORCID = "0000-0003-1341-4555"))
     )
 Description: Provides a suite of helper functions to support Bayesian Kernel 
     Machine Regression (BKMR) analyses in environmental health research. It 
@@ -24,7 +29,8 @@ Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.2
 License: GPL (>= 3)
 Imports:
-    MASS, stats
+    MASS,
+    stats
 Suggests:
     bkmr,
     fields,
