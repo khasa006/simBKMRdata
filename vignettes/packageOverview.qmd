@@ -111,6 +111,7 @@ head(analysisData_df)
 We show the density plots of these raw exposure levels:
 ```{r}
 #| label: fig-metals-density
+#| fig-cap: Histogram with Density Plot for Metals
 #| warning: false
 
 ggplot(
@@ -241,7 +242,8 @@ modelFit <- kmbayes(
 # Results
 We want to know which metals are related to cognitive ability, as measured by IQ.
 ```{r}
-#| label: tab-PIPs
+#| label: tbl-PIPs
+#| tbl-cap: Posterior Inclusion Probabilities (PIPs) for Metal Exposures
 #| echo: false
 
 library(gt)
@@ -254,22 +256,13 @@ pipFit %>%
   )
 ```
 
-Extraction and ranking of PIPs, conducted using the `ExtractPIPs()` function, revealed that Cadmium and Lead were among the most influential predictors of IQ variability, as indicated by elevated PIP values (@tab-PIPs).
-
-
-
-Table 1. Posterior Inclusion Probabilities (PIPs) for Metal Exposures
-
-```{r}
-
-
-```
+Extraction and ranking of PIPs, conducted using the `ExtractPIPs()` function, revealed that Cadmium and Lead were among the most influential predictors of IQ variability, as indicated by elevated PIP values (@tbl-PIPs).
 
 Notably, Cadmium and Lead emerged as likely key contributors to cognitive development outcomes. However, determining which PIP values were statistically meaningful required the use of a calibrated, data-driven threshold.
 
 To address the challenge of determining meaningful PIP thresholds under skewed data conditions, we applied the `calculate_pip_threshold()` function. This function dynamically estimates a threshold based on the dataset's coefficient of variation (CV) and sample size using a Four-Parameter Logistic Regression model.
 
-For the current dataset, the computed threshold value was `r pipThresh_num`. This threshold adapts to sample characteristics and adjusts the selection criterion accordingly, making it especially suitable for non-normal data distributions.
+For the current dataset, the computed threshold value was `r round(pipThresh_num, 3)`. This threshold adapts to sample characteristics and adjusts the selection criterion accordingly, making it especially suitable for non-normal data distributions.
 
 By comparing each metal's PIP against the calculated threshold, we identified a refined subset of significant exposures, which included not only cadmium and lead but also manganese and mercury. This approach allows for a statistically principled method of feature selection within the BKMR framework, ensuring robust and interpretable results even when the data deviate from normality.
 
