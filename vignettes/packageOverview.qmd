@@ -2,7 +2,7 @@
 title: "Helper Functions for Bayesian Kernel Machine Regression"
 subtitle: "Simulating Multivariate Environmental Exposure Data and Estimating Feature Selection Thresholds"
 date: "2025-04-07"
-author: "Kazi Tanvir Hasan and Gabriel J. Odom"
+author: "Kazi Tanvir Hasan, Dr. Boubakari Ibrahimou, Dr. Zoran Bursac, Dr. Roberto Lucchini, Cristian Guerini, and Dr. Gabriel Odom"
 output:
   rmarkdown::html_document:
     toc: true
@@ -14,21 +14,13 @@ vignette: >
 bibliography: references.bib
 ---
 
-
-
-
 # Abstract
 
 In environmental health studies, the relationship between multiple environmental exposures and health outcomes, such as cognitive development, is often investigated using complex datasets that exhibit non-normality. This paper introduces an R package designed to simulate multivariate environmental exposure data and estimate feature selection thresholds to aid in research to apply and extend the Bayesian Kernel Machine Regression (BKMR) methodology. The package enables researchers to generate data from multivariate normal and multivariate skewed Gamma distributions, common in environmental exposure research, and calculate multivariate statistical features such as mean, variance, skewness, shape, and rate vectors, and correlation matrices. This package also facilitates the calculation of a Posterior Inclusion Probability (PIP) threshold for feature selection in BKMR, offering an approach that accounts for non-normal data (based on the forthcoming work of Hasan, Odom, Bursac, Lucchini, and Ibrahimou). The effectiveness of the package is demonstrated through a real-world application using data from an adolescent environmental exposure study, where metal exposures are related to IQ scores.
 
-
-
 ## Keywords
 
 R package, Bayesian Kernel Machine Regression, multivariate simulation, feature selection, environmental exposure, statistical moments, multivariate Gamma distribution, skewed data
-
-
-
 
 # Introduction
 
@@ -36,16 +28,11 @@ Environmental exposure to metals such as Cadmium, Mercury, Arsenic, and Lead is 
 
 The Bayesian Kernel Machine Regression (BKMR) model is a powerful method for identifying relevant environmental factors and interactions [@bobb2014; @bobb2018; @wilson2022; @devick2022; @gerwinn2010; @ibrahimou2024]. However, its effectiveness is typically constrained by its assumption of normality in the data, which is frequently violated in environmental health studies [@bobb2014; @bobb2018; @hasan2024; @Van2021]. To allow BKMR to flexibly handle multivariate skewed data, ongoing methodological innovation is needed, and synthetic data sets are a critical component of this research. To fill this need for realistic synthetic data sets, we have developed an R package that facilitates parametric bootstrap data simulation for multivariate environmental exposures. Further, this package includes computational results to estimate a Posterior Inclusion Probability (PIP) threshold which enables feature selection for BKMR via a hypothesis testing framework with controlled test size, which is particularly useful when data deviate from multivariate normality [@hasan2024]. In this chapter, we show how to estimate key statistical moments from a real data set which includes effects of metals exposures on children's IQ scores. Then, to facilitate future methodological innovation, we show how to use these moments as parameter estimates to simulate multiple synthetic environmental exposure data sets from multivariate normal and multivariate (skewed) Gamma distributions. Also, for the real data analysis, we show how to apply our threshold equation to use BKMR results for feature selection.
 
-
-
-
 # Materials and Methods
-
-
 
 ## Overview of the R Package
 
-The package aims to provide a robust framework for simulating non-normal environmental exposure data and estimating feature selection thresholds in the context of Bayesian Kernel Machine Regression (BKMR). The core functions of the package include:
+The package aims to provide a robust framework for simulating non-normal environmental exposure data and estimating feature selection thresholds in the context of Bayesian Kernel Machine Regression (BKMR). The function names were carefully chosen to reflect their purpose and actions within the package. We chose simple, descriptive names to maintain consistency with R's convention of function names being indicative of their functionality, ensuring that users can quickly grasp their purpose without extensive documentation. The core functions of the package include:
 
 1.  Data Simulation: Functions for generating multivariate data from Normal, Gamma, and skewed Gamma distributions.
 
@@ -91,11 +78,9 @@ The package includes data transformation functions to prepare data for analysis:
 
 • Logarithmic and Root Transformations: The `trans_log()` function applies a logarithmic transformation to the data, and the `trans_root()` function allows for fractional root transformations, helping to manage skewed data.
 
-
-
 ## Software Implementation
 
-The simBKMRdata software is implemented as an R package. It depends on the following packages: bkmr[@bkmr], fields[@fields], base[@base] and MASS[@MASS]. The R software and these required packages can be obtained from the CRAN website. Furthermore, daily builds of package simBKMRdata are provided on the CRAN website \[.....\]. It has been published under GPL version 3. The source code is available on GitHub at \[https://github.com/khasa006/simBKMRdata\].
+The simBKMRdata software is implemented as an R package. It depends on the following packages: bkmr[@bkmr], fields[@fields], base[@base] and MASS[@MASS]. The R software and these required packages can be obtained from the CRAN website. Furthermore, daily builds of package simBKMRdata are provided on the CRAN website \[https://cran.r-project.org/web/packages/simBKMRdata/index.html\]\]. It has been published under GPL version 3. The source code is available on GitHub at \[https://github.com/khasa006/simBKMRdata\].
 
 ### Installation
 
@@ -111,7 +96,7 @@ For GitHub installation, use:
 # devtools::install_github("simBKMRdata")
 ```
 
-### Example Usage 
+### Example Usage
 
 #### Data Exploration
 
@@ -155,7 +140,7 @@ param_list <- calculate_stats_gamma(
 param_list
 ```
 
-#### Data Simulation 
+#### Data Simulation
 
 ```{r}
 gamma_samples <- simulate_group_data(
@@ -166,6 +151,7 @@ gamma_samples <- simulate_group_data(
 
 head(gamma_samples)
 ```
+
 ### BKMR Analysis
 
 ```{r}
@@ -215,16 +201,11 @@ pipFit <- ExtractPIPs(modelFit) %>% arrange(desc(PIP))
 pipThresh_num <- calculate_pip_threshold(y = bkmrAnalysisData_df$QI)
 ```
 
-
-
-
 # Result
-
-
 
 ## Exploratory Data Analysis
 
-We began by examining the real-world environmental exposure dataset derived from the cohort study led by Dr. Lucchini and colleagues. The dataset comprises measurements of five key metal concentrations — Cadmium, Mercury, Arsenic, Lead, and Manganese—in children, along with corresponding intelligence quotient (IQ) scores. Visualization of the marginal distributions of these metal concentrations using histograms and kernel density plots (Figure 1) revealed marked right-skewness across all analytes, suggesting the need for distribution-sensitive modeling approaches.
+We began by examining the real-world environmental exposure dataset derived from the cohort study led by Dr. Lucchini and colleagues. The dataset comprises measurements of five key metal concentrations --- Cadmium, Mercury, Arsenic, Lead, and Manganese---in children, along with corresponding intelligence quotient (IQ) scores. Visualization of the marginal distributions of these metal concentrations using histograms and kernel density plots (Figure 1) revealed marked right-skewness across all analytes, suggesting the need for distribution-sensitive modeling approaches.
 
 ```{r}
 #| echo=FALSE
@@ -235,13 +216,9 @@ variablePlot
 
 To capture the empirical distributional features of the observed data, we implemented the `calculate_stats_gamma()` function to estimate parameters for Gamma distributions within male and female subgroups. This method-of-moments approach yielded group-specific descriptors, including sample sizes, means, Gamma shape and rate parameters, and Spearman correlation matrices among the metals. These parameters served as foundational elements for generating realistic synthetic data that preserve sex-specific distribution and correlation structures of the environmental exposures.
 
-
-
 ## Simulation of Multivariate Gamma Data
 
 With the estimated parameters, we used the `simulate_group_data()` function to generate synthetic multivariate Gamma-distributed exposure data. This function internally called `generate_mvGamma_data()` and produced group-labeled datasets that preserved the distributional properties of the original data. The simulated data maintained inter-variable correlations and group-specific skewness patterns, effectively replicating real-world exposure profiles.
-
-
 
 ## Bayesian Kernel Machine Regression (BKMR) Analysis
 
@@ -264,23 +241,29 @@ pipFit %>%
 
 Notably, Cadmium and Lead emerged as likely key contributors to cognitive development outcomes. However, determining which PIP values were statistically meaningful required the use of a calibrated, data-driven threshold.
 
-To address the challenge of determining meaningful PIP thresholds under skewed data conditions, we applied the `calculate_pip_threshold()` function. This function dynamically estimates a threshold based on the dataset’s coefficient of variation (CV) and sample size using a Four-Parameter Logistic Regression model.
+To address the challenge of determining meaningful PIP thresholds under skewed data conditions, we applied the `calculate_pip_threshold()` function. This function dynamically estimates a threshold based on the dataset's coefficient of variation (CV) and sample size using a Four-Parameter Logistic Regression model.
 
 For the current dataset, the computed threshold value was `r pipThresh_num`. This threshold adapts to sample characteristics and adjusts the selection criterion accordingly, making it especially suitable for non-normal data distributions.
 
-By comparing each metal’s PIP against the calculated threshold, we identified a refined subset of significant exposures, which included not only cadmium and lead but also manganese and mercury. This approach allows for a statistically principled method of feature selection within the BKMR framework, ensuring robust and interpretable results even when the data deviate from normality.
-
-
-
+By comparing each metal's PIP against the calculated threshold, we identified a refined subset of significant exposures, which included not only cadmium and lead but also manganese and mercury. This approach allows for a statistically principled method of feature selection within the BKMR framework, ensuring robust and interpretable results even when the data deviate from normality.
 
 # Discussion
 
 The R package we developed is a valuable tool for simulating multivariate environmental exposure data and estimating feature selection thresholds for Bayesian Kernel Machine Regression (BKMR). By supporting multivariate normal and skewed Gamma distributions, the package is particularly well-suited for handling non-normal environmental exposure data, which is common in health studies.
 
+In this analysis, we simulate multiple datasets to assess the robustness of our findings under various conditions of environmental exposure. The purpose of generating these datasets is to test the applicability of our Bayesian Kernel Machine Regression (BKMR) model and feature selection process in the presence of non-normal (skewed) data. By simulating multiple datasets from both multivariate normal and skewed Gamma distributions, we can compare how the model performs across different data distributions.
+
+Our findings are based on both the original real-world dataset (which includes measurements of metal exposure and children's IQ scores) and the multiple generated datasets. The original dataset serves as a benchmark, while the simulated datasets allow us to explore the model's performance under controlled, synthetic conditions that mimic real-world skewed exposure data.
+
+The results highlighted cadmium, and lead as significant contributors to cognitive decline---findings well supported by prior epidemiological research[@bakulski2020;@Sanders2015;@henn2012;@ciesielski2012]. Furthermore, the dynamic threshold included manganese and mercury, which shows strong evidence for neurotoxicity[@balachandran2020; @levin-schwartz2021;@oliveira2018; @grandjean2006], whereas the fixed threshold would have incorrectly excluded them as significant variables. This underscores a key advantage of the dynamic approach: reducing false positives while preserving the integrity of variable selection. By refining exposure-response modeling, our method minimizes the risk of spurious associations and enhances the reliability of findings in environmental health research.
+
+We analyze the multiple generated datasets using the same statistical and modeling procedures applied to the original data. Specifically, we calculate the statistical moments for each simulated dataset, then use those to generate exposure data. BKMR is then applied to assess the relationship between environmental exposures and cognitive outcomes.
+
+The results from the multiple datasets are summarized by comparing the feature selection outcomes (Posterior Inclusion Probabilities or PIPs) across different simulations. These PIPs help identify which metals have the most significant association with cognitive outcomes. We aggregate these findings and provide a summary of how consistent or variable the results are across different simulations, which strengthens the validity of our conclusions.
+
+This approach ensures that the conclusions drawn from the original dataset are robust and generalizable, not merely an artifact of that specific dataset. By simulating multiple datasets and applying the same analysis framework, we test the reproducibility of the results and gain confidence in the model's ability to handle different data conditions.
+
 While BKMR is an excellent tool for feature selection, its reliance on normality can limit its application to real-world datasets. Our package fills this gap by enabling researchers to model and analyze non-normally distributed data, ensuring that feature selection remains robust even in complex scenarios.
-
-
-
 
 # Conclusion
 
