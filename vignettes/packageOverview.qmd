@@ -16,7 +16,7 @@ bibliography: references.bib
 
 # Abstract
 
-In environmental health studies, the relationship between multiple environmental exposures and health outcomes, such as cognitive development, is often investigated using complex datasets that exhibit non-normality. This paper introduces an R package designed to simulate multivariate environmental exposure data and estimate feature selection thresholds to aid in research to apply and extend the Bayesian Kernel Machine Regression (BKMR) methodology. The package enables researchers to generate data from multivariate normal and multivariate skewed Gamma distributions, common in environmental exposure research, and calculate multivariate statistical features such as mean, variance, skewness, shape, and rate vectors, and correlation matrices. This package also facilitates the calculation of a Posterior Inclusion Probability (PIP) threshold for feature selection in BKMR, offering an approach that accounts for non-normal data (based on the forthcoming work of @hasan2024). The effectiveness of the package is demonstrated through a real-world application using data from an adolescent environmental exposure study, where metal exposures are related to IQ scores.
+In environmental health studies, the relationship between multiple environmental exposures and health outcomes, such as cognitive development, is often investigated using complex datasets that exhibit non-normality. This paper introduces an R package designed to simulate multivariate environmental exposure data and estimate feature selection thresholds to aid in research to apply and extend the Bayesian Kernel Machine Regression (BKMR) methodology. The package enables researchers to generate data from multivariate normal and multivariate skewed Gamma distributions, common in environmental exposure research, and calculate multivariate statistical features such as mean, variance, skewness, shape, and rate vectors, and correlation matrices. This package also facilitates the calculation of a Posterior Inclusion Probability (PIP) threshold for feature selection in BKMR, offering an approach that accounts for non-normal data (based on the forthcoming work of @hasan2025). The effectiveness of the package is demonstrated through a real-world application using data from an adolescent environmental exposure study, where metal exposures are related to IQ scores.
 
 ## Keywords
 
@@ -87,6 +87,7 @@ Now we load the necessary libraries:
 #| message: false
 library(tidyverse)
 library(simBKMRdata)
+library(gt)
 ```
 
 # Example Analysis of Heavy Metal Exposure
@@ -103,7 +104,15 @@ data("metalExposChildren_df")
 analysisData_df <- metalExposChildren_df %>%
   select(QI, Cadmium:Manganese, Sex)
 
-head(analysisData_df)
+head(analysisData_df) %>%
+  gt() %>%
+  tab_header(
+    title = "Top Rows of the Data"
+  ) %>%
+  fmt_number(
+    decimals = 2
+  ) %>%
+  opt_table_outline()
 ```
 
 We show the density plots of these raw exposure levels:
@@ -169,7 +178,15 @@ gamma_samples <- simulate_group_data(
   group_col_name = "Sex"
 )
 
-head(gamma_samples)
+head(gamma_samples) %>% 
+  gt() %>%
+  tab_header(
+    title = "Top Rows of the gamma Sample"
+  ) %>%
+  fmt_number(
+    decimals = 2
+  ) %>%
+  opt_table_outline()
 ```
 
 We account for the grouping variable column name with `group_col_name`, and we specify the Multivariate Gamma distribution by invoking the helper function `generate_mvGamma_data()`. This function can be repeatedly invoked to create hundreds of parametric bootstrap resamples to test future methodological developments. However, these simulation results are extensively discussed in @hasan2024 and @hasan2025, so we will not rehash them here.
@@ -276,8 +293,6 @@ We want to know which metals are related to cognitive ability, as measured by IQ
 #| label: tbl-PIPs
 #| tbl-cap: Posterior Inclusion Probabilities (PIPs) for Metal Exposures
 #| echo: false
-
-library(gt)
 
 pipFit <- ExtractPIPs(modelFit) %>% arrange(desc(PIP))
 pipFit %>%
