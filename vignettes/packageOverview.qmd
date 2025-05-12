@@ -12,6 +12,7 @@ vignette: >
   %\VignetteEngine{quarto::docx}
   %\VignetteLanguage{en}
 bibliography: references.bib
+csl: the-new-england-journal-of-medicine.csl
 ---
 
 # Abstract
@@ -26,7 +27,7 @@ R package, Bayesian Kernel Machine Regression, multivariate simulation, feature 
 
 Environmental exposure to metals such as Cadmium, Mercury, Arsenic, and Lead is linked to various adverse health outcomes, especially among children [@Horton2013]. In particular, these exposures may influence cognitive functions, with effects that often vary based on the concentration of metals in the environment [@Sanders2015; @trasande2011; @tyler2014; @tolins2014]. Research into these relationships frequently involves complex, multivariate datasets where environmental factors are correlated, and data distributions often exhibit skewness rather than normality [@bobb2014; @bobb2018; @hasan2024].
 
-The Bayesian Kernel Machine Regression (BKMR) model is a powerful method for identifying relevant environmental factors and interactions [@bobb2014; @bobb2018; @wilson2022; @devick2022; @gerwinn2010; @ibrahimou2024]. However, its effectiveness is typically constrained by its assumption of normality in the data, which is frequently violated in environmental health studies [@bobb2014; @bobb2018; @hasan2024; @Van2021]. To allow BKMR to flexibly handle multivariate skewed data, ongoing methodological innovation is needed, and synthetic data sets are a critical component of this research. To fill this need for realistic synthetic data sets, we have developed an R package that facilitates parametric bootstrap data simulation for multivariate environmental exposures. Further, this package includes computational results to estimate a Posterior Inclusion Probability (PIP) threshold which enables feature selection for BKMR via a hypothesis testing framework with controlled test size, which is particularly useful when data deviate from multivariate normality [@hasan2024]. In this chapter, we show how to estimate key statistical moments from a real data set which includes effects of metals exposures on children's IQ scores. Then, to facilitate future methodological innovation, we show how to use these moments as parameter estimates to simulate multiple synthetic environmental exposure data sets from multivariate normal and multivariate (skewed) Gamma distributions. Also, for the real data analysis, we show how to apply our threshold equation to use BKMR results for feature selection.
+The Bayesian Kernel Machine Regression (BKMR) model is a powerful method for identifying relevant environmental factors and interactions [@bobb2014; @bobb2018; @wilson2022; @devick2022; @gerwinn2010; @ibrahimou2024]. However, its effectiveness is typically constrained by its assumption of normality in the data, which is frequently violated in environmental health studies [@bobb2014; @bobb2018; @hasan2024; @Van2021]. To allow BKMR to flexibly handle multivariate skewed data, ongoing methodological innovation is needed, and synthetic data sets are a critical component of this research. To fill this need for realistic synthetic data sets, we have developed an R package that facilitates parametric bootstrap data simulation for multivariate environmental exposures. Further, this package includes computational results to estimate a Posterior Inclusion Probability (PIP) threshold which enables feature selection for BKMR via a hypothesis testing framework with controlled test size, which is particularly useful when data deviate from multivariate normality [@hasan2024]. In this chapter, we show how to estimate key statistical moments from a real data set which includes effects of metals exposures on children's IQ scores. Then, to facilitate future methodological innovation, we show how to use these moments as parameter estimates to simulate multiple synthetic environmental exposure data sets from multivariate normal and multivariate (skewed) Gamma distributions. Finally, for the real data analysis application examining exposure to mixture metals and IQ in a cohort of Italian children, we show how to apply our threshold equation and to use BKMR results for feature selection.
 
 # Materials and Methods
 
@@ -92,7 +93,7 @@ library(gt)
 
 # Example Analysis of Heavy Metal Exposure
 
-We began by examining the real-world environmental exposure dataset derived from the cohort study led by Dr. Lucchini and colleagues. The dataset comprises measurements of five key metal concentrations in children---Cadmium, Mercury, Arsenic, Lead, and Manganese, along with corresponding intelligence quotient (IQ) scores, evaluated using the Wechsler Intelligence Scale for Children (WISC-IV), a standardised instrument for assessing children's Full-Scale IQ (FSIQ) and Performance IQ (PIQ)[@grizzle2011; @renzetti2021].
+We began by examining the real-world environmental exposure dataset derived from the cohort study led by Lucchini and colleagues. The dataset comprises measurements of five key metal concentrations in children---Cadmium, Mercury and Arsenic from urine, Lead, and Selenium from blood and Manganese from hair, along with corresponding intelligence quotient (IQ) scores, evaluated using the Wechsler Intelligence Scale for Children (WISC-IV), a standardised instrument for assessing children's Full-Scale IQ (FSIQ)[@grizzle2011; @renzetti2021].
 
 ## Data Exploration
 
@@ -169,7 +170,7 @@ str(
 
 ## Data Simulation
 
-With the estimated parameters, we used the `simulate_group_data()` function to generate synthetic multivariate Gamma-distributed exposure data and preserve the distributional properties of the original data. The simulated data maintained inter-variable correlations and group-specific skewness patterns, effectively replicating real-world exposure profiles. Now that we have the Method of Moments estimates, we can draw a parametric bootstrap sample by passing in the list of group-specific parameter estimates found above:
+With the estimated parameters, we used the `simulate_group_data()` function to generate synthetic multivariate Gamma-distributed exposure data and preserve the distributional properties of the original data. The simulated data maintained inter-variable correlations and group-specific skewness patterns, effectively replicating real-world exposure profiles. Based on the Method of Moments estimates that were calculated, we can draw a parametric bootstrap sample by passing in the list of group-specific parameter estimates found above:
 
 ```{r}
 gamma_samples <- simulate_group_data(
@@ -189,7 +190,7 @@ head(gamma_samples) %>%
   opt_table_outline()
 ```
 
-We account for the grouping variable column name with `group_col_name`, and we specify the Multivariate Gamma distribution by invoking the helper function `generate_mvGamma_data()`. This function can be repeatedly invoked to create hundreds of parametric bootstrap resamples to test future methodological developments. However, these simulation results are extensively discussed in @hasan2024 and @hasan2025, so we will not rehash them here.
+We account for the grouping variable column name with `group_col_name`, and we specify the Multivariate Gamma distribution by invoking the helper function `generate_mvGamma_data()`. This function can be repeatedly invoked to create hundreds of parametric bootstrap resamples to test future methodological developments. These simulation results are extensively discussed in @hasan2024 and @hasan2025.
 
 ## Dynamic Threshold Calculation
 
@@ -208,7 +209,7 @@ Therefore, based on this response vector's distribution, we have shown that a th
 
 ## Bayesian Kernel Machine Regression Analysis
 
-If we are confident in our methodological advancements, we will need to execute BKMR on the real data. To assess the relationship between metal exposures and cognitive outcomes, we employed BKMR using the kmbayes() function from the bkmr package. Prior to analysis, we omit the missing values and the metal concentration variables were log-transformed using the `trans_log()` function to mitigate skewness. Because we want to transform by $\log_{10}(x+1)$, we will use the function `trans_log()` which uses base 10 and a one-unit positive shift by default. The exposure matrix thus comprised log-transformed values of the five metals, with IQ as the continuous outcome variable.
+To assess the relationship between metal exposures and cognitive outcomes, we will need to execute BKMR on the real data. To assess the relationship between metal exposures and cognitive outcomes, we employed BKMR using the kmbayes() function from the bkmr package. Prior to analysis, we omit the missing values and the metal concentration variables were log-transformed using the `trans_log()` function to mitigate skewness. Because we want to transform by $\log_{10}(x+1)$, we will use the function `trans_log()` which uses base 10 and a one-unit positive shift by default. The exposure matrix thus comprised log-transformed values of the five metals, with IQ as the continuous outcome variable.
 
 ```{r}
 #| label: transform-data-for-bkmr
