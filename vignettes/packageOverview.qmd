@@ -8,11 +8,10 @@ output:
     toc: true
     toc_depth: 2
 vignette: >
-  %\VignetteIndexEntry{simBKMR R Package}
-  %\VignetteEngine{quarto::docx}
+  %\VignetteIndexEntry{Calculate PIP Threshold from Response Vector}
+  %\VignetteEngine{quarto::html}
   %\VignetteLanguage{en}
 bibliography: references.bib
-csl: the-new-england-journal-of-medicine.csl
 ---
 
 # Abstract
@@ -93,7 +92,7 @@ library(gt)
 
 # Example Analysis of Heavy Metal Exposure
 
-We began by examining the real-world environmental exposure dataset derived from the cohort study led by Lucchini and colleagues. The dataset comprises measurements of five key metal concentrations in children---Cadmium, Mercury and Arsenic from urine, Lead, and Selenium from blood and Manganese from hair, along with corresponding intelligence quotient (IQ) scores, evaluated using the Wechsler Intelligence Scale for Children (WISC-IV), a standardised instrument for assessing children's Full-Scale IQ (FSIQ)[@grizzle2011; @renzetti2021].
+We began by examining the real-world environmental exposure dataset derived from the cohort study led by Lucchini and colleagues. The dataset comprises measurements of five key metal concentrations in children---Cadmium, Mercury and Arsenic from urine, Lead from blood and Manganese from hair, along with corresponding intelligence quotient (IQ) scores, evaluated using the Wechsler Intelligence Scale for Children (WISC-IV), a standardised instrument for assessing children's Full-Scale IQ (FSIQ)[@wechsler2003; @orsini2012; @grizzle2011; @renzetti2021].
 
 ## Data Exploration
 
