@@ -1,17 +1,16 @@
 ---
 author:
-- Kazi Tanvir Hasan, Dr.Gabriel Odom, Cristian Guerini, Dr.Zoran
-  Bursac, Dr.Roberto Lucchini, and Dr.Boubakari Ibrahimou
+- Kazi Tanvir Hasan, Dr. Gabriel Odom, Cristian Guerini, Dr. Zoran
+  Bursac, Dr. Roberto Lucchini, and Dr. Boubakari Ibrahimou
 bibliography: references.bib
-csl: the-new-england-journal-of-medicine.csl
-date: 5/12/25
+date: 5/13/25
 subtitle: Simulating Multivariate Environmental Exposure Data and
   Estimating Feature Selection Thresholds
 title: Helper Functions for Bayesian Kernel Machine Regression
 toc-title: Table of contents
 vignette: |
-  \%`\VignetteIndexEntry{simBKMR R Package}`{=tex}
-  %`\VignetteEngine{quarto::docx}`{=tex} %`\VignetteLanguage{en}`{=tex}
+  \%`\VignetteIndexEntry{Calculate PIP Threshold from Response Vector}`{=tex}
+  %`\VignetteEngine{quarto::html}`{=tex} %`\VignetteLanguage{en}`{=tex}
 ---
 
 # Abstract
@@ -29,9 +28,9 @@ multivariate statistical features such as mean, variance, skewness,
 shape, and rate vectors, and correlation matrices. This package also
 facilitates the calculation of a Posterior Inclusion Probability (PIP)
 threshold for feature selection in BKMR, offering an approach that
-accounts for non-normal data (based on the forthcoming work
-of@hasan2025). The effectiveness of the package is demonstrated through
-a real-world application using data from an adolescent environmental
+accounts for non-normal data (based on the forthcoming work of
+@hasan2025). The effectiveness of the package is demonstrated through a
+real-world application using data from an adolescent environmental
 exposure study, where metal exposures are related to IQ scores.
 
 ## Keywords
@@ -44,21 +43,21 @@ multivariate Gamma distribution, skewed data
 
 Environmental exposure to metals such as Cadmium, Mercury, Arsenic, and
 Lead is linked to various adverse health outcomes, especially among
-children[@Horton2013]. In particular, these exposures may influence
+children [@Horton2013]. In particular, these exposures may influence
 cognitive functions, with effects that often vary based on the
-concentration of metals in the
-environment[@Sanders2015; @trasande2011; @tyler2014; @tolins2014].
-Research into these relationships frequently involves complex,
-multivariate datasets where environmental factors are correlated, and
-data distributions often exhibit skewness rather than
-normality[@bobb2014; @bobb2018; @hasan2024].
+concentration of metals in the environment
+[@Sanders2015; @trasande2011; @tyler2014; @tolins2014]. Research into
+these relationships frequently involves complex, multivariate datasets
+where environmental factors are correlated, and data distributions often
+exhibit skewness rather than normality
+[@bobb2014; @bobb2018; @hasan2024].
 
 The Bayesian Kernel Machine Regression (BKMR) model is a powerful method
-for identifying relevant environmental factors and
-interactions[@bobb2014; @bobb2018; @wilson2022; @devick2022; @gerwinn2010; @ibrahimou2024].
+for identifying relevant environmental factors and interactions
+[@bobb2014; @bobb2018; @wilson2022; @devick2022; @gerwinn2010; @ibrahimou2024].
 However, its effectiveness is typically constrained by its assumption of
 normality in the data, which is frequently violated in environmental
-health studies[@bobb2014; @bobb2018; @hasan2024; @Van2021]. To allow
+health studies [@bobb2014; @bobb2018; @hasan2024; @Van2021]. To allow
 BKMR to flexibly handle multivariate skewed data, ongoing methodological
 innovation is needed, and synthetic data sets are a critical component
 of this research. To fill this need for realistic synthetic data sets,
@@ -67,17 +66,17 @@ data simulation for multivariate environmental exposures. Further, this
 package includes computational results to estimate a Posterior Inclusion
 Probability (PIP) threshold which enables feature selection for BKMR via
 a hypothesis testing framework with controlled test size, which is
-particularly useful when data deviate from multivariate
-normality[@hasan2024]. In this chapter, we show how to estimate key
-statistical moments from a real data set which includes effects of
-metals exposures on children's IQ scores. Then, to facilitate future
-methodological innovation, we show how to use these moments as parameter
-estimates to simulate multiple synthetic environmental exposure data
-sets from multivariate normal and multivariate (skewed) Gamma
-distributions. Finally, for the real data analysis application examining
-exposure to mixture metals and IQ in a cohort of Italian children, we
-show how to apply our threshold equation and to use BKMR results for
-feature selection.
+particularly useful when data deviate from multivariate normality
+[@hasan2024]. In this chapter, we show how to estimate key statistical
+moments from a real data set which includes effects of metals exposures
+on children's IQ scores. Then, to facilitate future methodological
+innovation, we show how to use these moments as parameter estimates to
+simulate multiple synthetic environmental exposure data sets from
+multivariate normal and multivariate (skewed) Gamma distributions.
+Finally, for the real data analysis application examining exposure to
+mixture metals and IQ in a cohort of Italian children, we show how to
+apply our threshold equation and to use BKMR results for feature
+selection.
 
 # Materials and Methods
 
@@ -185,11 +184,11 @@ library(gt)
 We began by examining the real-world environmental exposure dataset
 derived from the cohort study led by Lucchini and colleagues. The
 dataset comprises measurements of five key metal concentrations in
-children---Cadmium, Mercury and Arsenic from urine, Lead, and Selenium
-from blood and Manganese from hair, along with corresponding
-intelligence quotient (IQ) scores, evaluated using the Wechsler
-Intelligence Scale for Children (WISC-IV), a standardised instrument for
-assessing children's Full-Scale IQ (FSIQ)[@grizzle2011; @renzetti2021].
+children---Cadmium, Mercury and Arsenic from urine, Lead from blood and
+Manganese from hair, along with corresponding intelligence quotient (IQ)
+scores, evaluated using the Wechsler Intelligence Scale for Children
+(WISC-IV), a standardised instrument for assessing children's Full-Scale
+IQ (FSIQ)[@wechsler2003; @orsini2012; @grizzle2011; @renzetti2021].
 
 ## Data Exploration
 
@@ -218,23 +217,23 @@ head(analysisData_df) %>%
 
 ::: cell-output-display
 ```{=html}
-<div id="zfeivircjl" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#zfeivircjl table {
+<div id="awxelhtwhp" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#awxelhtwhp table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#zfeivircjl thead, #zfeivircjl tbody, #zfeivircjl tfoot, #zfeivircjl tr, #zfeivircjl td, #zfeivircjl th {
+#awxelhtwhp thead, #awxelhtwhp tbody, #awxelhtwhp tfoot, #awxelhtwhp tr, #awxelhtwhp td, #awxelhtwhp th {
   border-style: none;
 }
 
-#zfeivircjl p {
+#awxelhtwhp p {
   margin: 0;
   padding: 0;
 }
 
-#zfeivircjl .gt_table {
+#awxelhtwhp .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -260,12 +259,12 @@ head(analysisData_df) %>%
   border-left-color: #D3D3D3;
 }
 
-#zfeivircjl .gt_caption {
+#awxelhtwhp .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#zfeivircjl .gt_title {
+#awxelhtwhp .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -277,7 +276,7 @@ head(analysisData_df) %>%
   border-bottom-width: 0;
 }
 
-#zfeivircjl .gt_subtitle {
+#awxelhtwhp .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -289,7 +288,7 @@ head(analysisData_df) %>%
   border-top-width: 0;
 }
 
-#zfeivircjl .gt_heading {
+#awxelhtwhp .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -301,13 +300,13 @@ head(analysisData_df) %>%
   border-right-color: #D3D3D3;
 }
 
-#zfeivircjl .gt_bottom_border {
+#awxelhtwhp .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#zfeivircjl .gt_col_headings {
+#awxelhtwhp .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -322,7 +321,7 @@ head(analysisData_df) %>%
   border-right-color: #D3D3D3;
 }
 
-#zfeivircjl .gt_col_heading {
+#awxelhtwhp .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -342,7 +341,7 @@ head(analysisData_df) %>%
   overflow-x: hidden;
 }
 
-#zfeivircjl .gt_column_spanner_outer {
+#awxelhtwhp .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -354,15 +353,15 @@ head(analysisData_df) %>%
   padding-right: 4px;
 }
 
-#zfeivircjl .gt_column_spanner_outer:first-child {
+#awxelhtwhp .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#zfeivircjl .gt_column_spanner_outer:last-child {
+#awxelhtwhp .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#zfeivircjl .gt_column_spanner {
+#awxelhtwhp .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -374,11 +373,11 @@ head(analysisData_df) %>%
   width: 100%;
 }
 
-#zfeivircjl .gt_spanner_row {
+#awxelhtwhp .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#zfeivircjl .gt_group_heading {
+#awxelhtwhp .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -404,7 +403,7 @@ head(analysisData_df) %>%
   text-align: left;
 }
 
-#zfeivircjl .gt_empty_group_heading {
+#awxelhtwhp .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -419,15 +418,15 @@ head(analysisData_df) %>%
   vertical-align: middle;
 }
 
-#zfeivircjl .gt_from_md > :first-child {
+#awxelhtwhp .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#zfeivircjl .gt_from_md > :last-child {
+#awxelhtwhp .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#zfeivircjl .gt_row {
+#awxelhtwhp .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -446,7 +445,7 @@ head(analysisData_df) %>%
   overflow-x: hidden;
 }
 
-#zfeivircjl .gt_stub {
+#awxelhtwhp .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -459,7 +458,7 @@ head(analysisData_df) %>%
   padding-right: 5px;
 }
 
-#zfeivircjl .gt_stub_row_group {
+#awxelhtwhp .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -473,15 +472,15 @@ head(analysisData_df) %>%
   vertical-align: top;
 }
 
-#zfeivircjl .gt_row_group_first td {
+#awxelhtwhp .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#zfeivircjl .gt_row_group_first th {
+#awxelhtwhp .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#zfeivircjl .gt_summary_row {
+#awxelhtwhp .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -491,16 +490,16 @@ head(analysisData_df) %>%
   padding-right: 5px;
 }
 
-#zfeivircjl .gt_first_summary_row {
+#awxelhtwhp .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#zfeivircjl .gt_first_summary_row.thick {
+#awxelhtwhp .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#zfeivircjl .gt_last_summary_row {
+#awxelhtwhp .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -510,7 +509,7 @@ head(analysisData_df) %>%
   border-bottom-color: #D3D3D3;
 }
 
-#zfeivircjl .gt_grand_summary_row {
+#awxelhtwhp .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -520,7 +519,7 @@ head(analysisData_df) %>%
   padding-right: 5px;
 }
 
-#zfeivircjl .gt_first_grand_summary_row {
+#awxelhtwhp .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -530,7 +529,7 @@ head(analysisData_df) %>%
   border-top-color: #D3D3D3;
 }
 
-#zfeivircjl .gt_last_grand_summary_row_top {
+#awxelhtwhp .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -540,11 +539,11 @@ head(analysisData_df) %>%
   border-bottom-color: #D3D3D3;
 }
 
-#zfeivircjl .gt_striped {
+#awxelhtwhp .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#zfeivircjl .gt_table_body {
+#awxelhtwhp .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -553,7 +552,7 @@ head(analysisData_df) %>%
   border-bottom-color: #D3D3D3;
 }
 
-#zfeivircjl .gt_footnotes {
+#awxelhtwhp .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -567,7 +566,7 @@ head(analysisData_df) %>%
   border-right-color: #D3D3D3;
 }
 
-#zfeivircjl .gt_footnote {
+#awxelhtwhp .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -576,7 +575,7 @@ head(analysisData_df) %>%
   padding-right: 5px;
 }
 
-#zfeivircjl .gt_sourcenotes {
+#awxelhtwhp .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -590,7 +589,7 @@ head(analysisData_df) %>%
   border-right-color: #D3D3D3;
 }
 
-#zfeivircjl .gt_sourcenote {
+#awxelhtwhp .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -598,72 +597,72 @@ head(analysisData_df) %>%
   padding-right: 5px;
 }
 
-#zfeivircjl .gt_left {
+#awxelhtwhp .gt_left {
   text-align: left;
 }
 
-#zfeivircjl .gt_center {
+#awxelhtwhp .gt_center {
   text-align: center;
 }
 
-#zfeivircjl .gt_right {
+#awxelhtwhp .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#zfeivircjl .gt_font_normal {
+#awxelhtwhp .gt_font_normal {
   font-weight: normal;
 }
 
-#zfeivircjl .gt_font_bold {
+#awxelhtwhp .gt_font_bold {
   font-weight: bold;
 }
 
-#zfeivircjl .gt_font_italic {
+#awxelhtwhp .gt_font_italic {
   font-style: italic;
 }
 
-#zfeivircjl .gt_super {
+#awxelhtwhp .gt_super {
   font-size: 65%;
 }
 
-#zfeivircjl .gt_footnote_marks {
+#awxelhtwhp .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#zfeivircjl .gt_asterisk {
+#awxelhtwhp .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#zfeivircjl .gt_indent_1 {
+#awxelhtwhp .gt_indent_1 {
   text-indent: 5px;
 }
 
-#zfeivircjl .gt_indent_2 {
+#awxelhtwhp .gt_indent_2 {
   text-indent: 10px;
 }
 
-#zfeivircjl .gt_indent_3 {
+#awxelhtwhp .gt_indent_3 {
   text-indent: 15px;
 }
 
-#zfeivircjl .gt_indent_4 {
+#awxelhtwhp .gt_indent_4 {
   text-indent: 20px;
 }
 
-#zfeivircjl .gt_indent_5 {
+#awxelhtwhp .gt_indent_5 {
   text-indent: 25px;
 }
 
-#zfeivircjl .katex-display {
+#awxelhtwhp .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#zfeivircjl div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#awxelhtwhp div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -861,23 +860,23 @@ head(gamma_samples) %>%
 
 ::: cell-output-display
 ```{=html}
-<div id="yyuczbzyha" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#yyuczbzyha table {
+<div id="vnmddzwtoe" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#vnmddzwtoe table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#yyuczbzyha thead, #yyuczbzyha tbody, #yyuczbzyha tfoot, #yyuczbzyha tr, #yyuczbzyha td, #yyuczbzyha th {
+#vnmddzwtoe thead, #vnmddzwtoe tbody, #vnmddzwtoe tfoot, #vnmddzwtoe tr, #vnmddzwtoe td, #vnmddzwtoe th {
   border-style: none;
 }
 
-#yyuczbzyha p {
+#vnmddzwtoe p {
   margin: 0;
   padding: 0;
 }
 
-#yyuczbzyha .gt_table {
+#vnmddzwtoe .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -903,12 +902,12 @@ head(gamma_samples) %>%
   border-left-color: #D3D3D3;
 }
 
-#yyuczbzyha .gt_caption {
+#vnmddzwtoe .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#yyuczbzyha .gt_title {
+#vnmddzwtoe .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -920,7 +919,7 @@ head(gamma_samples) %>%
   border-bottom-width: 0;
 }
 
-#yyuczbzyha .gt_subtitle {
+#vnmddzwtoe .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -932,7 +931,7 @@ head(gamma_samples) %>%
   border-top-width: 0;
 }
 
-#yyuczbzyha .gt_heading {
+#vnmddzwtoe .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -944,13 +943,13 @@ head(gamma_samples) %>%
   border-right-color: #D3D3D3;
 }
 
-#yyuczbzyha .gt_bottom_border {
+#vnmddzwtoe .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#yyuczbzyha .gt_col_headings {
+#vnmddzwtoe .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -965,7 +964,7 @@ head(gamma_samples) %>%
   border-right-color: #D3D3D3;
 }
 
-#yyuczbzyha .gt_col_heading {
+#vnmddzwtoe .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -985,7 +984,7 @@ head(gamma_samples) %>%
   overflow-x: hidden;
 }
 
-#yyuczbzyha .gt_column_spanner_outer {
+#vnmddzwtoe .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -997,15 +996,15 @@ head(gamma_samples) %>%
   padding-right: 4px;
 }
 
-#yyuczbzyha .gt_column_spanner_outer:first-child {
+#vnmddzwtoe .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#yyuczbzyha .gt_column_spanner_outer:last-child {
+#vnmddzwtoe .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#yyuczbzyha .gt_column_spanner {
+#vnmddzwtoe .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1017,11 +1016,11 @@ head(gamma_samples) %>%
   width: 100%;
 }
 
-#yyuczbzyha .gt_spanner_row {
+#vnmddzwtoe .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#yyuczbzyha .gt_group_heading {
+#vnmddzwtoe .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1047,7 +1046,7 @@ head(gamma_samples) %>%
   text-align: left;
 }
 
-#yyuczbzyha .gt_empty_group_heading {
+#vnmddzwtoe .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1062,15 +1061,15 @@ head(gamma_samples) %>%
   vertical-align: middle;
 }
 
-#yyuczbzyha .gt_from_md > :first-child {
+#vnmddzwtoe .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#yyuczbzyha .gt_from_md > :last-child {
+#vnmddzwtoe .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#yyuczbzyha .gt_row {
+#vnmddzwtoe .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1089,7 +1088,7 @@ head(gamma_samples) %>%
   overflow-x: hidden;
 }
 
-#yyuczbzyha .gt_stub {
+#vnmddzwtoe .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1102,7 +1101,7 @@ head(gamma_samples) %>%
   padding-right: 5px;
 }
 
-#yyuczbzyha .gt_stub_row_group {
+#vnmddzwtoe .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1116,15 +1115,15 @@ head(gamma_samples) %>%
   vertical-align: top;
 }
 
-#yyuczbzyha .gt_row_group_first td {
+#vnmddzwtoe .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#yyuczbzyha .gt_row_group_first th {
+#vnmddzwtoe .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#yyuczbzyha .gt_summary_row {
+#vnmddzwtoe .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1134,16 +1133,16 @@ head(gamma_samples) %>%
   padding-right: 5px;
 }
 
-#yyuczbzyha .gt_first_summary_row {
+#vnmddzwtoe .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#yyuczbzyha .gt_first_summary_row.thick {
+#vnmddzwtoe .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#yyuczbzyha .gt_last_summary_row {
+#vnmddzwtoe .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1153,7 +1152,7 @@ head(gamma_samples) %>%
   border-bottom-color: #D3D3D3;
 }
 
-#yyuczbzyha .gt_grand_summary_row {
+#vnmddzwtoe .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1163,7 +1162,7 @@ head(gamma_samples) %>%
   padding-right: 5px;
 }
 
-#yyuczbzyha .gt_first_grand_summary_row {
+#vnmddzwtoe .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1173,7 +1172,7 @@ head(gamma_samples) %>%
   border-top-color: #D3D3D3;
 }
 
-#yyuczbzyha .gt_last_grand_summary_row_top {
+#vnmddzwtoe .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1183,11 +1182,11 @@ head(gamma_samples) %>%
   border-bottom-color: #D3D3D3;
 }
 
-#yyuczbzyha .gt_striped {
+#vnmddzwtoe .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#yyuczbzyha .gt_table_body {
+#vnmddzwtoe .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1196,7 +1195,7 @@ head(gamma_samples) %>%
   border-bottom-color: #D3D3D3;
 }
 
-#yyuczbzyha .gt_footnotes {
+#vnmddzwtoe .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1210,7 +1209,7 @@ head(gamma_samples) %>%
   border-right-color: #D3D3D3;
 }
 
-#yyuczbzyha .gt_footnote {
+#vnmddzwtoe .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1219,7 +1218,7 @@ head(gamma_samples) %>%
   padding-right: 5px;
 }
 
-#yyuczbzyha .gt_sourcenotes {
+#vnmddzwtoe .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1233,7 +1232,7 @@ head(gamma_samples) %>%
   border-right-color: #D3D3D3;
 }
 
-#yyuczbzyha .gt_sourcenote {
+#vnmddzwtoe .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1241,72 +1240,72 @@ head(gamma_samples) %>%
   padding-right: 5px;
 }
 
-#yyuczbzyha .gt_left {
+#vnmddzwtoe .gt_left {
   text-align: left;
 }
 
-#yyuczbzyha .gt_center {
+#vnmddzwtoe .gt_center {
   text-align: center;
 }
 
-#yyuczbzyha .gt_right {
+#vnmddzwtoe .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#yyuczbzyha .gt_font_normal {
+#vnmddzwtoe .gt_font_normal {
   font-weight: normal;
 }
 
-#yyuczbzyha .gt_font_bold {
+#vnmddzwtoe .gt_font_bold {
   font-weight: bold;
 }
 
-#yyuczbzyha .gt_font_italic {
+#vnmddzwtoe .gt_font_italic {
   font-style: italic;
 }
 
-#yyuczbzyha .gt_super {
+#vnmddzwtoe .gt_super {
   font-size: 65%;
 }
 
-#yyuczbzyha .gt_footnote_marks {
+#vnmddzwtoe .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#yyuczbzyha .gt_asterisk {
+#vnmddzwtoe .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#yyuczbzyha .gt_indent_1 {
+#vnmddzwtoe .gt_indent_1 {
   text-indent: 5px;
 }
 
-#yyuczbzyha .gt_indent_2 {
+#vnmddzwtoe .gt_indent_2 {
   text-indent: 10px;
 }
 
-#yyuczbzyha .gt_indent_3 {
+#vnmddzwtoe .gt_indent_3 {
   text-indent: 15px;
 }
 
-#yyuczbzyha .gt_indent_4 {
+#vnmddzwtoe .gt_indent_4 {
   text-indent: 20px;
 }
 
-#yyuczbzyha .gt_indent_5 {
+#vnmddzwtoe .gt_indent_5 {
   text-indent: 25px;
 }
 
-#yyuczbzyha .katex-display {
+#vnmddzwtoe .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#yyuczbzyha div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#vnmddzwtoe div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -1327,47 +1326,47 @@ head(gamma_samples) %>%
     </tr>
   </thead>
   <tbody class="gt_table_body">
-    <tr><td headers="V1" class="gt_row gt_right">95.00</td>
-<td headers="V2" class="gt_row gt_right">2.45</td>
-<td headers="V3" class="gt_row gt_right">5.05</td>
-<td headers="V4" class="gt_row gt_right">80.74</td>
-<td headers="V5" class="gt_row gt_right">2.98</td>
-<td headers="V6" class="gt_row gt_right">302.79</td>
+    <tr><td headers="V1" class="gt_row gt_right">105.18</td>
+<td headers="V2" class="gt_row gt_right">3.13</td>
+<td headers="V3" class="gt_row gt_right">2.99</td>
+<td headers="V4" class="gt_row gt_right">25.10</td>
+<td headers="V5" class="gt_row gt_right">17.52</td>
+<td headers="V6" class="gt_row gt_right">529.38</td>
 <td headers="Sex" class="gt_row gt_left">Female</td></tr>
-    <tr><td headers="V1" class="gt_row gt_right">100.56</td>
-<td headers="V2" class="gt_row gt_right">0.13</td>
-<td headers="V3" class="gt_row gt_right">1.60</td>
-<td headers="V4" class="gt_row gt_right">46.07</td>
-<td headers="V5" class="gt_row gt_right">11.27</td>
-<td headers="V6" class="gt_row gt_right">573.28</td>
+    <tr><td headers="V1" class="gt_row gt_right">82.51</td>
+<td headers="V2" class="gt_row gt_right">1.44</td>
+<td headers="V3" class="gt_row gt_right">0.27</td>
+<td headers="V4" class="gt_row gt_right">2.21</td>
+<td headers="V5" class="gt_row gt_right">1.83</td>
+<td headers="V6" class="gt_row gt_right">123.33</td>
 <td headers="Sex" class="gt_row gt_left">Female</td></tr>
-    <tr><td headers="V1" class="gt_row gt_right">88.81</td>
-<td headers="V2" class="gt_row gt_right">0.02</td>
-<td headers="V3" class="gt_row gt_right">0.28</td>
-<td headers="V4" class="gt_row gt_right">29.48</td>
-<td headers="V5" class="gt_row gt_right">9.88</td>
-<td headers="V6" class="gt_row gt_right">895.08</td>
+    <tr><td headers="V1" class="gt_row gt_right">115.46</td>
+<td headers="V2" class="gt_row gt_right">0.93</td>
+<td headers="V3" class="gt_row gt_right">0.08</td>
+<td headers="V4" class="gt_row gt_right">29.88</td>
+<td headers="V5" class="gt_row gt_right">6.51</td>
+<td headers="V6" class="gt_row gt_right">725.13</td>
 <td headers="Sex" class="gt_row gt_left">Female</td></tr>
-    <tr><td headers="V1" class="gt_row gt_right">122.21</td>
-<td headers="V2" class="gt_row gt_right">0.33</td>
-<td headers="V3" class="gt_row gt_right">0.83</td>
-<td headers="V4" class="gt_row gt_right">68.07</td>
-<td headers="V5" class="gt_row gt_right">24.42</td>
-<td headers="V6" class="gt_row gt_right">297.67</td>
+    <tr><td headers="V1" class="gt_row gt_right">103.90</td>
+<td headers="V2" class="gt_row gt_right">0.46</td>
+<td headers="V3" class="gt_row gt_right">0.03</td>
+<td headers="V4" class="gt_row gt_right">27.66</td>
+<td headers="V5" class="gt_row gt_right">21.34</td>
+<td headers="V6" class="gt_row gt_right">473.50</td>
 <td headers="Sex" class="gt_row gt_left">Female</td></tr>
-    <tr><td headers="V1" class="gt_row gt_right">105.96</td>
-<td headers="V2" class="gt_row gt_right">0.55</td>
-<td headers="V3" class="gt_row gt_right">0.47</td>
-<td headers="V4" class="gt_row gt_right">3.03</td>
-<td headers="V5" class="gt_row gt_right">4.30</td>
-<td headers="V6" class="gt_row gt_right">522.86</td>
+    <tr><td headers="V1" class="gt_row gt_right">96.98</td>
+<td headers="V2" class="gt_row gt_right">0.60</td>
+<td headers="V3" class="gt_row gt_right">0.10</td>
+<td headers="V4" class="gt_row gt_right">59.33</td>
+<td headers="V5" class="gt_row gt_right">24.56</td>
+<td headers="V6" class="gt_row gt_right">1,721.85</td>
 <td headers="Sex" class="gt_row gt_left">Female</td></tr>
-    <tr><td headers="V1" class="gt_row gt_right">98.67</td>
-<td headers="V2" class="gt_row gt_right">4.26</td>
-<td headers="V3" class="gt_row gt_right">0.48</td>
-<td headers="V4" class="gt_row gt_right">65.76</td>
-<td headers="V5" class="gt_row gt_right">10.07</td>
-<td headers="V6" class="gt_row gt_right">118.93</td>
+    <tr><td headers="V1" class="gt_row gt_right">73.98</td>
+<td headers="V2" class="gt_row gt_right">0.22</td>
+<td headers="V3" class="gt_row gt_right">0.03</td>
+<td headers="V4" class="gt_row gt_right">31.11</td>
+<td headers="V5" class="gt_row gt_right">10.27</td>
+<td headers="V6" class="gt_row gt_right">792.50</td>
 <td headers="Sex" class="gt_row gt_left">Female</td></tr>
   </tbody>
   
@@ -1383,7 +1382,7 @@ and we specify the Multivariate Gamma distribution by invoking the
 helper function `generate_mvGamma_data()`. This function can be
 repeatedly invoked to create hundreds of parametric bootstrap resamples
 to test future methodological developments. These simulation results are
-extensively discussed in@hasan2024 and@hasan2025.
+extensively discussed in @hasan2024 and @hasan2025.
 
 ## Dynamic Threshold Calculation
 
@@ -1392,8 +1391,8 @@ rejection before we perform an experiment. For variable selection with
 BKMR, this is no different. In previous
 studies[@ibrahimou2024; @pesenti2023; @li2022; @zhang2019; @coker2018; @barbieri2004; @zheng2024],
 a static threshold 50% was used to delineate which exposures were
-statistically related to the outcome. However, as shown in@hasan2024
-and@hasan2025, using a static threshold often results in either highly
+statistically related to the outcome. However, as shown in @hasan2024
+and @hasan2025, using a static threshold often results in either highly
 conservative (underpowered) tests, or tests that have a poorly
 controlled $\alpha$ size (greater than the expected 5%).
 
@@ -2099,11 +2098,10 @@ offers a valuable corroborating perspective.
 
 The results highlighted cadmium, and lead as significant contributors to
 cognitive decline---findings well supported by prior epidemiological
-research highlighting their neurotoxic
-effects[@bakulski2020; @Sanders2015; @henn2012; @ciesielski2012]. In
-addition, the dynamic, data-driven PIP threshold, included additional
-metals - manganese, mercury and arsenic, which showed strong evidence
-for
+research highlighting their neurotoxic effects
+[@bakulski2020; @Sanders2015; @henn2012; @ciesielski2012]. In addition,
+the dynamic, data-driven PIP threshold, included additional metals -
+manganese, mercury and arsenic, which showed strong evidence for
 neurotoxicity[@balachandran2020; @levin-schwartz2021; @oliveira2018; @grandjean2006; @tian2025; @rosado2007].
 Notably, if we relied on a static threshold (e.g., PIP \> 0.5), these
 additional exposures would have been incorrectly excluded, potentially

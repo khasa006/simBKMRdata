@@ -8,7 +8,7 @@ output:
     toc: true
     toc_depth: 2
 vignette: >
-  %\VignetteIndexEntry{Calculate PIP Threshold from Response Vector}
+  %\VignetteIndexEntry{Helper Functions for Bayesian Kernel Machine Regression}
   %\VignetteEngine{quarto::html}
   %\VignetteLanguage{en}
 bibliography: references.bib
