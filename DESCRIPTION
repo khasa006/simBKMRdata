@@ -1,6 +1,6 @@
 Package: simBKMRdata
 Title: Helper Functions for Bayesian Kernel Machine Regression
-Version: 0.2.0
+Version: 0.2.1
 Authors@R: 
     c(
       person("Kazi Tanvir", "Hasan", , "khasa006@fiu.edu", role = c("aut", "cre"),

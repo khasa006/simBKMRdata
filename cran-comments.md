@@ -1,3 +1,7 @@
+## Version 0.2.1 Bump
+
+> Updated vignette for journal submission; added vignette authors.
+
 ## Version 0.1.1 CRAN Review Comments
 
 
