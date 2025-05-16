@@ -3,17 +3,17 @@ author:
 - Kazi Tanvir Hasan, Dr. Gabriel Odom, Cristian Guerini, Dr. Zoran
   Bursac, Dr. Roberto Lucchini, and Dr. Boubakari Ibrahimou
 bibliography: references.bib
-date: 5/13/25
+date: 5/16/25
 subtitle: Simulating Multivariate Environmental Exposure Data and
   Estimating Feature Selection Thresholds
 title: Helper Functions for Bayesian Kernel Machine Regression
 toc-title: Table of contents
 vignette: |
-  \%`\VignetteIndexEntry{Calculate PIP Threshold from Response Vector}`{=tex}
+  \%`\VignetteIndexEntry{Helper Functions for Bayesian Kernel Machine Regression}`{=tex}
   %`\VignetteEngine{quarto::html}`{=tex} %`\VignetteLanguage{en}`{=tex}
 ---
 
-# Abstract
+# Summary
 
 In environmental health studies, the relationship between multiple
 environmental exposures and health outcomes, such as cognitive
@@ -39,7 +39,7 @@ R package, Bayesian Kernel Machine Regression, multivariate simulation,
 feature selection, environmental exposure, statistical moments,
 multivariate Gamma distribution, skewed data
 
-# Introduction
+# Statement of Need
 
 Environmental exposure to metals such as Cadmium, Mercury, Arsenic, and
 Lead is linked to various adverse health outcomes, especially among
@@ -187,7 +187,7 @@ dataset comprises measurements of five key metal concentrations in
 children---Cadmium, Mercury and Arsenic from urine, Lead from blood and
 Manganese from hair, along with corresponding intelligence quotient (IQ)
 scores, evaluated using the Wechsler Intelligence Scale for Children
-(WISC-IV), a standardised instrument for assessing children's Full-Scale
+(WISC-IV), a standardized instrument for assessing children's Full-Scale
 IQ (FSIQ)[@wechsler2003; @orsini2012; @grizzle2011; @renzetti2021].
 
 ## Data Exploration
@@ -217,23 +217,23 @@ head(analysisData_df) %>%
 
 ::: cell-output-display
 ```{=html}
-<div id="awxelhtwhp" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#awxelhtwhp table {
+<div id="wtlqhlgsue" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#wtlqhlgsue table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#awxelhtwhp thead, #awxelhtwhp tbody, #awxelhtwhp tfoot, #awxelhtwhp tr, #awxelhtwhp td, #awxelhtwhp th {
+#wtlqhlgsue thead, #wtlqhlgsue tbody, #wtlqhlgsue tfoot, #wtlqhlgsue tr, #wtlqhlgsue td, #wtlqhlgsue th {
   border-style: none;
 }
 
-#awxelhtwhp p {
+#wtlqhlgsue p {
   margin: 0;
   padding: 0;
 }
 
-#awxelhtwhp .gt_table {
+#wtlqhlgsue .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -259,12 +259,12 @@ head(analysisData_df) %>%
   border-left-color: #D3D3D3;
 }
 
-#awxelhtwhp .gt_caption {
+#wtlqhlgsue .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#awxelhtwhp .gt_title {
+#wtlqhlgsue .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -276,7 +276,7 @@ head(analysisData_df) %>%
   border-bottom-width: 0;
 }
 
-#awxelhtwhp .gt_subtitle {
+#wtlqhlgsue .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -288,7 +288,7 @@ head(analysisData_df) %>%
   border-top-width: 0;
 }
 
-#awxelhtwhp .gt_heading {
+#wtlqhlgsue .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -300,13 +300,13 @@ head(analysisData_df) %>%
   border-right-color: #D3D3D3;
 }
 
-#awxelhtwhp .gt_bottom_border {
+#wtlqhlgsue .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#awxelhtwhp .gt_col_headings {
+#wtlqhlgsue .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -321,7 +321,7 @@ head(analysisData_df) %>%
   border-right-color: #D3D3D3;
 }
 
-#awxelhtwhp .gt_col_heading {
+#wtlqhlgsue .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -341,7 +341,7 @@ head(analysisData_df) %>%
   overflow-x: hidden;
 }
 
-#awxelhtwhp .gt_column_spanner_outer {
+#wtlqhlgsue .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -353,15 +353,15 @@ head(analysisData_df) %>%
   padding-right: 4px;
 }
 
-#awxelhtwhp .gt_column_spanner_outer:first-child {
+#wtlqhlgsue .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#awxelhtwhp .gt_column_spanner_outer:last-child {
+#wtlqhlgsue .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#awxelhtwhp .gt_column_spanner {
+#wtlqhlgsue .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -373,11 +373,11 @@ head(analysisData_df) %>%
   width: 100%;
 }
 
-#awxelhtwhp .gt_spanner_row {
+#wtlqhlgsue .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#awxelhtwhp .gt_group_heading {
+#wtlqhlgsue .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -403,7 +403,7 @@ head(analysisData_df) %>%
   text-align: left;
 }
 
-#awxelhtwhp .gt_empty_group_heading {
+#wtlqhlgsue .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -418,15 +418,15 @@ head(analysisData_df) %>%
   vertical-align: middle;
 }
 
-#awxelhtwhp .gt_from_md > :first-child {
+#wtlqhlgsue .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#awxelhtwhp .gt_from_md > :last-child {
+#wtlqhlgsue .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#awxelhtwhp .gt_row {
+#wtlqhlgsue .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -445,7 +445,7 @@ head(analysisData_df) %>%
   overflow-x: hidden;
 }
 
-#awxelhtwhp .gt_stub {
+#wtlqhlgsue .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -458,7 +458,7 @@ head(analysisData_df) %>%
   padding-right: 5px;
 }
 
-#awxelhtwhp .gt_stub_row_group {
+#wtlqhlgsue .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -472,15 +472,15 @@ head(analysisData_df) %>%
   vertical-align: top;
 }
 
-#awxelhtwhp .gt_row_group_first td {
+#wtlqhlgsue .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#awxelhtwhp .gt_row_group_first th {
+#wtlqhlgsue .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#awxelhtwhp .gt_summary_row {
+#wtlqhlgsue .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -490,16 +490,16 @@ head(analysisData_df) %>%
   padding-right: 5px;
 }
 
-#awxelhtwhp .gt_first_summary_row {
+#wtlqhlgsue .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#awxelhtwhp .gt_first_summary_row.thick {
+#wtlqhlgsue .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#awxelhtwhp .gt_last_summary_row {
+#wtlqhlgsue .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -509,7 +509,7 @@ head(analysisData_df) %>%
   border-bottom-color: #D3D3D3;
 }
 
-#awxelhtwhp .gt_grand_summary_row {
+#wtlqhlgsue .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -519,7 +519,7 @@ head(analysisData_df) %>%
   padding-right: 5px;
 }
 
-#awxelhtwhp .gt_first_grand_summary_row {
+#wtlqhlgsue .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -529,7 +529,7 @@ head(analysisData_df) %>%
   border-top-color: #D3D3D3;
 }
 
-#awxelhtwhp .gt_last_grand_summary_row_top {
+#wtlqhlgsue .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -539,11 +539,11 @@ head(analysisData_df) %>%
   border-bottom-color: #D3D3D3;
 }
 
-#awxelhtwhp .gt_striped {
+#wtlqhlgsue .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#awxelhtwhp .gt_table_body {
+#wtlqhlgsue .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -552,7 +552,7 @@ head(analysisData_df) %>%
   border-bottom-color: #D3D3D3;
 }
 
-#awxelhtwhp .gt_footnotes {
+#wtlqhlgsue .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -566,7 +566,7 @@ head(analysisData_df) %>%
   border-right-color: #D3D3D3;
 }
 
-#awxelhtwhp .gt_footnote {
+#wtlqhlgsue .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -575,7 +575,7 @@ head(analysisData_df) %>%
   padding-right: 5px;
 }
 
-#awxelhtwhp .gt_sourcenotes {
+#wtlqhlgsue .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -589,7 +589,7 @@ head(analysisData_df) %>%
   border-right-color: #D3D3D3;
 }
 
-#awxelhtwhp .gt_sourcenote {
+#wtlqhlgsue .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -597,72 +597,72 @@ head(analysisData_df) %>%
   padding-right: 5px;
 }
 
-#awxelhtwhp .gt_left {
+#wtlqhlgsue .gt_left {
   text-align: left;
 }
 
-#awxelhtwhp .gt_center {
+#wtlqhlgsue .gt_center {
   text-align: center;
 }
 
-#awxelhtwhp .gt_right {
+#wtlqhlgsue .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#awxelhtwhp .gt_font_normal {
+#wtlqhlgsue .gt_font_normal {
   font-weight: normal;
 }
 
-#awxelhtwhp .gt_font_bold {
+#wtlqhlgsue .gt_font_bold {
   font-weight: bold;
 }
 
-#awxelhtwhp .gt_font_italic {
+#wtlqhlgsue .gt_font_italic {
   font-style: italic;
 }
 
-#awxelhtwhp .gt_super {
+#wtlqhlgsue .gt_super {
   font-size: 65%;
 }
 
-#awxelhtwhp .gt_footnote_marks {
+#wtlqhlgsue .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#awxelhtwhp .gt_asterisk {
+#wtlqhlgsue .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#awxelhtwhp .gt_indent_1 {
+#wtlqhlgsue .gt_indent_1 {
   text-indent: 5px;
 }
 
-#awxelhtwhp .gt_indent_2 {
+#wtlqhlgsue .gt_indent_2 {
   text-indent: 10px;
 }
 
-#awxelhtwhp .gt_indent_3 {
+#wtlqhlgsue .gt_indent_3 {
   text-indent: 15px;
 }
 
-#awxelhtwhp .gt_indent_4 {
+#wtlqhlgsue .gt_indent_4 {
   text-indent: 20px;
 }
 
-#awxelhtwhp .gt_indent_5 {
+#wtlqhlgsue .gt_indent_5 {
   text-indent: 25px;
 }
 
-#awxelhtwhp .katex-display {
+#wtlqhlgsue .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#awxelhtwhp div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#wtlqhlgsue div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -860,23 +860,23 @@ head(gamma_samples) %>%
 
 ::: cell-output-display
 ```{=html}
-<div id="vnmddzwtoe" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#vnmddzwtoe table {
+<div id="umksbciogm" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#umksbciogm table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#vnmddzwtoe thead, #vnmddzwtoe tbody, #vnmddzwtoe tfoot, #vnmddzwtoe tr, #vnmddzwtoe td, #vnmddzwtoe th {
+#umksbciogm thead, #umksbciogm tbody, #umksbciogm tfoot, #umksbciogm tr, #umksbciogm td, #umksbciogm th {
   border-style: none;
 }
 
-#vnmddzwtoe p {
+#umksbciogm p {
   margin: 0;
   padding: 0;
 }
 
-#vnmddzwtoe .gt_table {
+#umksbciogm .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -902,12 +902,12 @@ head(gamma_samples) %>%
   border-left-color: #D3D3D3;
 }
 
-#vnmddzwtoe .gt_caption {
+#umksbciogm .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#vnmddzwtoe .gt_title {
+#umksbciogm .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -919,7 +919,7 @@ head(gamma_samples) %>%
   border-bottom-width: 0;
 }
 
-#vnmddzwtoe .gt_subtitle {
+#umksbciogm .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -931,7 +931,7 @@ head(gamma_samples) %>%
   border-top-width: 0;
 }
 
-#vnmddzwtoe .gt_heading {
+#umksbciogm .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -943,13 +943,13 @@ head(gamma_samples) %>%
   border-right-color: #D3D3D3;
 }
 
-#vnmddzwtoe .gt_bottom_border {
+#umksbciogm .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#vnmddzwtoe .gt_col_headings {
+#umksbciogm .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -964,7 +964,7 @@ head(gamma_samples) %>%
   border-right-color: #D3D3D3;
 }
 
-#vnmddzwtoe .gt_col_heading {
+#umksbciogm .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -984,7 +984,7 @@ head(gamma_samples) %>%
   overflow-x: hidden;
 }
 
-#vnmddzwtoe .gt_column_spanner_outer {
+#umksbciogm .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -996,15 +996,15 @@ head(gamma_samples) %>%
   padding-right: 4px;
 }
 
-#vnmddzwtoe .gt_column_spanner_outer:first-child {
+#umksbciogm .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#vnmddzwtoe .gt_column_spanner_outer:last-child {
+#umksbciogm .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#vnmddzwtoe .gt_column_spanner {
+#umksbciogm .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1016,11 +1016,11 @@ head(gamma_samples) %>%
   width: 100%;
 }
 
-#vnmddzwtoe .gt_spanner_row {
+#umksbciogm .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#vnmddzwtoe .gt_group_heading {
+#umksbciogm .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1046,7 +1046,7 @@ head(gamma_samples) %>%
   text-align: left;
 }
 
-#vnmddzwtoe .gt_empty_group_heading {
+#umksbciogm .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1061,15 +1061,15 @@ head(gamma_samples) %>%
   vertical-align: middle;
 }
 
-#vnmddzwtoe .gt_from_md > :first-child {
+#umksbciogm .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#vnmddzwtoe .gt_from_md > :last-child {
+#umksbciogm .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#vnmddzwtoe .gt_row {
+#umksbciogm .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1088,7 +1088,7 @@ head(gamma_samples) %>%
   overflow-x: hidden;
 }
 
-#vnmddzwtoe .gt_stub {
+#umksbciogm .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1101,7 +1101,7 @@ head(gamma_samples) %>%
   padding-right: 5px;
 }
 
-#vnmddzwtoe .gt_stub_row_group {
+#umksbciogm .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1115,15 +1115,15 @@ head(gamma_samples) %>%
   vertical-align: top;
 }
 
-#vnmddzwtoe .gt_row_group_first td {
+#umksbciogm .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#vnmddzwtoe .gt_row_group_first th {
+#umksbciogm .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#vnmddzwtoe .gt_summary_row {
+#umksbciogm .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1133,16 +1133,16 @@ head(gamma_samples) %>%
   padding-right: 5px;
 }
 
-#vnmddzwtoe .gt_first_summary_row {
+#umksbciogm .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#vnmddzwtoe .gt_first_summary_row.thick {
+#umksbciogm .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#vnmddzwtoe .gt_last_summary_row {
+#umksbciogm .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1152,7 +1152,7 @@ head(gamma_samples) %>%
   border-bottom-color: #D3D3D3;
 }
 
-#vnmddzwtoe .gt_grand_summary_row {
+#umksbciogm .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1162,7 +1162,7 @@ head(gamma_samples) %>%
   padding-right: 5px;
 }
 
-#vnmddzwtoe .gt_first_grand_summary_row {
+#umksbciogm .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1172,7 +1172,7 @@ head(gamma_samples) %>%
   border-top-color: #D3D3D3;
 }
 
-#vnmddzwtoe .gt_last_grand_summary_row_top {
+#umksbciogm .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1182,11 +1182,11 @@ head(gamma_samples) %>%
   border-bottom-color: #D3D3D3;
 }
 
-#vnmddzwtoe .gt_striped {
+#umksbciogm .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#vnmddzwtoe .gt_table_body {
+#umksbciogm .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1195,7 +1195,7 @@ head(gamma_samples) %>%
   border-bottom-color: #D3D3D3;
 }
 
-#vnmddzwtoe .gt_footnotes {
+#umksbciogm .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1209,7 +1209,7 @@ head(gamma_samples) %>%
   border-right-color: #D3D3D3;
 }
 
-#vnmddzwtoe .gt_footnote {
+#umksbciogm .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1218,7 +1218,7 @@ head(gamma_samples) %>%
   padding-right: 5px;
 }
 
-#vnmddzwtoe .gt_sourcenotes {
+#umksbciogm .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1232,7 +1232,7 @@ head(gamma_samples) %>%
   border-right-color: #D3D3D3;
 }
 
-#vnmddzwtoe .gt_sourcenote {
+#umksbciogm .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1240,72 +1240,72 @@ head(gamma_samples) %>%
   padding-right: 5px;
 }
 
-#vnmddzwtoe .gt_left {
+#umksbciogm .gt_left {
   text-align: left;
 }
 
-#vnmddzwtoe .gt_center {
+#umksbciogm .gt_center {
   text-align: center;
 }
 
-#vnmddzwtoe .gt_right {
+#umksbciogm .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#vnmddzwtoe .gt_font_normal {
+#umksbciogm .gt_font_normal {
   font-weight: normal;
 }
 
-#vnmddzwtoe .gt_font_bold {
+#umksbciogm .gt_font_bold {
   font-weight: bold;
 }
 
-#vnmddzwtoe .gt_font_italic {
+#umksbciogm .gt_font_italic {
   font-style: italic;
 }
 
-#vnmddzwtoe .gt_super {
+#umksbciogm .gt_super {
   font-size: 65%;
 }
 
-#vnmddzwtoe .gt_footnote_marks {
+#umksbciogm .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#vnmddzwtoe .gt_asterisk {
+#umksbciogm .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#vnmddzwtoe .gt_indent_1 {
+#umksbciogm .gt_indent_1 {
   text-indent: 5px;
 }
 
-#vnmddzwtoe .gt_indent_2 {
+#umksbciogm .gt_indent_2 {
   text-indent: 10px;
 }
 
-#vnmddzwtoe .gt_indent_3 {
+#umksbciogm .gt_indent_3 {
   text-indent: 15px;
 }
 
-#vnmddzwtoe .gt_indent_4 {
+#umksbciogm .gt_indent_4 {
   text-indent: 20px;
 }
 
-#vnmddzwtoe .gt_indent_5 {
+#umksbciogm .gt_indent_5 {
   text-indent: 25px;
 }
 
-#vnmddzwtoe .katex-display {
+#umksbciogm .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#vnmddzwtoe div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#umksbciogm div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -1326,47 +1326,47 @@ head(gamma_samples) %>%
     </tr>
   </thead>
   <tbody class="gt_table_body">
-    <tr><td headers="V1" class="gt_row gt_right">105.18</td>
-<td headers="V2" class="gt_row gt_right">3.13</td>
-<td headers="V3" class="gt_row gt_right">2.99</td>
-<td headers="V4" class="gt_row gt_right">25.10</td>
-<td headers="V5" class="gt_row gt_right">17.52</td>
-<td headers="V6" class="gt_row gt_right">529.38</td>
+    <tr><td headers="V1" class="gt_row gt_right">109.64</td>
+<td headers="V2" class="gt_row gt_right">0.00</td>
+<td headers="V3" class="gt_row gt_right">0.00</td>
+<td headers="V4" class="gt_row gt_right">1.21</td>
+<td headers="V5" class="gt_row gt_right">0.04</td>
+<td headers="V6" class="gt_row gt_right">760.56</td>
 <td headers="Sex" class="gt_row gt_left">Female</td></tr>
-    <tr><td headers="V1" class="gt_row gt_right">82.51</td>
-<td headers="V2" class="gt_row gt_right">1.44</td>
-<td headers="V3" class="gt_row gt_right">0.27</td>
-<td headers="V4" class="gt_row gt_right">2.21</td>
-<td headers="V5" class="gt_row gt_right">1.83</td>
-<td headers="V6" class="gt_row gt_right">123.33</td>
+    <tr><td headers="V1" class="gt_row gt_right">106.35</td>
+<td headers="V2" class="gt_row gt_right">0.70</td>
+<td headers="V3" class="gt_row gt_right">0.00</td>
+<td headers="V4" class="gt_row gt_right">4.02</td>
+<td headers="V5" class="gt_row gt_right">18.27</td>
+<td headers="V6" class="gt_row gt_right">70.06</td>
 <td headers="Sex" class="gt_row gt_left">Female</td></tr>
-    <tr><td headers="V1" class="gt_row gt_right">115.46</td>
-<td headers="V2" class="gt_row gt_right">0.93</td>
-<td headers="V3" class="gt_row gt_right">0.08</td>
-<td headers="V4" class="gt_row gt_right">29.88</td>
-<td headers="V5" class="gt_row gt_right">6.51</td>
-<td headers="V6" class="gt_row gt_right">725.13</td>
+    <tr><td headers="V1" class="gt_row gt_right">94.95</td>
+<td headers="V2" class="gt_row gt_right">0.06</td>
+<td headers="V3" class="gt_row gt_right">0.95</td>
+<td headers="V4" class="gt_row gt_right">15.83</td>
+<td headers="V5" class="gt_row gt_right">41.03</td>
+<td headers="V6" class="gt_row gt_right">428.84</td>
 <td headers="Sex" class="gt_row gt_left">Female</td></tr>
-    <tr><td headers="V1" class="gt_row gt_right">103.90</td>
-<td headers="V2" class="gt_row gt_right">0.46</td>
-<td headers="V3" class="gt_row gt_right">0.03</td>
-<td headers="V4" class="gt_row gt_right">27.66</td>
-<td headers="V5" class="gt_row gt_right">21.34</td>
-<td headers="V6" class="gt_row gt_right">473.50</td>
+    <tr><td headers="V1" class="gt_row gt_right">114.27</td>
+<td headers="V2" class="gt_row gt_right">0.14</td>
+<td headers="V3" class="gt_row gt_right">0.00</td>
+<td headers="V4" class="gt_row gt_right">13.25</td>
+<td headers="V5" class="gt_row gt_right">2.80</td>
+<td headers="V6" class="gt_row gt_right">463.81</td>
 <td headers="Sex" class="gt_row gt_left">Female</td></tr>
-    <tr><td headers="V1" class="gt_row gt_right">96.98</td>
-<td headers="V2" class="gt_row gt_right">0.60</td>
-<td headers="V3" class="gt_row gt_right">0.10</td>
-<td headers="V4" class="gt_row gt_right">59.33</td>
-<td headers="V5" class="gt_row gt_right">24.56</td>
-<td headers="V6" class="gt_row gt_right">1,721.85</td>
+    <tr><td headers="V1" class="gt_row gt_right">115.34</td>
+<td headers="V2" class="gt_row gt_right">2.00</td>
+<td headers="V3" class="gt_row gt_right">0.61</td>
+<td headers="V4" class="gt_row gt_right">11.52</td>
+<td headers="V5" class="gt_row gt_right">5.58</td>
+<td headers="V6" class="gt_row gt_right">152.58</td>
 <td headers="Sex" class="gt_row gt_left">Female</td></tr>
-    <tr><td headers="V1" class="gt_row gt_right">73.98</td>
+    <tr><td headers="V1" class="gt_row gt_right">89.31</td>
 <td headers="V2" class="gt_row gt_right">0.22</td>
-<td headers="V3" class="gt_row gt_right">0.03</td>
-<td headers="V4" class="gt_row gt_right">31.11</td>
-<td headers="V5" class="gt_row gt_right">10.27</td>
-<td headers="V6" class="gt_row gt_right">792.50</td>
+<td headers="V3" class="gt_row gt_right">1.42</td>
+<td headers="V4" class="gt_row gt_right">20.67</td>
+<td headers="V5" class="gt_row gt_right">31.36</td>
+<td headers="V6" class="gt_row gt_right">524.98</td>
 <td headers="Sex" class="gt_row gt_left">Female</td></tr>
   </tbody>
   
@@ -2085,7 +2085,7 @@ is common in health studies.
 ## Implications of Pediatric Heavy Metal Exposure
 
 In addition to describing the software package, we present an analysis
-of an annonymus but original real-world dataset (which includes
+of an anonymous but original real-world dataset (which includes
 measurements of metal exposure and children's IQ scores). Using BKMR
 within this framework allowed us to rigorously assess the relationships
 between multiple environmental exposures and cognitive development. The
