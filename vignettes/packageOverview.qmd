@@ -14,7 +14,7 @@ vignette: >
 bibliography: references.bib
 ---
 
-# Summary
+# Abstract
 
 In environmental health studies, the relationship between multiple environmental exposures and health outcomes, such as cognitive development, is often investigated using complex datasets that exhibit non-normality. This paper introduces an R package designed to simulate multivariate environmental exposure data and estimate feature selection thresholds to aid in research to apply and extend the Bayesian Kernel Machine Regression (BKMR) methodology. The package enables researchers to generate data from multivariate normal and multivariate skewed Gamma distributions, common in environmental exposure research, and calculate multivariate statistical features such as mean, variance, skewness, shape, and rate vectors, and correlation matrices. This package also facilitates the calculation of a Posterior Inclusion Probability (PIP) threshold for feature selection in BKMR, offering an approach that accounts for non-normal data (based on the forthcoming work of @hasan2025). The effectiveness of the package is demonstrated through a real-world application using data from an adolescent environmental exposure study, where metal exposures are related to IQ scores.
 
@@ -22,7 +22,7 @@ In environmental health studies, the relationship between multiple environmental
 
 R package, Bayesian Kernel Machine Regression, multivariate simulation, feature selection, environmental exposure, statistical moments, multivariate Gamma distribution, skewed data
 
-# Statement of Need
+# Introduction
 
 Environmental exposure to metals such as Cadmium, Mercury, Arsenic, and Lead is linked to various adverse health outcomes, especially among children [@Horton2013]. In particular, these exposures may influence cognitive functions, with effects that often vary based on the concentration of metals in the environment [@Sanders2015; @trasande2011; @tyler2014; @tolins2014]. Research into these relationships frequently involves complex, multivariate datasets where environmental factors are correlated, and data distributions often exhibit skewness rather than normality [@bobb2014; @bobb2018; @hasan2024].
 

@@ -9,3 +9,4 @@ README.html
 ^CRAN-SUBMISSION$
 ^cran-comments\.md$
 ^paper\.md$
+^paper\.qmd$
