@@ -10,3 +10,14 @@ README.html
 ^cran-comments\.md$
 ^paper\.md$
 ^paper\.qmd$
+^\.git$
+^\.gitignore$
+^RJ.*$
+^simBKMRdata\.(Rmd|html|log|tex)$
+^simBKMRdata_old\.pdf$
+^simBRKRdata\.pdf$
+^motivation-letter$
+^figures$
+^references\.bib$
+^scripts$
+^simBKMRdata\.R$

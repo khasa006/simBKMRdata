@@ -1,48 +1,26 @@
-## Version 0.2.1 Bump
+## R CMD check results
 
-> Updated vignette for journal submission; added vignette authors.
+0 errors | 0 warnings | 0 notes
 
-## Version 0.1.1 CRAN Review Comments
+## Test environments
 
+* macOS 26.6.2, Apple Silicon, R 4.4.2
+* win-builder, R-devel (2026-09-12 r90533), x86_64-w64-mingw32
 
-> Please do not start the description with "This package", package name,
-title or similar. 
+The package passes win-builder R-devel with:
 
-We changed the start of the description field to "Provides a suite of helper functions..."
+Status: OK
 
-> If there are references describing the methods in your package, please
-add these in the description field of your DESCRIPTION file in the form
-authors (year) <doi:...>
-authors (year, ISBN:...)
-or if those are not available: <https:...>
-with no space after 'doi:', 'https:' and angle brackets for
-auto-linking. (If you want to add a title as well please put it in
-quotes: "Title")
-For more details:
-<https://urldefense.com/v3/__https://contributor.r-project.org/cran-cookbook/description_issues.html*references__;Iw!!FjuHKAHQs5udqho!MmUbX-DMsbll3K_k56nEWq0yQVuHkZFvusflkQu5y6BnRaJAAlSsealGn1UT_quLIDveGd_SxeHSL7RP_ZpNrr0HiL-IYM4$ >
+All package tests, examples, documentation checks, vignettes, and manuals completed successfully.
 
-We have added the medRxiv pre-print link to the description; the paper is currently under review.
+## Release summary
 
-> Please always make sure to reset to user's options(), working directory
-or par() after you changed it in examples and vignettes and demos. ->
-inst/doc/estimation_and_simulation.R
-e.g.:
-oldpar <- par(mfrow = c(1,2))
-...
-par(oldpar)
-For more details:
-<https://urldefense.com/v3/__https://contributor.r-project.org/cran-cookbook/code_issues.html*change-of-options-graphical-parameters-and-working-directory__;Iw!!FjuHKAHQs5udqho!MmUbX-DMsbll3K_k56nEWq0yQVuHkZFvusflkQu5y6BnRaJAAlSsealGn1UT_quLIDveGd_SxeHSL7RP_ZpNrr0Hios-H14$ >
+This is an update to simBKMRdata version 0.2.2.
 
-We are now resetting the user par() options to their previous states.
+Changes include:
 
-
-## Version 0.1.0 R CMD check results
-
-0 errors | 0 warnings | 1 note
-```
-checking for future file timestamps ... NOTE
-  unable to verify current time
-```
-
-* This is a new release.
-
+* expanded `testthat` coverage across the package's exported functions;
+* updated package documentation and metadata;
+* addition of `NEWS.md`;
+* maintenance and CRAN-readiness improvements;
+* clarification of Gaussian simulation documentation while retaining the existing intended Gaussian simulation behavior.
