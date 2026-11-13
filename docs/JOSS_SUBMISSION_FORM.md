@@ -36,8 +36,8 @@ Research archive (separate from the software): https://doi.org/10.5281/zenodo.24
 
 ## Author checks before clicking Submit
 
-- [ ] Verify the current JOSS branch **R package check succeeds**, not merely PDF build.
-- [ ] Check final PDF for citations, names, author-affiliation display, math and typographic issues.
+- [ ] Verify the current JOSS branch-head R package check succeeds (prior source/metadata revision passed; latest documentation-only commit may still be running).
+- [x] Inspect final author-confirmed 4-page JOSS PDF; verified corresponding-author indices 1 and 2, all six authors, references, no-funding and AI disclosure (workflow `43349928309`).
 - [x] Corresponding author confirms the revised manuscript, corrected code and tests, authorship details, and AI-assisted work were human-reviewed, edited and validated; coauthor approval was previously reported.
 - [x] Identify documented developer research workflows in the executable package vignettes, with successful R CI vignette rebuilding; see `docs/RESEARCH_SOFTWARE_TRACEABILITY.md`.
 - [ ] Consider whether additional peer-reviewed or independent usage evidence is available, since JOSS editors may view examples alone as insufficient impact.
