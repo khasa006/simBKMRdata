@@ -45,3 +45,18 @@ JOSS currently screens on sustained public development (`>6` months), iterative 
 - GitHub CI: https://github.com/khasa006/simBKMRdata/actions
 - JOSS draft PR #8: https://github.com/khasa006/simBKMRdata/pull/8
 - Statistical fix PR #9: https://github.com/khasa006/simBKMRdata/pull/9
+
+
+## Dataset version restriction (author clarification, November 2026)
+
+The corresponding author states that **only the dataset version currently distributed in `simBKMRdata` may be used**. Do not regenerate it from earlier cohort files, substitute a more extensive dataset, add new participants or variables, or change participant-level values during JOSS preparation or the proposed 0.2.3 update.
+
+Git object verification across `main`, the JOSS preparation branch, and the 0.2.3 candidate branch shows identical blob SHA values for:
+
+- `data/metalExposChildren_df.rda`: `354a64e7a5850a45faa63acaa6c7ee48bf824aa8`
+- `inst/extdata/metalExposChildren.csv`: `b3c78ccf6bad39cf686a05c9f373bf2edb824d5f`
+- `inst/scripts/data_metalExposChildren_save.R`: `26de97b410e822bdde4dfedbbe9a5418a609343b`
+
+These hashes verify that neither prepared branch changes the existing dataset assets. Source-level `R/data_metalExposChildren.R` and the corresponding `.Rd` help were edited for documentation only. Identical hashes do not independently verify de-identification, license scope, or that the original permission email covers the two distributed assets; retain the author-reported April 3, 2025 authorization with the private project records.
+
+**Decision:** preserve the two current data assets byte-for-byte; no new dataset version is authorized by this clarification.
