@@ -1,8 +1,9 @@
 #' Calculate PIP Threshold
 #'
 #' @description Given a response vector (or statistics from this vector),
-#' calculate a PIP threshold that should preserve close to a nominal 5% test
-#' size for Bayesian Kernel Machine Regression (BKMR) feature selection.
+#' evaluate a simulation-calibrated PIP threshold for Bayesian Kernel
+#' Machine Regression (BKMR) feature selection. The output is an empirical
+#' selection heuristic, not a guarantee of frequentist Type I error control.
 #'
 #' @param y a response vector for BKMR
 #' @param absCV If `y` is not supplied, the absolute value of the coefficient
@@ -10,17 +11,20 @@
 #' @param sampSize If `y` is not supplied, the number of observations included
 #' in the response
 #' @param coeffs_ls A list of Richard's Curve parameters. See Details.
-#' @param na.rm Remove missing values from `y`? Defaults to `TRUE`
+#' @param na.rm Whether missing values are ignored when computing the mean
+#' and SD of `y`. Defaults to `TRUE`. Note: the current implementation counts
+#' all elements of `y`, including missing values, for `sampSize`.
 #'
 #' @returns A single numeric value; the output of the Richard's Four-Parameter
 #' Logistic Regression curve with the coefficient values supplied in
 #' `coeffs_ls`.
 #'
-#' @details CalculatePipThreshold function is designed to model the relationship between PIP(q95),
-#' coefficient of variation (CV), and sample size using a form of four-parameter
-#' logistic regression (Richard Curve). This function employs the `nls` function
-#' from the R `stats` package, utilizing the Levenberg-Marquardt algorithm for
-#' optimization to ensure robust parameter estimation.
+#' @details This function evaluates a generalized logistic curve fitted
+#' previously to simulation-based 95th percentiles of PIPs over response CV
+#' and sample size. The function uses the supplied fixed coefficients; it does
+#' not fit a regression model or call `nls()`. The default coefficients reflect
+#' the calibration conditions in the related accepted methodological study.
+#' Use outside those conditions requires separate calibration assessment.
 #' \deqn{
 #'   PIP(q_{95}) = A + \frac{K-A}{ (C + \exp(-\beta_1x_1) )^{\beta_2x_2} }
 #' }
@@ -38,8 +42,11 @@
 #'
 #' x2: Log-transformed sample size (log10(Sample Size)).
 #'
-#' The detailed explanation of how we calculated the values in `coeffs_ls` can
-#' be found in <......>.
+#' The coefficients and their saved-output numerical verification are described
+#' in the BKMR analysis archive: <https://doi.org/10.5281/zenodo.24021746>.
+#' Inputs with zero mean, zero variability, or missing outcomes can yield
+#' undefined values or inconsistent effective sample sizes; inspect inputs
+#' before using the result.
 #'
 #' For more information on Richard's curve, see
 #' <https://en.wikipedia.org/wiki/Generalised_logistic_function>
