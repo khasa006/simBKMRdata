@@ -33,7 +33,7 @@ affiliations:
     index: 1
   - name: Department of Biostatistics, Robert Stempel College of Public Health & Social Work, Florida International University, Miami, Florida, United States
     index: 2
-  - name: Department of Medical-Surgical Specialties, Radiological Sciences and Public Health, University of Brescia, Brescia, Italy
+  - name: University of Brescia, Italy
     index: 3
   - name: Department of Environmental Health Sciences, Robert Stempel College of Public Health & Social Work, Florida International University, Miami, Florida, United States
     index: 4
