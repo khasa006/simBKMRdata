@@ -57,7 +57,7 @@ test_that("simulate_group_gaussian checks names and required parameters", {
     "named sublists"
   )
   bad <- list(A = list(sampSize = 2, mean_vec = c(0, 0), sampCorr_mat = diag(2)))
-  expect_error(simulate_group_gaussian(bad, "grp"), "must contain")
+  expect_error(simulate_group_gaussian(bad, "grp"), "requires")
 })
 
 test_that("simulate_group_gaussian validates the working covariance inputs", {
