@@ -32,7 +32,9 @@ Status: **draft only; do not submit until all mandatory checks are resolved.**
 ## Open-development and impact criteria
 
 - [x] Trace the threshold formula and rounded coefficients to dated Project 2 research scripts and the saved-output archive; see `docs/JOSS_SCIENTIFIC_VALIDATION_AUDIT.md`.
-- [ ] Establish whether released `simBKMRdata` or an identifiable predecessor was **actually used** in the original manuscript analyses. The 2024 Project 1 script uses `lcmix::rmvgamma()`, so this cannot be inferred. Document any independent external adopters, if verifiable.
+- [x] Document **verified developer research workflows** that directly call package functions in executable Quarto vignettes and have passed a GitHub Actions vignette rebuild. See `docs/RESEARCH_SOFTWARE_TRACEABILITY.md` and `paper.md`.
+- [x] Distinguish associated papers from actual released-package usage: the 2024 original study scripts do not show package imports and Project 1 uses `lcmix::rmvgamma()`. No independent external adopter has been verified.
+- [ ] JOSS editorial screening may still judge package vignettes insufficient research-impact evidence; stronger independent research use (if available) would materially strengthen the submission.
 - [ ] Request feedback from an independent researcher who installs and tests the package; document actual results rather than inventing endorsements.
 - [ ] Continue meaningful public development and issue/PR discussions. The prior concentrated commit pattern may trigger JOSS pre-review rejection even if these files are added.
 - [ ] After successful JOSS review, publish a tagged, versioned software release and archive **of simBKMRdata itself** (distinct from the `simBKMR` research-data DOI). The corresponding author requested JOSS submission **before** publishing version 0.2.3, consistent with JOSS's post-review release process.
