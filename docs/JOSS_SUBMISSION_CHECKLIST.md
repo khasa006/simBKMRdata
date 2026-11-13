@@ -5,11 +5,12 @@ Status: **draft only; do not submit until all mandatory checks are resolved.**
 ## Scientific and bibliographic checks
 
 - [x] Coauthor approval reported by corresponding author in November 2026 for six authors in `DESCRIPTION` order; retain records of approval.
-- [ ] Confirm approval records cover each author's ORCID, current affiliation and contributions, **including corrected display name Boubakari Ibrahimou** and the corresponding given/family field corrections for Cristian Guerini and Zoran Bursac. See `docs/JOSS_FINAL_MANUSCRIPT_REVIEW.md`.
+- [x] Corresponding author confirmed author and affiliation details, including **Kazi Tanvir Hasan affiliations [1, 2]**, corrected Boubakari Ibrahimou display name, and the given/family metadata corrections for Cristian Guerini and Zoran Bursac. Individual coauthor approval records remain private and were not independently inspected.
 - [x] Cross-check both methodological paper author lists, public DOI metadata and publication years; cite the 2025 medRxiv preprint using its verifiable title/DOI and identify the revised paper accepted in 2026 separately. Final peer-reviewed DOI remains unavailable; see `docs/JOSS_FINAL_MANUSCRIPT_REVIEW.md`.
 - [ ] Confirm that `simBKMRdata` or identifiable precursor functions were used in each research manuscript. Point to exact original scripts and commit IDs. If the package was generalized after the analyses, say so explicitly.
-- [ ] Obtain an author-confirmed funding/acknowledgements statement (including no funding if applicable) and confirm any JOSS conflict-of-interest disclosure; the current paper still contains a temporary administrative note.
-- [ ] Re-confirm human-author inspection, editing and validation of **the revised** AI-assisted software changes, tests, documentation and AI disclosure before initial JOSS submission; prior approval of an earlier manuscript draft does not establish this.
+- [x] Corresponding author confirmed no software funding and no acknowledgements; paper states no external funding and omits the acknowledgements section.
+- [ ] Confirm conflict-of-interest disclosure requirements at submission; none was asserted by the author.
+- [x] Corresponding author confirmed human review, editing and validation of the AI-assisted manuscript, software corrections, tests and documentation. Updated AI disclosure accordingly.
 - [ ] Obtain explicit data-owner documentation for redistribution of the 437-row children's metal-exposure dataset, including de-identification, subject IDs, and the asserted CC BY 4.0 license; the current source comment alone is insufficient.
 - [ ] Provide a precise method comparison with alternative multivariate simulation packages; no unsupported novelty claims.
 
