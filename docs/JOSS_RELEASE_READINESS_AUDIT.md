@@ -60,3 +60,7 @@ Git object verification across `main`, the JOSS preparation branch, and the 0.2.
 These hashes verify that neither prepared branch changes the existing dataset assets. Source-level `R/data_metalExposChildren.R` and the corresponding `.Rd` help were edited for documentation only. Identical hashes do not independently verify de-identification, license scope, or that the original permission email covers the two distributed assets; retain the author-reported April 3, 2025 authorization with the private project records.
 
 **Decision:** preserve the two current data assets byte-for-byte; no new dataset version is authorized by this clarification.
+
+## Research-impact step 3 resolution (November 2026)
+
+A code-level traceability check verified two **actual package-based developer workflows** in `vignettes/bkmr_threshold.qmd` and `vignettes/packageOverview.qmd`: an applied BKMR model and threshold-selection example, and grouped Gamma parameter-estimation/simulation examples. GitHub Actions run `43345933384` reports successful creation, validation and rebuilding of package vignettes. The specific function calls, original research script differences, and limitations appear in `docs/RESEARCH_SOFTWARE_TRACEABILITY.md` and are summarized in the updated JOSS manuscript's Research impact statement. Step 3's evidence mapping is **complete**, but JOSS eligibility remains an editorial decision; these examples do not establish outside adoption or use of the released package in the original methodological studies.
