@@ -15,6 +15,7 @@
 - **Submission category:** Research software / mathematical and statistical software / epidemiology, as available in the current submission form
 - **Author responsible for submission:** Kazi Tanvir Hasan
 - **Contact:** khasa006@fiu.edu
+- **Corresponding author affiliations:** (1) Yale School of Medicine, Department of Psychiatry; (2) Florida International University, Department of Biostatistics, Robert Stempel College of Public Health & Social Work
 - **Coauthors:** Boubakari Ibrahimou; Cristian Guerini; Zoran Bursac; Roberto Lucchini; Gabriel Odom (all appear in `paper.md` in the established order).
 
 ## Short software description
@@ -37,11 +38,11 @@ Research archive (separate from the software): https://doi.org/10.5281/zenodo.24
 
 - [ ] Verify the current JOSS branch **R package check succeeds**, not merely PDF build.
 - [ ] Check final PDF for citations, names, author-affiliation display, math and typographic issues.
-- [ ] All coauthors review the **post-approval revisions** to AI disclosure and correctness-fix code and agree to be accountable for them.
+- [x] Corresponding author confirms the revised manuscript, corrected code and tests, authorship details, and AI-assisted work were human-reviewed, edited and validated; coauthor approval was previously reported.
 - [x] Identify documented developer research workflows in the executable package vignettes, with successful R CI vignette rebuilding; see `docs/RESEARCH_SOFTWARE_TRACEABILITY.md`.
 - [ ] Consider whether additional peer-reviewed or independent usage evidence is available, since JOSS editors may view examples alone as insufficient impact.
 - [ ] Verify authorization and de-identification for the bundled 437-row children's metal-exposure dataset; the data documentation's CC BY 4.0 claim does not by itself prove redistribution rights.
-- [ ] Confirm funding/acknowledgements or explicitly state none.
+- [x] Corresponding author confirmed no external software funding and no acknowledgements. The paper now includes a no-funding statement and omits the Acknowledgements section.
 - [ ] Review the current JOSS scope and public-development-history criteria; editorial screening can reject codebases with insufficient iterative public development.
 - [ ] Verify any change to `main`, branch and package version metadata before submission.
 
