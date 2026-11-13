@@ -149,14 +149,14 @@ This function computes the threshold for the PIPs using the coefficient of varia
 
 
 ## 9. Interpretation of Results
-Finally, we compare the PIPs with the threshold to identify the variables (metals) that have a significant effect on the response variable.
+Finally, we compare PIPs with the empirical threshold to identify variables selected under this particular BKMR fit; selection alone does not establish a statistically significant effect.
 
 ```{r}
 # Identify exposures with PIPs greater than the empirical selection threshold
 selected_exposures <- pipFit %>%
   filter(PIP > pipThresh_fn)
 
-# Display significant exposures
+# Display exposures selected by the empirical threshold
 selected_exposures
 ```
 
