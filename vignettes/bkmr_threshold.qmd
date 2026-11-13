@@ -28,7 +28,7 @@ library(tidyverse)
 ```
 
 ## 2. Data Preprocessing
-First, we load the data, clean it, and perform any necessary transformations. In this case, we take the log-transformation of the metal concentrations to ensure they are on a comparable scale.
+First, we load the data, clean it, and perform any necessary transformations. In this case, we apply a log10(x + 1) transformation to the metal concentrations to reduce skewness. This transformation does not standardize the variables to comparable scales.
 
 ```{r}
 # Set the seed for reproducibility
@@ -132,14 +132,13 @@ pipFit
 
 The `ExtractPIPs()` function returns the posterior inclusion probabilities, which are then sorted in descending order to identify the most important exposures.
 
-8. Dynamic Threshold Calculation
+## 8. Dynamic Threshold Calculation
 Next, we calculate the dynamic threshold for model inclusion. This threshold is based on the coefficient of variation (CV) of the response variable (QI) and the sample size.
 
 ```{r}
 # Calculate the dynamic threshold for model inclusion
 pipThresh_fn <- calculate_pip_threshold(
-  absCV = sd(bkmrAnalysisData_df$QI) / mean(bkmrAnalysisData_df$QI),  # Coefficient of variation
-  sampSize = length(bkmrAnalysisData_df$QI)  # Sample size
+  y = bkmrAnalysisData_df$QI  # Uses nonmissing sample size internally
 )
 
 # Display the threshold
@@ -153,15 +152,15 @@ This function computes the threshold for the PIPs using the coefficient of varia
 Finally, we compare the PIPs with the threshold to identify the variables (metals) that have a significant effect on the response variable.
 
 ```{r}
-# Identify exposures with PIPs greater than the threshold
-significant_exposures <- pipFit %>%
+# Identify exposures with PIPs greater than the empirical selection threshold
+selected_exposures <- pipFit %>%
   filter(PIP > pipThresh_fn)
 
 # Display significant exposures
-significant_exposures
+selected_exposures
 ```
 
-This step filters the exposures whose posterior inclusion probabilities exceed the dynamic threshold, indicating that these variables are significant predictors of the outcome.
+This step filters the exposures whose posterior inclusion probabilities exceed the dynamic threshold, indicating that these variables exceed the simulation-calibrated selection threshold in this fitted model. Exceeding a PIP threshold is not a formal statistical significance test and does not guarantee frequentist Type I error control.
 
 
 
