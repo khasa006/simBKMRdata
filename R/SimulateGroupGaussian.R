@@ -49,7 +49,7 @@ simulate_group_gaussian <- function(param_list, group_col_name) {
   if (!is.list(param_list) || length(param_list) == 0L ||
       is.null(names(param_list)) || anyNA(names(param_list)) ||
       any(!nzchar(names(param_list))) || anyDuplicated(names(param_list))) {
-    stop("param_list must be a nonempty list of uniquely named groups.",
+    stop("param_list must be a nonempty list of named sublists with unique group names.",
          call. = FALSE)
   }
   if (!is.character(group_col_name) || length(group_col_name) != 1L ||
@@ -69,7 +69,7 @@ simulate_group_gaussian <- function(param_list, group_col_name) {
     sd_vec <- pars$sampSD
     corr <- pars$sampCorr_mat
     if (!is.numeric(n) || length(n) != 1L || !is.finite(n) ||
-        n < 1 || n != as.integer(n)) {
+        n < 1 || n > .Machine$integer.max || n != floor(n)) {
       stop("sampSize must be a positive integer.", call. = FALSE)
     }
     if (!is.numeric(mu) || !is.numeric(sd_vec) ||
