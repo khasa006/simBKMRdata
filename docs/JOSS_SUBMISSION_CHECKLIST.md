@@ -9,7 +9,7 @@ Status: **draft only; do not submit until all mandatory checks are resolved.**
 - [ ] Confirm the full author lists, citation metadata, and publication year for both methodological papers. Replace provisional BibTeX records.
 - [ ] Confirm that `simBKMRdata` or identifiable precursor functions were used in each research manuscript. Point to exact original scripts and commit IDs. If the package was generalized after the analyses, say so explicitly.
 - [ ] Confirm funding and acknowledgements.
-- [ ] Have all authors review the AI usage disclosure for accuracy, including AI tools used in earlier software development.
+- [ ] Re-confirm human-author inspection, editing and validation of **the revised** AI-assisted software changes, tests, documentation and AI disclosure before initial JOSS submission; prior approval of an earlier manuscript draft does not establish this.
 - [ ] Obtain explicit data-owner documentation for redistribution of the 437-row children's metal-exposure dataset, including de-identification, subject IDs, and the asserted CC BY 4.0 license; the current source comment alone is insufficient.
 - [ ] Provide a precise method comparison with alternative multivariate simulation packages; no unsupported novelty claims.
 
@@ -23,7 +23,7 @@ Status: **draft only; do not submit until all mandatory checks are resolved.**
 - [x] Add seeded numerical tests for Gamma marginal moments and Gaussian-copula rank dependence; see `test-joss-gamma-marginal-calibration.R` (await successful CI for latest commit).
 - [x] Correct PIP and Gamma generator help text without changing numerical behavior; see source roxygen and matching `.Rd` files.
 - [x] Implement Gaussian marginal-SD and nonmissing PIP sample-size corrections with regression tests on draft branch and isolated release PR #9.
-- [ ] Confirm 0.2.3 CI success; merge and publish versioned package release after review.
+- [ ] Confirm 0.2.3 CI success; **do not merge, tag or publish** before JOSS submission at the corresponding author's request.
 - [ ] Resolve remaining Spearman-to-Pearson calibration, Gamma input validation, and redistribution-permission findings documented in `docs/JOSS_SCIENTIFIC_VALIDATION_AUDIT.md`.
 - [ ] Remove stale template artifacts (e.g. `figures/penguins.png` and `inst/.DS_Store`) after confirming unused.
 - [ ] Reconcile the README's unfinished outline with the released API.
@@ -35,6 +35,7 @@ Status: **draft only; do not submit until all mandatory checks are resolved.**
 - [ ] Establish whether released `simBKMRdata` or an identifiable predecessor was **actually used** in the original manuscript analyses. The 2024 Project 1 script uses `lcmix::rmvgamma()`, so this cannot be inferred. Document any independent external adopters, if verifiable.
 - [ ] Request feedback from an independent researcher who installs and tests the package; document actual results rather than inventing endorsements.
 - [ ] Continue meaningful public development and issue/PR discussions. The prior concentrated commit pattern may trigger JOSS pre-review rejection even if these files are added.
-- [ ] Publish a versioned software release and archive **of simBKMRdata itself** (distinct from the `simBKMR` research-data DOI) when the software changes are reviewed.
-- [ ] Update the JOSS bibliography with the package archive DOI.
-- [ ] After review, submit the GitHub repository URL and paper path via the official JOSS form. Do not submit the research-analysis repository as the software.
+- [ ] After successful JOSS review, publish a tagged, versioned software release and archive **of simBKMRdata itself** (distinct from the `simBKMR` research-data DOI). The corresponding author requested JOSS submission **before** publishing version 0.2.3, consistent with JOSS's post-review release process.
+- [ ] Add the final package archive DOI for publication after the release is archived; do not invent it in the initial manuscript.
+- [x] Prepare exact branch and manuscript details in `docs/JOSS_SUBMISSION_FORM.md`.
+- [ ] Submit the corrected software branch and `paper.md` via the official JOSS submission portal, after pending technical/data/impact/human validation checks. Do not submit the research-analysis repository as the software.
