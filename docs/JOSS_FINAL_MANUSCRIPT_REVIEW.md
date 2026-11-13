@@ -59,3 +59,7 @@ The [current JOSS author AI policy](https://joss.readthedocs.io/en/latest/polici
 - [2025 threshold preprint](https://doi.org/10.1101/2025.04.14.25325822).
 - [Boubakari Ibrahimou at FIU](https://stempel.fiu.edu/faculty-staff/profiles/ibrahimou-boubakari.html).
 - [JOSS manuscript format](https://joss.readthedocs.io/en/latest/paper.html).
+
+## Corresponding-author final clarifications (12 November 2026)
+
+The corresponding author explicitly confirmed all author metadata except one requested correction: Kazi Tanvir Hasan is affiliated with **(1) Department of Psychiatry, Yale School of Medicine** and **(2) Department of Biostatistics, Robert Stempel College of Public Health & Social Work, Florida International University**. The redundant institution-only FIU index 5 was removed from `paper.md`. No external funding was received for the software, and no acknowledgements are required. The author also confirmed human validation of the AI-assisted changes. The AI disclosure now explicitly records review, editing, and validation without asserting independent verification of every coauthor's email approval. A new PDF build must be checked for these final changes; earlier visual inspections covered preceding revisions.
