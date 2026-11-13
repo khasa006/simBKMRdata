@@ -24,8 +24,8 @@ in the response}
 \item{coeffs_ls}{A list of Richard's Curve parameters. See Details.}
 
 \item{na.rm}{Whether missing values are ignored when computing the mean
-and SD of \code{y}. Defaults to \code{TRUE}. Note: the current implementation counts
-all elements of \code{y}, including missing values, for \code{sampSize}.}
+and SD of \code{y}. Defaults to \code{TRUE}. If missing values are excluded,
+\code{sampSize} is the number of nonmissing observations.}
 }
 \value{
 A single numeric value; the output of the Richard's Four-Parameter
@@ -64,9 +64,10 @@ x2: Log-transformed sample size (log10(Sample Size)).
 
 The coefficients and their saved-output numerical verification are described
 in the BKMR analysis archive: \url{https://doi.org/10.5281/zenodo.24021746}.
-Inputs with zero mean, zero variability, or missing outcomes can yield
-undefined values or inconsistent effective sample sizes; inspect inputs
-before using the result.
+When \code{y} is supplied, its nonmissing observation count is used for the
+sample-size term if \code{na.rm = TRUE}. At least two observed values, a nonzero
+mean, and nonzero SD are required. Invalid or degenerate inputs cause an
+explicit error. Existing complete-case calculations are unchanged.
 
 For more information on Richard's curve, see
 \url{https://en.wikipedia.org/wiki/Generalised_logistic_function}
