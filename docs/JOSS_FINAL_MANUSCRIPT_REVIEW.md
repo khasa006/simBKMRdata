@@ -12,7 +12,7 @@ The exact JOSS-generated PDF from successful [run 43347370101](https://github.co
 - Text is readable, with no obvious clipping, overlapping text, missing entire sections, or missing citations in the four-page preview.
 - The large DRAFT watermark; JOSS placeholder DOI `10.xxxxxx/draft`; January 1, 1970 submission date; and missing volume, issue and page metadata are **preview-template placeholders**, not manuscript claims. They must **not** be copied into actual submission metadata.
 - The last page contains only the final few bibliography entries, which is a normal page-break consequence rather than a layout error; no manual page-size change is necessary.
-- The PDF initially reviewed preceded the newest bibliography and coauthor metadata changes. Those later changes triggered new JOSS PDF builds, which must be reviewed at their final head commit before submission.
+- A second JOSS PDF artifact from successful [run 43348779687](https://github.com/khasa006/simBKMRdata/actions/runs/43348779687) was retrieved and inspected after the updated author byline and 2025 preprint citation were committed (`cae752530eb14f6bf316aaf690435bd6db358014`). It remains four pages; the byline correctly displays **Boubakari Ibrahimou**, and the medRxiv reference displays the verified 2025 title and DOI. Subsequent commits to `docs/` only do not change the paper text or bibliography. Repeat PDF review only if `paper.md`, `paper.bib`, the PDF workflow or other paper inputs change.
 
 ## Verified bibliography
 
@@ -47,7 +47,7 @@ The [current JOSS author AI policy](https://joss.readthedocs.io/en/latest/polici
 2. Authors must personally inspect/validate AI-assisted changes and approve the full paper, paper metadata, updated code, tests, and disclosure.
 3. Confirm **funding sources or absence of external funding for the software project**, acknowledgment of contributors outside the author list if applicable, and required conflict-of-interest disclosures. The current Acknowledgements section contains a pending administrative note; it is **not publishable as final copy**.
 4. Retain the 3 April 2025 data-sharing approval and confirm public redistribution scope and de-identification for the **existing unchanged dataset**; do not replace or regenerate the data.
-5. After final head commits, check both latest JOSS PDF and `R CMD check --as-cran` workflow results, including any WARNINGS/NOTES. Review the final rendered PDF again; build success is not a full scientific or bibliographic review.
+5. JOSS PDF was visually reviewed on the final *paper-source* revision. Check the latest branch-head `R CMD check --as-cran` results, including any WARNINGS/NOTES; rerender/review the PDF only if paper inputs change.
 6. After author approval and verification, submit to JOSS separately. **Do not merge, publish, tag, or release 0.2.3 in advance** at the corresponding author's request.
 
 ## Primary evidence links
