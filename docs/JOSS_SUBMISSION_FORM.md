@@ -23,7 +23,9 @@
 
 ## Research applications and evidence
 
-The package implements reusable functions associated with two methodological research projects by the authors: an investigation of BKMR sensitivity to exposure distributions and an empirical dynamic PIP-thresholding study. The threshold formula and its rounded default coefficients can be traced to a dated 2024 script in the archived research repository and independently checked from saved simulation outputs. The original Gamma simulation scripts used a different software generator, so exact replication of historical exposure simulations using the current package has **not** been established. Do not claim verified independent adoption, end-to-end reproducibility of BKMR MCMC, or formal frequentist Type I error control.
+**Verified developer research workflow:** the package vignettes use `simBKMRdata` functions on an existing metal-exposure dataset to estimate group-specific Gamma parameters and generate synthetic exposures, and apply `calculate_pip_threshold()` after a BKMR model fit and PIP extraction. GitHub Actions successfully rebuilt the vignettes. See `docs/RESEARCH_SOFTWARE_TRACEABILITY.md` for exact files and CI evidence. These are executable examples by the developer group, not independent published studies or external adoption.
+
+**Methods lineage:** Two methodological studies motivated the package: BKMR sensitivity to exposure distributions and empirical dynamic PIP thresholding. The threshold formula and its default coefficients can be traced to dated 2024 research code and numerically checked from saved simulation outputs. The earlier Gamma simulations used `lcmix::rmvgamma()` rather than the current package generator; the original scripts do not establish import of the released package. Do not claim exact historical reconstruction, formal Type I error control, or external adoption.
 
 Research archive (separate from the software): https://doi.org/10.5281/zenodo.24021746
 
@@ -36,7 +38,8 @@ Research archive (separate from the software): https://doi.org/10.5281/zenodo.24
 - [ ] Verify the current JOSS branch **R package check succeeds**, not merely PDF build.
 - [ ] Check final PDF for citations, names, author-affiliation display, math and typographic issues.
 - [ ] All coauthors review the **post-approval revisions** to AI disclosure and correctness-fix code and agree to be accountable for them.
-- [ ] Identify and provide **specific documented research use** of the package or precursor functions, beyond broad association with two methods papers.
+- [x] Identify documented developer research workflows in the executable package vignettes, with successful R CI vignette rebuilding; see `docs/RESEARCH_SOFTWARE_TRACEABILITY.md`.
+- [ ] Consider whether additional peer-reviewed or independent usage evidence is available, since JOSS editors may view examples alone as insufficient impact.
 - [ ] Verify authorization and de-identification for the bundled 437-row children's metal-exposure dataset; the data documentation's CC BY 4.0 claim does not by itself prove redistribution rights.
 - [ ] Confirm funding/acknowledgements or explicitly state none.
 - [ ] Review the current JOSS scope and public-development-history criteria; editorial screening can reject codebases with insufficient iterative public development.
