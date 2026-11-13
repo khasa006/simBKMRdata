@@ -13,7 +13,7 @@ authors:
     affiliation: [1, 5]
     corresponding: true
     email: khasa006@fiu.edu
-  - name: Ibrahimou Boubakari
+  - name: Boubakari Ibrahimou
     orcid: 0000-0003-3173-4317
     affiliation: 2
   - name: Cristian Guerini
