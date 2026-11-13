@@ -10,7 +10,7 @@ tags:
 authors:
   - name: Kazi Tanvir Hasan
     orcid: 0000-0002-7723-4177
-    affiliation: [1, 5]
+    affiliation: [1, 2]
     corresponding: true
     email: khasa006@fiu.edu
   - name: Boubakari Ibrahimou
@@ -37,8 +37,6 @@ affiliations:
     index: 3
   - name: Department of Environmental Health Sciences, Robert Stempel College of Public Health & Social Work, Florida International University, Miami, Florida, United States
     index: 4
-  - name: Florida International University, Miami, Florida, United States
-    index: 5
 date: 12 November 2026
 bibliography: paper.bib
 ---
@@ -76,10 +74,10 @@ Two methodological studies motivate the package: work on BKMR sensitivity to exp
 
 # AI usage disclosure
 
-Generative AI (OpenAI ChatGPT, GPT-6, November 2026) assisted with initial manuscript drafting, repository documentation, workflow configuration, code review, proposed bug fixes, and scaffolding regression tests. The underlying statistical methods and original research findings predate this assistance. The corresponding author reports coauthor approval of the earlier manuscript draft. Subsequent AI-assisted code and manuscript revisions require human-author review and independent validation before final submission; an automated build does not by itself establish scientific validity. The authors are responsible for all methodological choices and scientific claims.
+Generative AI (OpenAI ChatGPT, GPT-6, November 2026) assisted with initial manuscript drafting, repository documentation, workflow configuration, code review, proposed bug fixes, and scaffolding regression tests. The underlying statistical methods and original research findings predate this assistance. The corresponding author confirms that the AI-assisted manuscript, documentation, code changes, and tests have been reviewed, edited, and validated by a human author. The authors take responsibility for the software, methodological decisions, and all scientific claims.
 
-# Acknowledgements
+# Funding
 
-The corresponding author reports approval by the six software authors listed above. Any applicable funding acknowledgements and individual contributor statements remain to be confirmed before final submission.
+No external funding was received for development of this software.
 
 # References
