@@ -15,7 +15,7 @@
 - **Submission category:** Research software / mathematical and statistical software / epidemiology, as available in the current submission form
 - **Author responsible for submission:** Kazi Tanvir Hasan
 - **Contact:** khasa006@fiu.edu
-- **Coauthors:** Ibrahimou Boubakari; Cristian Guerini; Zoran Bursac; Roberto Lucchini; Gabriel Odom (all appear in `paper.md` in the established order).
+- **Coauthors:** Boubakari Ibrahimou; Cristian Guerini; Zoran Bursac; Roberto Lucchini; Gabriel Odom (all appear in `paper.md` in the established order).
 
 ## Short software description
 
