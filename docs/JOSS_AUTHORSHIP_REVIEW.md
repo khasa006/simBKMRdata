@@ -2,7 +2,7 @@
 
 The six authors and their order exactly follow the `Authors@R` entries in `DESCRIPTION` for `simBKMRdata` version 0.2.2. ORCID identifiers are copied directly from `DESCRIPTION`; the identifiers themselves have not been independently authenticated as belonging to each individual.
 
-**The corresponding author confirmed their dual Yale/FIU affiliation and email, and supplied Cristian Guerini's department. The remaining coauthors' affiliations and the final full author list still require their review.** Current workplace, affiliation at the time of original software development, and an author's preferred JOSS publishing affiliation may differ.
+**The corresponding author reports coauthor approval of the JOSS manuscript (November 2026).** This report is recorded here; individual written confirmations, their exact scope, and contributions have not been independently inspected. The corresponding author confirmed their dual Yale/FIU affiliation and email, and specified University of Brescia, Italy for Cristian Guerini. Current workplace, affiliation at the time of original software development, and an author's preferred JOSS publishing affiliation may differ.
 
 | Order | Name in JOSS paper | ORCID | Proposed affiliation | Evidence and action |
 | --- | --- | --- | --- | --- |
@@ -15,7 +15,7 @@ The six authors and their order exactly follow the `Authors@R` entries in `DESCR
 
 ## Author sign-off required
 
-- [ ] All six authors agree to be listed on the JOSS paper in this order.
+- [x] Coauthor approval reported by the corresponding author (November 2026); retain approval records for submission.
 - [ ] Confirm or correct each preferred affiliation as of submission.
 - [ ] Obtain explicit confirmation of each person's ORCID.
 - [x] Kazi Tanvir Hasan confirmed as corresponding author; email: `khasa006@fiu.edu` (12 November 2026).
@@ -26,6 +26,6 @@ The six authors and their order exactly follow the `Authors@R` entries in `DESCR
 
 ## Paper metadata convention
 
-`paper.md` now lists all six contributors in original package order. Cristian Guerini's proposed affiliation is University of Brescia, Italy (institution only), as requested by the corresponding author; it requires Cristian Guerini's approval. Kazi Tanvir Hasan's dual affiliations and correspondence address have been confirmed by the corresponding author. Do not mark the metadata final until each author approves.
+`paper.md` now lists all six contributors in original package order. Cristian Guerini's proposed affiliation is University of Brescia, Italy (institution only), as requested by the corresponding author; it requires Cristian Guerini's approval. Kazi Tanvir Hasan's dual affiliations and correspondence address have been confirmed by the corresponding author. Coauthor approval was reported by the corresponding author; retain the approvals and check whether they explicitly include each person's preferred affiliation, ORCID, and author contributions.
 
 No modification is needed to `simBKMR`, its analysis scripts, or the CRAN package's released `main` branch for this authorship review.
