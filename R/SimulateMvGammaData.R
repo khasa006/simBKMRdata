@@ -1,11 +1,16 @@
 #' Generate Multivariate Skewed Gamma Transformed Data
 #'
-#' @description This function generates multivariate normal samples, transforms
-#' them into Z-scores, and then calls the `qgamma()` function to transform the
-#' values for each correlated variable to those from a Gamma distribution.
+#' @description Generates a latent multivariate Gaussian sample using
+#' `MASS::mvrnorm()`, applies `pnorm()` to each component, then transforms
+#' probabilities with marginal `qgamma()` calls. To obtain the specified
+#' Gamma marginals, the latent Gaussian matrix must have unit diagonal.
+#' The resulting Pearson and rank correlations generally differ from entries
+#' of the latent Gaussian correlation matrix.
 #'
 #' @param sampSize Number of samples to generate.
-#' @param sampCorr_mat A correlation matrix for the normal distribution.
+#' @param sampCorr_mat Latent Gaussian correlation matrix with unit diagonal,
+#' passed directly as the covariance matrix to `MASS::mvrnorm()`. This is not
+#' necessarily the resulting Gamma Pearson or Spearman correlation matrix.
 #' @param shape_num A numeric vector of shape parameters for the Gamma transformation.
 #' @param rate_num A numeric vector of rate parameters for the Gamma transformation.
 #' Second column: <https://en.wikipedia.org/wiki/Gamma_distribution>

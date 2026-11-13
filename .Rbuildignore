@@ -21,3 +21,8 @@ README.html
 ^references\.bib$
 ^scripts$
 ^simBKMRdata\.R$
+^\.github$
+^CONTRIBUTING\.md$
+^SUPPORT\.md$
+^docs$
+^paper\.bib$
