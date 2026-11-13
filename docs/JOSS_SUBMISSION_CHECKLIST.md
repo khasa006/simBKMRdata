@@ -5,10 +5,10 @@ Status: **draft only; do not submit until all mandatory checks are resolved.**
 ## Scientific and bibliographic checks
 
 - [x] Coauthor approval reported by corresponding author in November 2026 for six authors in `DESCRIPTION` order; retain records of approval.
-- [ ] Confirm approval records also cover each author's ORCID, current affiliation, and software contribution where applicable.
-- [ ] Confirm the full author lists, citation metadata, and publication year for both methodological papers. Replace provisional BibTeX records.
+- [ ] Confirm approval records cover each author's ORCID, current affiliation and contributions, **including corrected display name Boubakari Ibrahimou** and the corresponding given/family field corrections for Cristian Guerini and Zoran Bursac. See `docs/JOSS_FINAL_MANUSCRIPT_REVIEW.md`.
+- [x] Cross-check both methodological paper author lists, public DOI metadata and publication years; cite the 2025 medRxiv preprint using its verifiable title/DOI and identify the revised paper accepted in 2026 separately. Final peer-reviewed DOI remains unavailable; see `docs/JOSS_FINAL_MANUSCRIPT_REVIEW.md`.
 - [ ] Confirm that `simBKMRdata` or identifiable precursor functions were used in each research manuscript. Point to exact original scripts and commit IDs. If the package was generalized after the analyses, say so explicitly.
-- [ ] Confirm funding and acknowledgements.
+- [ ] Obtain an author-confirmed funding/acknowledgements statement (including no funding if applicable) and confirm any JOSS conflict-of-interest disclosure; the current paper still contains a temporary administrative note.
 - [ ] Re-confirm human-author inspection, editing and validation of **the revised** AI-assisted software changes, tests, documentation and AI disclosure before initial JOSS submission; prior approval of an earlier manuscript draft does not establish this.
 - [ ] Obtain explicit data-owner documentation for redistribution of the 437-row children's metal-exposure dataset, including de-identification, subject IDs, and the asserted CC BY 4.0 license; the current source comment alone is insufficient.
 - [ ] Provide a precise method comparison with alternative multivariate simulation packages; no unsupported novelty claims.
@@ -17,7 +17,8 @@ Status: **draft only; do not submit until all mandatory checks are resolved.**
 
 - [ ] Run `R CMD check --as-cran` or `devtools::check()` locally on the PR branch and record results.
 - [ ] Check GitHub Actions workflow after pushing; adjust setup if Quarto and dependencies require additional system libraries.
-- [ ] Render the paper with the JOSS paper compiler or the JOSS preprint-preview service, check all references and metadata, and review the generated PDF.
+- [x] Retrieve and inspect **all four pages** of the successful JOSS draft PDF artifact; verify text flow, author blocks, affiliations, citations and preview-only placeholders. See `docs/JOSS_FINAL_MANUSCRIPT_REVIEW.md`.
+- [ ] Repeat PDF inspection for the *final manuscript/metadata* head after recent edits; confirm final author names and bibliographic output.
 - [ ] Ensure every vignette runs on a clean supported R environment and does not depend on undisclosed files.
 - [ ] Audit input validation for non-positive sample sizes, invalid Gamma parameters, non-positive-definite matrices, missing values, zero response means, and `na.rm` behavior.
 - [x] Add seeded numerical tests for Gamma marginal moments and Gaussian-copula rank dependence; see `test-joss-gamma-marginal-calibration.R` (await successful CI for latest commit).
