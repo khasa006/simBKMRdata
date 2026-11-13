@@ -4,7 +4,8 @@ Status: **draft only; do not submit until all mandatory checks are resolved.**
 
 ## Scientific and bibliographic checks
 
-- [ ] Confirm JOSS author list, author order, permissions, current affiliations, ORCIDs, and software contributions. The current `paper.md` identifies the corresponding author only as a conservative placeholder, **not** a final authorship decision. `DESCRIPTION` names six package authors.
+- [x] Coauthor approval reported by corresponding author in November 2026 for six authors in `DESCRIPTION` order; retain records of approval.
+- [ ] Confirm approval records also cover each author's ORCID, current affiliation, and software contribution where applicable.
 - [ ] Confirm the full author lists, citation metadata, and publication year for both methodological papers. Replace provisional BibTeX records.
 - [ ] Confirm that `simBKMRdata` or identifiable precursor functions were used in each research manuscript. Point to exact original scripts and commit IDs. If the package was generalized after the analyses, say so explicitly.
 - [ ] Confirm funding and acknowledgements.
