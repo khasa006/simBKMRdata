@@ -11,13 +11,33 @@ authors:
   - name: Kazi Tanvir Hasan
     orcid: 0000-0002-7723-4177
     affiliation: 1
+  - name: Ibrahimou Boubakari
+    orcid: 0000-0003-3173-4317
+    affiliation: 2
+  - name: Cristian Guerini
+    orcid: 0009-0004-4480-5182
+    affiliation: 3
+  - name: Zoran Bursac
+    orcid: 0000-0001-9306-0907
+    affiliation: 2
+  - name: Roberto Lucchini
+    orcid: 0000-0002-9723-0237
+    affiliation: 4
+  - name: Gabriel Odom
+    orcid: 0000-0003-1341-4555
+    affiliation: 2
 affiliations:
-  - name: Yale School of Medicine, United States
+  - name: Department of Psychiatry, Yale School of Medicine, New Haven, Connecticut, United States
     index: 1
+  - name: Department of Biostatistics, Robert Stempel College of Public Health & Social Work, Florida International University, Miami, Florida, United States
+    index: 2
+  - name: University of Brescia, Brescia, Italy
+    index: 3
+  - name: Department of Environmental Health Sciences, Robert Stempel College of Public Health & Social Work, Florida International University, Miami, Florida, United States
+    index: 4
 date: 12 November 2026
 bibliography: paper.bib
 ---
-
 # Summary
 
 Researchers studying combined exposures to environmental chemicals often encounter measurements that are positively skewed, correlated, and different across population subgroups. Bayesian kernel machine regression (BKMR) is one approach for examining potentially nonlinear associations between exposure mixtures and an outcome [@bobb2015]. Evaluating the behavior of these analyses requires simulated exposure data with specified distributions and dependence structures. `simBKMRdata` is an R package for estimating parameters from multivariate observations, generating correlated Gaussian and Gamma exposure data, simulating subgroup-specific datasets, applying transformations, and computing a response-dependent posterior inclusion probability (PIP) threshold. The package provides building blocks for reproducible simulation experiments rather than fitting BKMR models itself.
