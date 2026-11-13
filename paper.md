@@ -10,7 +10,9 @@ tags:
 authors:
   - name: Kazi Tanvir Hasan
     orcid: 0000-0002-7723-4177
-    affiliation: 1
+    affiliation: [1, 5]
+    corresponding: true
+    email: khasa006@fiu.edu
   - name: Ibrahimou Boubakari
     orcid: 0000-0003-3173-4317
     affiliation: 2
@@ -31,10 +33,12 @@ affiliations:
     index: 1
   - name: Department of Biostatistics, Robert Stempel College of Public Health & Social Work, Florida International University, Miami, Florida, United States
     index: 2
-  - name: University of Brescia, Brescia, Italy
+  - name: Department of Medical-Surgical Specialties, Radiological Sciences and Public Health, University of Brescia, Brescia, Italy
     index: 3
   - name: Department of Environmental Health Sciences, Robert Stempel College of Public Health & Social Work, Florida International University, Miami, Florida, United States
     index: 4
+  - name: Florida International University, Miami, Florida, United States
+    index: 5
 date: 12 November 2026
 bibliography: paper.bib
 ---
