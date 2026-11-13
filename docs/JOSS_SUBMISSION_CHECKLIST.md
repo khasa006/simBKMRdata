@@ -22,7 +22,9 @@ Status: **draft only; do not submit until all mandatory checks are resolved.**
 - [ ] Audit input validation for non-positive sample sizes, invalid Gamma parameters, non-positive-definite matrices, missing values, zero response means, and `na.rm` behavior.
 - [x] Add seeded numerical tests for Gamma marginal moments and Gaussian-copula rank dependence; see `test-joss-gamma-marginal-calibration.R` (await successful CI for latest commit).
 - [x] Correct PIP and Gamma generator help text without changing numerical behavior; see source roxygen and matching `.Rd` files.
-- [ ] Resolve substantive assumptions and input-validation findings documented in `docs/JOSS_SCIENTIFIC_VALIDATION_AUDIT.md`, preferably before a new versioned release.
+- [x] Implement Gaussian marginal-SD and nonmissing PIP sample-size corrections with regression tests on draft branch and isolated release PR #9.
+- [ ] Confirm 0.2.3 CI success; merge and publish versioned package release after review.
+- [ ] Resolve remaining Spearman-to-Pearson calibration, Gamma input validation, and redistribution-permission findings documented in `docs/JOSS_SCIENTIFIC_VALIDATION_AUDIT.md`.
 - [ ] Remove stale template artifacts (e.g. `figures/penguins.png` and `inst/.DS_Store`) after confirming unused.
 - [ ] Reconcile the README's unfinished outline with the released API.
 - [ ] Review existing open issues and close genuinely resolved issues with evidence.
