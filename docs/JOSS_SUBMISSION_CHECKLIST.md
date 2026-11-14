@@ -22,12 +22,14 @@ Status: **draft only; do not submit until all mandatory checks are resolved.**
 - [x] Re-inspect the final author-confirmed four-page JOSS PDF (run `43349928309`): **Hasan affiliations [1,2]**, six authors, 2025 medRxiv citation, no-funding statement, no acknowledgements, affirmative AI validation disclosure. Repeat only if paper inputs change.
 - [ ] Ensure every vignette runs on a clean supported R environment and does not depend on undisclosed files.
 - [x] Audit the supported input domains and list untested malformed-input cases in `docs/JOSS_SCIENTIFIC_VALIDATION_AUDIT.md` (14 November follow-up).
-- [ ] Fix or explicitly exclude **Gamma invalid-input and n=1** cases, verify grouped wrapper validation and missingness policy, and add regression tests before treating candidate 0.2.3 as release-ready.
+- [x] Implement **Gamma invalid-input and n=1/p=1** checks on both unreleased branches, synchronize `.Rd` help and `NEWS.md`, and add targeted regression tests (`tests/testthat/test-gamma-input-domain.R`).
+- [ ] Confirm GitHub Actions checks pass on the **new Gamma-fix head commits** before declaring these newly added tests validated.
+- [ ] Review grouped-wrapper validation and missingness policy separately; no change to their numerical behavior was made.
 - [x] Add seeded numerical tests for Gamma marginal moments and Gaussian-copula rank dependence; see `test-joss-gamma-marginal-calibration.R` (await successful CI for latest commit).
 - [x] Correct PIP and Gamma generator help text without changing numerical behavior; see source roxygen and matching `.Rd` files.
 - [x] Implement Gaussian marginal-SD and nonmissing PIP sample-size corrections with regression tests on draft branch and isolated release PR #9.
 - [x] Confirm 0.2.3 release-candidate CI success at PR #9 head `a2ef709eb1a94e06c0d4fc5ce5c95c3faf38b6be`; **do not merge, tag or publish** before JOSS submission at the corresponding author's request.
-- [ ] Keep Spearman-to-latent-Pearson calibration identified as a **documented modeling limitation** unless a new method is designed and independently tested. Fix Gamma generator malformed-input and single-row handling before release. Dataset redistribution permission requires the original author/data-owner record; do not change the dataset.
+- [ ] Keep Spearman-to-latent-Pearson calibration identified as a **documented modeling limitation** unless a new method is designed and independently tested. Gamma generator malformed-input and single-row handling have been corrected **pending new CI**. Dataset redistribution permission still requires the original author/data-owner record; do not change the dataset.
 - [ ] Remove stale template artifacts (e.g. `figures/penguins.png` and `inst/.DS_Store`) after confirming unused.
 - [ ] Reconcile the README's unfinished outline with the released API.
 - [ ] Review existing open issues and close genuinely resolved issues with evidence.
