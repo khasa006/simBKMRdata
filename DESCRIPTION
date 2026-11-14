@@ -1,15 +1,15 @@
 Package: simBKMRdata
 Title: Helper Functions for Bayesian Kernel Machine Regression
-Version: 0.2.2
+Version: 0.2.3
 Authors@R: 
     c(
       person("Kazi Tanvir", "Hasan", , "khasa006@fiu.edu", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0002-7723-4177")),
-      person("Ibrahimou", "Boubakari", , "bibrahim@fiu.edu", role = "aut",
+      person("Boubakari", "Ibrahimou", , "bibrahim@fiu.edu", role = "aut",
            comment = c(ORCID = "0000-0003-3173-4317")),
-      person("Guerini", "Cristian", , "cristian.guerini@unibs.it", role = "aut",
+      person("Cristian", "Guerini", , "cristian.guerini@unibs.it", role = "aut",
       comment = c(ORCID = "0009-0004-4480-5182")),
-      person("Bursac", "Zoran", , "zbursac@fiu.edu", role = "aut",
+      person("Zoran", "Bursac", , "zbursac@fiu.edu", role = "aut",
            comment = c(ORCID = "0000-0001-9306-0907")),
       person("Roberto", "Lucchini", , "rlucchin@fiu.edu", role = "aut",
            comment = c(ORCID = "0000-0002-9723-0237")),

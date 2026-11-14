@@ -5,7 +5,7 @@
 \alias{metalExposChildren_df}
 \title{Children's Environmental Heavy Metal Exposure Data}
 \format{
-\subsection{\code{who}}{
+\subsection{\code{metalExposChildren_df}}{
 
 A data frame with 437 rows and 13 columns:
 \describe{
@@ -17,9 +17,9 @@ A data frame with 437 rows and 13 columns:
 \item{Arsenic}{As urine concentration	ng/ml}
 \item{Lead}{Pb blood concentration	ng/ml}
 \item{Manganese}{Mn hair concentration	ng/g}
-\item{Sex}{Student's gender; 1 = Male, 2 = Female}
+\item{Sex}{Sex encoded as a factor with levels Female and Male}
 \item{BMI}{Body Mass Index (kg/m2)}
-\item{SES}{Social Economic Status; 1 = LOW, 2 = MEDIUM, 3 = HIGH}
+\item{SES}{Socioeconomic status as an ordered factor (LOW, MEDIUM, HIGH)}
 \item{Distance_metres}{Distance to nearest industrial site (m)}
 \item{SPM}{Raven's Standard Progressive Matrices}
 }
@@ -27,7 +27,9 @@ A data frame with 437 rows and 13 columns:
 }
 \source{
 Prof. Roberto Lucchini; see inst/scripts/data_metalExposChildren*.R
-for more details. Licensed under CC BY 4.0.
+for processing details. The preparation script records an April 3, 2025,
+permission email from Prof. Lucchini and indicates CC BY 4.0 distribution.
+The original permission correspondence should be retained by the authors.
 }
 \usage{
 metalExposChildren_df
