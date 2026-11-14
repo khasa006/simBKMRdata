@@ -7,22 +7,30 @@
 generate_mvGamma_data(sampSize, sampCorr_mat, shape_num, rate_num)
 }
 \arguments{
-\item{sampSize}{Number of samples to generate.}
+\item{sampSize}{A single positive integer number of samples to generate.}
 
-\item{sampCorr_mat}{A correlation matrix for the normal distribution.}
+\item{sampCorr_mat}{A finite symmetric positive-semidefinite latent Gaussian
+correlation matrix with unit diagonal, passed to \code{MASS::mvrnorm()} as a
+covariance matrix. Its entries are not generally the Gamma Pearson or
+Spearman correlations.}
 
-\item{shape_num}{A numeric vector of shape parameters for the Gamma transformation.}
+\item{shape_num}{A finite, strictly positive numeric vector of Gamma shape
+parameters, one per simulated variable.}
 
-\item{rate_num}{A numeric vector of rate parameters for the Gamma transformation.
-Second column: \url{https://en.wikipedia.org/wiki/Gamma_distribution}}
+\item{rate_num}{A finite, strictly positive numeric vector of Gamma rate
+parameters, one per simulated variable.}
 }
 \value{
-A data frame containing the transformed Gamma samples.
+A data frame with \code{sampSize} rows and one column per variable,
+including for \code{sampSize = 1} or a one-variable correlation matrix.
 }
 \description{
-This function generates multivariate normal samples, transforms
-them into Z-scores, and then calls the \code{qgamma()} function to transform the
-values for each correlated variable to those from a Gamma distribution.
+Generates a latent multivariate Gaussian sample using
+\code{MASS::mvrnorm()}, applies \code{pnorm()} to each component, then transforms
+probabilities with marginal \code{qgamma()} calls. A valid latent correlation
+matrix has unit diagonal and must be positive semidefinite to obtain the
+specified Gamma marginal distributions. Pearson and rank correlations of
+the resulting Gamma variables generally differ from the latent correlations.
 }
 \examples{
 p <- 4

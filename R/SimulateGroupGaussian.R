@@ -8,11 +8,14 @@
 #' @param param_list A list of named sublists, where each sublist contains the
 #' parameters for a group (sample size, mean, standard deviation, and
 #' correlation matrix). The dimension of the parameters for each group must be
-#' the same. `sampCorr_mat` is passed directly to `MASS::mvrnorm()` as its
-#' `Sigma` argument; therefore, when it is a correlation matrix, the generated
-#' Gaussian variables have unit marginal variances. `sampSD` is retained in
-#' the parameter object for compatibility with `calculate_stats_gaussian()` but
-#' is not used to rescale the Gaussian draws.
+#' the same. The generator constructs a covariance matrix as
+#' `diag(sampSD) %*% sampCorr_mat %*% diag(sampSD)` and passes it to
+#' `MASS::mvrnorm()`. Each group therefore uses the specified marginal
+#' standard deviations. The input matrix must be symmetric positive
+#' semidefinite with unit diagonal. Note that `calculate_stats_gaussian()`
+#' estimates a Spearman correlation matrix; treating those rank correlations
+#' as Pearson correlations in a Gaussian covariance is an approximation,
+#' not an exact recovery of rank correlation.
 #' @param group_col_name The column name of the grouping/label column to be
 #' created in the final data frame. The values are taken from the names of the
 #' sublists of `param_list`. Defaults to "group". See the example below.
@@ -43,93 +46,72 @@
 #' simulate_group_gaussian(param_list, "Sex")
 #' 
 simulate_group_gaussian <- function(param_list, group_col_name) {
-
-  # Check if the list of parameters is named
-  group_names_all <- names(param_list)
-  if (is.null(group_names_all)) {
-    stop(
-      "param_list must be a list of named sublists for each group. The names
-      will be used as the values for the group_col_name column.")
+  if (!is.list(param_list) || length(param_list) == 0L ||
+      is.null(names(param_list)) || anyNA(names(param_list)) ||
+      any(!nzchar(names(param_list))) || anyDuplicated(names(param_list))) {
+    stop("param_list must be a nonempty list of named sublists with unique group names.",
+         call. = FALSE)
   }
-  
-  # Add check that all the dimensions are equal across the groups
-  
-  # Expected parameter names
-  gaussian_params_expected <- c(
-    "sampSize", "mean_vec", "sampSD", "sampCorr_mat"
-  )
-  
-  simOut_ls <- lapply(
-    X = group_names_all,
-    FUN = function(group_name) {
-      
-      # Get the parameters for the current group
-      group_params <- param_list[[group_name]]
-      param_names <- names(group_params)
-      param_check_lgl <- gaussian_params_expected %in% param_names
-      if (!all(param_check_lgl)) {
-        stop(
-          "All parameter sublists must contain sample size (sampSize), sample mean
-        (mean_vec), sample standard deviation (sampSD), and sample correlation
-        matrix (sampCorr_mat); these list names must be EXACT.")
-      }
-      
-      generated_data <- MASS::mvrnorm(
-        n = group_params$sampSize,
-        mu = group_params$mean_vec,
-        Sigma = group_params$sampCorr_mat
-      )
-      
-      # Create a data frame for the generated data and add the group label
-      generated_data_df <- as.data.frame(generated_data)
-      generated_data_df[[group_col_name]] <- group_name  # Add group label
-      
-      generated_data_df
-      
+  if (!is.character(group_col_name) || length(group_col_name) != 1L ||
+      is.na(group_col_name) || !nzchar(group_col_name)) {
+    stop("group_col_name must be a nonempty column name.", call. = FALSE)
+  }
+
+  expected <- c("sampSize", "mean_vec", "sampSD", "sampCorr_mat")
+  sim_out <- lapply(names(param_list), function(group_name) {
+    pars <- param_list[[group_name]]
+    if (!is.list(pars) || !all(expected %in% names(pars))) {
+      stop("Each group requires sampSize, mean_vec, sampSD and sampCorr_mat.",
+           call. = FALSE)
     }
-  )
+    n <- pars$sampSize
+    mu <- pars$mean_vec
+    sd_vec <- pars$sampSD
+    corr <- pars$sampCorr_mat
+    if (!is.numeric(n) || length(n) != 1L || !is.finite(n) ||
+        n < 1 || n > .Machine$integer.max || n != floor(n)) {
+      stop("sampSize must be a positive integer.", call. = FALSE)
+    }
+    if (!is.numeric(mu) || !is.numeric(sd_vec) ||
+        length(mu) < 1L || length(mu) != length(sd_vec) ||
+        any(!is.finite(mu)) || any(!is.finite(sd_vec)) ||
+        any(sd_vec <= 0)) {
+      stop("mean_vec and sampSD must have equal, positive dimension; sampSD must be strictly positive.",
+           call. = FALSE)
+    }
+    dim_p <- length(mu)
+    if (!is.matrix(corr) || !is.numeric(corr) ||
+        !identical(dim(corr), c(dim_p, dim_p)) ||
+        any(!is.finite(corr)) ||
+        !isTRUE(all.equal(corr, t(corr), tolerance = 1e-8)) ||
+        any(abs(diag(corr) - 1) > 1e-8) ||
+        any(abs(corr) > 1 + 1e-8)) {
+      stop("sampCorr_mat must be a finite, symmetric correlation matrix with unit diagonal.",
+           call. = FALSE)
+    }
+    if (min(eigen(corr, symmetric = TRUE, only.values = TRUE)$values) < -1e-8) {
+      stop("sampCorr_mat must be positive semidefinite.", call. = FALSE)
+    }
 
-  # Combine all the group data frames into one
-  do.call("rbind", simOut_ls)
-  
+    # D %*% R %*% D converts marginal SDs and a working correlation matrix
+    # into a covariance matrix. The upstream estimator supplies Spearman
+    # correlations; these are NOT automatically Pearson-equivalent.
+    covariance <- sweep(sweep(corr, 1L, sd_vec, "*"), 2L, sd_vec, "*")
+    drawn <- MASS::mvrnorm(n = as.integer(n), mu = mu, Sigma = covariance)
+    # MASS::mvrnorm returns a vector if n == 1; preserve the p-column format.
+    drawn <- matrix(drawn, nrow = as.integer(n), ncol = dim_p)
+    df <- as.data.frame(drawn)
+    names(df) <- if (!is.null(names(mu)) && all(nzchar(names(mu)))) {
+      names(mu)
+    } else {
+      paste0("V", seq_len(dim_p))
+    }
+    if (group_col_name %in% names(df)) {
+      stop("group_col_name collides with a simulated variable name.",
+           call. = FALSE)
+    }
+    df[[group_col_name]] <- group_name
+    df
+  })
+  do.call(rbind, sim_out)
 }
-
-# # Initialize an empty list to store the generated data for each group
-# all_data <- list()
-# 
-# # Iterate over each group in param_list
-# for (group_name in names(param_list)) {
-#   
-#   # Get the parameters for the current group
-#   group_params <- param_list[[group_name]]
-#   gaussian_param_names <- names(group_params)
-#   gaussian_params_expected <- c(
-#     "sampSize", "mean_vec", "sampSD", "sampCorr_mat"
-#   )
-#   param_check_lgl <- gaussian_params_expected %in% gaussian_param_names
-#   if (!all(param_check_lgl)) {
-#     stop(
-#       "All parameter sublists must contain sample size (sampSize), sample mean
-#         (mean_vec), sample standard deviation (sampSD), and sample correlation
-#         matrix (sampCorr_mat); these list names must be EXACT.")
-#   }
-#   
-#   # # Check if the required parameters are present in the group
-#   # if (is.null(group_params$mean_vec) || is.null(group_params$sampCorr_mat)) {
-#   #   stop("Each group must have 'mean_vec' and 'sampCorr_mat' in its parameters.")
-#   # }
-#   
-#   generated_data <- MASS::mvrnorm(
-#     n = group_params$sampSize,
-#     mu = group_params$mean_vec,
-#     Sigma = group_params$sampCorr_mat
-#   )
-#   
-#   # Create a data frame for the generated data and add the group label
-#   generated_data_df <- as.data.frame(generated_data)
-#   generated_data_df[[group_col_name]] <- group_name  # Add group label
-#   
-#   # Append the data to the list
-#   all_data[[group_name]] <- generated_data_df
-# }
-
