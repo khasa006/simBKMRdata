@@ -9,7 +9,7 @@
 - **Submission branch:** `joss-submission-preparation-2026-11`
 - **Paper path:** `paper.md`
 - **Bibliography:** `paper.bib`
-- **Software version represented by branch:** 0.2.3 **development candidate; unreleased**, with two correctness fixes. The **published CRAN version remains 0.2.2**.
+- **Software version represented by branch:** 0.2.3 **development candidate; unreleased**, with the Gaussian marginal-SD, PIP missingness, and Gamma input-domain/dimension corrections. The **published CRAN version remains 0.2.2**.
 - **Programming language:** R
 - **License:** GPL-3.0-or-later (as represented by `DESCRIPTION`)
 - **Submission category:** Research software / mathematical and statistical software / epidemiology, as available in the current submission form
@@ -36,7 +36,7 @@ Research archive (separate from the software): https://doi.org/10.5281/zenodo.24
 
 ## Author checks before clicking Submit
 
-- [ ] Verify the current JOSS branch-head R package check succeeds (prior source/metadata revision passed; latest documentation-only commit may still be running).
+- [x] Verify the last code-containing JOSS branch R package check succeeds: run `43634286336`, `Status: OK`, 137 passing tests, no failures/warnings/skips. Recheck current branch SHA before submitting because subsequent documentation-only commits trigger CI.
 - [x] Inspect final author-confirmed 4-page JOSS PDF; verified corresponding-author indices 1 and 2, all six authors, references, no-funding and AI disclosure (workflow `43349928309`).
 - [x] Corresponding author confirms the revised manuscript, corrected code and tests, authorship details, and AI-assisted work were human-reviewed, edited and validated; coauthor approval was previously reported.
 - [x] Identify documented developer research workflows in the executable package vignettes, with successful R CI vignette rebuilding; see `docs/RESEARCH_SOFTWARE_TRACEABILITY.md`.
@@ -51,3 +51,13 @@ Research archive (separate from the software): https://doi.org/10.5281/zenodo.24
 No paper has been submitted to JOSS from this preparation. Do **not** merge the JOSS preparation pull request or publish a release solely to complete this form. The appropriate submission uses the same GitHub repository and the specified JOSS branch, which contains both the paper and the corrected source code.
 
 **After submission:** save the JOSS submission identifier or public pre-review issue URL here and inform the coauthors. Tagged release and archival DOI are intended to follow successful review.
+
+## Final preparation and JOSS release sequence (14 November 2026)
+
+- [x] Confirm both candidate sources have successful GitHub Actions checks: JOSS [43634286336](https://github.com/khasa006/simBKMRdata/actions/runs/43634286336); package-only 0.2.3 [43634062129](https://github.com/khasa006/simBKMRdata/actions/runs/43634062129).
+- [x] Prepare release sequencing and provenance handoff in `docs/JOSS_FINAL_HANDOFF_2026-11.md` (this branch) and `docs/RELEASE_0.2.3_HANDOFF.md` (PR #9 branch).
+- [ ] Resolve original derived-dataset redistribution permission and de-identification documentation; currently connected Gmail search did not locate the April 3, 2025 message.
+- [ ] Evaluate actual research impact and JOSS public-development-history screening; developer vignettes support documented package use but do not by themselves prove external adoption or guarantee editorial eligibility.
+- [ ] Conduct final corresponding-author confirmation of the actual submitted version of paper and code, including any changes since the prior human validation.
+- [ ] Enter repository and paper details into the JOSS portal and submit; **no submission has been made here**.
+- [ ] After successful JOSS review, create GitHub software tag/release, deposit a software-specific archive, and update the paper and review thread with the actual DOI. CRAN submission follows its own process.
