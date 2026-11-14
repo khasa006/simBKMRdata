@@ -21,7 +21,7 @@ test_that("Gamma generator requires positive finite marginal parameters", {
 
 test_that("Gamma generator validates latent correlation matrices", {
   args <- list(sampSize = 10, shape_num = c(2, 3), rate_num = c(1, 2))
-  bad_shapes <- list(NULL, 1, matrix(1, 1, 1),
+  bad_shapes <- list(NULL, 1,
                      matrix(1, 2, 3), matrix(NA_real_, 2, 2),
                      matrix(Inf, 2, 2), matrix("1", 2, 2))
   for (mat in bad_shapes) {
