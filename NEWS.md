@@ -1,5 +1,13 @@
 # simBKMRdata 0.2.3
 
+* Added explicit input validation in `generate_mvGamma_data()` for positive integer
+  sample sizes, positive finite Gamma shape/rate parameters, and valid finite,
+  symmetric positive-semidefinite latent Gaussian correlation matrices with
+  unit diagonal. Invalid settings now produce actionable errors.
+* Preserved an `n x p` data-frame result for single-observation and
+  single-variable Gamma simulations (`sampSize = 1`, `p = 1`), with
+  seeded regression tests. Existing valid multivariate simulation draws
+  retain their numerical behavior.
 * Corrected `simulate_group_gaussian()` to use group-specific marginal
   standard deviations when constructing a covariance matrix:
   `diag(sampSD) %*% sampCorr_mat %*% diag(sampSD)`. Previously,
