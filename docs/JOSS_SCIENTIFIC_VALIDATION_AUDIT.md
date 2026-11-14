@@ -71,3 +71,16 @@ The repository still has Issues #1–#7 open (plus two draft PRs). Issues #1–#
 3. Preserve the existing `metalExposChildren_df.rda` and `inst/extdata/metalExposChildren.csv` byte-for-byte. Author-reported 2025 permission remains documentary, not independently checked; confirm de-identification and public redistribution.
 4. No new `v0.2.3` tag/release, CRAN submission, merge of PR #8/#9 or JOSS submission occurred in this review. Changes to simulation code should be tested in isolation on the development branch, then resubmitted for human scientific validation because the prior author approval covered the preceding revision.
 
+
+## Gamma generator fix implemented on both unreleased branches (14 November 2026)
+
+The recommended release-gating correction for `generate_mvGamma_data()` has now been committed to the JOSS draft and isolated 0.2.3 candidate, without changing the latent Gaussian-copula construction or the original participant-level datasets.
+
+- `R/SimulateMvGammaData.R` explicitly validates a finite positive integer sample count, finite strictly positive Gamma shape/rate vectors of matching dimension, and a finite nonempty square symmetric positive-semidefinite latent correlation matrix with unit diagonal and correlations in [-1,1].
+- A shape-normalization line reconstructs an `n × p` numeric matrix from `MASS::mvrnorm()` before probability transformation. This prevents dimensional loss for one observation and permits one variable while preserving the original algorithm for valid ordinary multivariate inputs.
+- `tests/testthat/test-gamma-input-domain.R` contains malformed-input cases and output-shape checks for `n = 1`, `p = 1`, and `n = p = 1`. The seeded comparison checks the ordinary multivariate path against explicit original `mvrnorm` → `pnorm` → `qgamma` operations.
+- `man/generate_mvGamma_data.Rd` and `NEWS.md` were updated to describe the supported domain and candidate fix.
+- The source/help/test/release-note files have identical Git blob SHAs across PR #8 and PR #9.
+- New GitHub Actions checks were initiated for both branches; a green historical check on an older commit is **not evidence of these new tests passing**. Record the new CI result before declaring release readiness.
+
+This correction does **not** resolve the separate statistical question of how to convert an empirical Spearman correlation matrix into the latent Gaussian correlation required for a targeted output rank correlation, nor does it change the grouped-wrapper input policies or the missing-data treatment in parameter estimation. Those remain separately documented limitations or future changes.
