@@ -11,7 +11,7 @@ Status: **draft only; do not submit until all mandatory checks are resolved.**
 - [x] Corresponding author confirmed no software funding and no acknowledgements; paper states no external funding and omits the acknowledgements section.
 - [ ] Confirm conflict-of-interest disclosure requirements at submission; none was asserted by the author.
 - [x] Corresponding author confirmed human review, editing and validation of the AI-assisted manuscript, software corrections, tests and documentation. Updated AI disclosure accordingly.
-- [ ] Obtain explicit data-owner documentation for redistribution of the 437-row children's metal-exposure dataset, including de-identification, subject IDs, and the asserted CC BY 4.0 license; the current source comment alone is insufficient.
+- [ ] **Conditional source authorization provided to corresponding author**: The April 3, 2025 email exchange describes permission to include the selected dataset **only if it would be impossible to associate the shared data with the Taranto cohort**; the PI separately raised the study's written-request data-sharing plan. **Do not mark the condition satisfied.** Have the PI/institution confirm that the *actual public package files together with their documentation, vignettes and existing public scholarly context* meet this condition, and explicitly clarify public redistribution, de-identification, and any CC BY 4.0 licensing terms. The vignette identifies an Italian children’s cohort led by Lucchini, creating a plausible linkage concern. Do not expose the private email contents in the repository; retain the original correspondence privately.
 - [ ] Provide a precise method comparison with alternative multivariate simulation packages; no unsupported novelty claims.
 
 ## Technical checks
